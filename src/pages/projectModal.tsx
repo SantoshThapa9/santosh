@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import styles from "../assets/styles/ProjectModal.module.scss";
+import styles from "../assets/Styles/ProjectModal.module.scss";
 
 interface Project {
   id: number;

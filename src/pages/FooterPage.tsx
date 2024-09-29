@@ -6,7 +6,7 @@ import {
   FaGithub,
   FaDiscord,
 } from "react-icons/fa";
-import styles from "../assets/styles/Footer.module.scss";
+import styles from "../assets/Styles/Footer.module.scss";
 
 const FooterPage: React.FC = () => {
   const footerRef = useRef<HTMLDivElement>(null);

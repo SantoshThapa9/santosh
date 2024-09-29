@@ -3,7 +3,7 @@ import Typed from "typed.js";
 import { BsChevronDoubleDown } from "react-icons/bs";
 import { FaInstagram, FaGithub, FaLinkedin, FaDiscord } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import styles from "../assets/styles/Home.module.scss";
+import styles from "../assets/Styles/Home.module.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const Home: React.FC = React.memo(() => {
