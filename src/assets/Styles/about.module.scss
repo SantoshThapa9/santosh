@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
+$font-family-oswald: "Oswald", sans-serif;
+$font-family-cabin: "Cabin", sans-serif;
+$white: #ffffff;
+$dark-background: #070707;
+$medium-background: #181818;
+$green: rgb(0, 189, 0);
+$orange: orange;
+
+body {
+  background: linear-gradient($dark-background, $medium-background, $dark-background);
+}
+
+.sectionAbout {
+  width: 100%;
+  min-height: 100vh;
+  padding: 5vw;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 1500px; 
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 1500px; 
+    margin: 0 auto;
+  }
+}
+
+.aboutContent {
+  width: 100%;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.headingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+}
+
+.heading {
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  color: transparent;
+  font-family: $font-family-oswald;
+  -webkit-text-stroke: 0.2vw $white;
+
+  span {
+    color: $white;
+  }
+}
+
+.image {
+  margin-top: 10px;
+  background-image: url("santosh.jpg");
+  background-position: center;
+  height: clamp(100px, 15vw, 300px);
+  width: clamp(100px, 15vw, 300px);
+  background-size: cover;
+  border-radius: 50%;
+  transition: scale 0.2s ease-in-out;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+  }
+}
+
+.description {
+  font-size: clamp(0.8rem, 3vw, 2rem);
+  margin-top: 1rem;
+  color: $white;
+  font-family: $font-family-cabin;
+  margin-bottom: 5%;
+
+  span {
+    color: $green;
+    font-weight: bold;
+  }
+}
+
+.workHeading {
+  h3 {
+    font-size: clamp(2rem, 5vw, 7rem);
+    color: $orange;
+    font-family: $font-family-oswald;
+    margin-top: 5%;
+  }
+
+  p {
+    font-size: clamp(0.8rem, 2vw, 2rem);
+    color: $white;
+    font-family: $font-family-cabin;
+    margin-bottom: 10%;
+  }
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(50px, 10vw, 120px), 1fr));
+  gap: 5%;
+  margin-top: 5%;
+}
+
+.gridItem {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+  font-size: clamp(50px, 8vw, 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  transition: 0.3s ease;
+
+  &:hover {
+    scale: 1.1;
+  }
+}

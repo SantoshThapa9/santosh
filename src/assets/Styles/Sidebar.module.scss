@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Protest+Guerrilla&display=swap");
+
+.menuToggle {
+  position: fixed;
+  right: 1%;
+  top: 1%;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 9999;
+ 
+
+  &:focus {
+    outline: none;
+  }
+} 
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.nav {
+  ul {
+    text-align: center;
+  }
+
+  li {
+    margin: 100% 0;
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-family: "Bebas Neue", sans-serif;
+    color: #fff;
+
+    &:hover {
+      font-weight: 900;
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 500;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+
+  .sidebar.open ~ & {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

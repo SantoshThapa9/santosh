@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teko:wght@300..700&display=swap");
+
+.box1 {
+  width: 100%;
+  height: calc(var(--screen-vh, 1vh) * 100);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+
+  h1 {
+    position: absolute;
+    top: 0;
+    left: 1%;
+    font-weight: 900;
+    font-size: 2rem;
+    font-family: "Teko", sans-serif;
+
+    &::after {
+      content: ".";
+      margin-left: 3px;
+      color: rgb(0, 245, 82);
+    }
+  }
+}
+
+.headingHighlight {
+  color: rgb(0, 255, 200);
+  display: inline-block;
+  transition: transform;
+  cursor: pointer;
+
+  &:hover {
+    animation: bounce 1s;
+  }
+}
+
+.dialog {
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: arrive 2s ease-in-out;
+  gap: 10px;
+  transform: translateY(0);
+  margin-bottom: 10%;
+
+  h2 {
+    font-family: "Archivo Black", sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+
+  p {
+    font-size: clamp(0.8rem, 3vw, 2.5rem);
+    font-family: "Kanit", sans-serif;
+  }
+}
+
+.socialIconsContainer {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 5vw, 4rem);
+  position: absolute;
+  margin-top: 20vh;
+  animation: arrive 1s ease-in-out;
+
+  .icon {
+    font-size: clamp(2rem, 5vw, 4rem);
+    transition: transform 0.2s;
+    color: white;
+    border-radius: 50%;
+    padding: 0.2em;
+    border: 1px whitesmoke solid;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.cta {
+  border-radius: 3em;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
+  padding: 0.6em 1.2em;
+  font-weight: bolder;
+  background: transparent;
+  color: whitesmoke;
+  border: 1px silver solid;
+  position: absolute;
+  margin-top: 50vh;
+  -webkit-tap-highlight-color: transparent;
+  transition: 0.1s;
+  animation: arrive 1s ease-in-out;
+
+  cursor: pointer;
+
+  &:hover {
+    border: 1px grey solid;
+    scale: 0.95;
+    color: silver;
+  }
+}
+
+.scrollIconContainer {
+  animation: arrivescroll 2s ease-in-out, bounce 3s ease infinite;
+  transition: opacity ease-in-out;
+  font-size: clamp(2rem, 4vw, 3rem);
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  -webkit-tap-highlight-color: transparent;
+  opacity: 0.3;
+  height: 100px;
+  width: 100px;
+  &:hover .scrollIcon {
+    scale: 0.8;
+    bottom: 0;
+    opacity: 0.2;
+  }
+  .scrollIcon {
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    transition: all 0.6s ease;
+  }
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -2;
+  background-size: cover;
+  background-position: center center;
+  animation: arrive 1s ease-in-out;
+
+  @media (max-width: 767px) {
+    transform: none !important;
+  }
+}
+
+.overlayHeroPage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+.edgefade {
+  background-image: url("./fade.png");
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 13vh;
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  animation: arrive 1s ease-in-out;
+}
+
+@keyframes arrive {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes arrivescroll {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}

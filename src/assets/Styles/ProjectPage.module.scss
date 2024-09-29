@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
+
+.projectPage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 10vw;
+
+  @media (min-width: 768px) {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+}
+
+.heading {
+  font-size: clamp(1rem, 5vw, 4rem);
+  color: transparent;
+  font-family: "Oswald", sans-serif;
+  -webkit-text-stroke: 0.2vw rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10%;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(90px,15vw,300px), 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+.gridItem {
+  text-align: center;
+  font-size: 1rem;
+
+  &.inView {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    .title {
+      opacity: 1;
+    }
+
+    .thumbnail {
+      transform: scale(1.05);
+    }
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    width: 80%;
+    z-index: 2;
+
+    .description {
+      font-size: 0.875em;
+      margin: 10px 0 0;
+    }
+  }
+}
+
+.projectLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (max-width: 768px) {
+}
