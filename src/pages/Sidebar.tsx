@@ -1,7 +1,7 @@
 import React, { MouseEvent, useEffect } from "react";
 import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
-import styles from "../assets/styles/Sidebar.module.scss";
+import styles from "../assets/styles/sidebar.module.scss";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
