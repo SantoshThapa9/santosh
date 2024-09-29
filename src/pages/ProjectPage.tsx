@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import styles from "../assets/Styles/ProjectPage.module.scss";
+import styles from "./ProjectPage.module.scss";
 import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../assets/Styles/about.module.scss";
+import styles from "./about.module.scss";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
