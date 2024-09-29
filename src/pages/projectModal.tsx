@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import styles from "./ProjectModal.module.scss";
+import styles from "./projectModal.module.scss";
 
 interface Project {
   id: number;
@@ -53,12 +53,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({
         animate="visible"
         exit="exit"
       >
-        <img
-          src={project.thumbnail}
-          className={styles.modalThumbnail}
-        />
+        <img src={project.thumbnail} className={styles.modalThumbnail} />
         <p>{project.description}</p>
-        <a href={project.link} className={styles.goBtn} target="_blank" rel="noopener noreferrer">
+        <a
+          href={project.link}
+          className={styles.goBtn}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           View Project
         </a>
       </motion.div>
