@@ -14,12 +14,11 @@ const Home: React.FC = React.memo(() => {
   const opacity = useTransform(scrollY, [0, 600], [0.3, 0]);
 
   const getRandomImage = async (): Promise<string> => {
-    const images = await Promise.all(
-      Object.values(import.meta.glob("../assets/pics/*.{jpg,jpeg,png}")).map(
-        (importImage) => importImage() as Promise<{ default: string }>
-      )
-    );
-    return images[Math.floor(Math.random() * images.length)].default;
+    const imagePaths = Object.keys(import.meta.glob("./pics/*.{jpg,jpeg,png}"));
+    const randomImagePath =
+      imagePaths[Math.floor(Math.random() * imagePaths.length)];
+    const image = await import(randomImagePath);
+    return image.default;
   };
 
   useEffect(() => {
@@ -34,16 +33,7 @@ const Home: React.FC = React.memo(() => {
       });
     };
 
-    const setHeight = () => {
-      document.documentElement.style.setProperty(
-        "--screen-vh",
-        `${window.innerHeight * 0.01}px`
-      );
-    };
-    setHeight();
     window.addEventListener("scroll", handleScroll);
-
-    window.removeEventListener("resize", setHeight);
 
     const observer = new IntersectionObserver(
       async ([entry]) => {
@@ -59,7 +49,7 @@ const Home: React.FC = React.memo(() => {
 
     const typed = typedRef.current
       ? new Typed(typedRef.current, {
-          strings: ["Santosh", "a Developer"],
+          strings: ["Santosh.", "a Developer."],
           typeSpeed: 100,
           backSpeed: 50,
           backDelay: 1500,
@@ -69,7 +59,6 @@ const Home: React.FC = React.memo(() => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", setHeight);
       observer.disconnect();
       typed?.destroy();
     };
