@@ -14,11 +14,12 @@ const Home: React.FC = React.memo(() => {
   const opacity = useTransform(scrollY, [0, 600], [0.3, 0]);
 
   const getRandomImage = async (): Promise<string> => {
-    const imagePaths = Object.keys(import.meta.glob("./pics/*.{jpg,jpeg,png}"));
-    const randomImagePath =
-      imagePaths[Math.floor(Math.random() * imagePaths.length)];
-    const image = await import(randomImagePath);
-    return image.default;
+    const images = await Promise.all(
+      Object.values(import.meta.glob("./pics/*.{jpg,jpeg,png}")).map(
+        (importImage) => importImage() as Promise<{ default: string }>
+      )
+    );
+    return images[Math.floor(Math.random() * images.length)].default;
   };
 
   useEffect(() => {
