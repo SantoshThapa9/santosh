@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./ProjectPage.module.scss";
 import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
+import pp from "../pages/projectThumbnails/pp.png";
 
 import ProjectModal from "./projectModal";
 
@@ -29,6 +30,14 @@ const projects: Project[] = [
     link: "https://taskifyapp-smoky.vercel.app/",
     description:
       "Taskify helps you effortlessly manage your tasks. Add, view, and delete with a simple swipe. Stay organized and make your day easier",
+  },
+  {
+    id: 3,
+    title: "personal portfolio",
+    thumbnail: pp,
+    link: "/",
+    description:
+      "This is my favorite creation that serves as a complete representation of my skills, experience, and creative journey.",
   },
 ];
 
