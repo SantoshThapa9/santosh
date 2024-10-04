@@ -23,6 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
+    console.log("Scrollbar width:", scrollbarWidth);
 
     if (isSidebarOpen) {
       document.body.style.overflow = "hidden";
@@ -45,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <div>
       <button className={styles.menuToggle} onClick={toggleSidebar}>
-        {isSidebarOpen ? <RxCross2 /> : <MdOutlineMenu />}
+        {isSidebarOpen ? <RxCross2 className={styles.crossBtn}/> : <MdOutlineMenu />}
       </button>
       <div
         onClick={toggleSidebar}

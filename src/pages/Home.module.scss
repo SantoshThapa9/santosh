@@ -15,7 +15,7 @@
     top: 0;
     left: 1%;
     font-weight: 900;
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 4vw, 3rem);
     font-family: "Teko", sans-serif;
 
     &::after {
