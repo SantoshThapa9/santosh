@@ -17,11 +17,11 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Tic Tac Toe",
-    thumbnail: ttt,
-    link: "https://nic986.github.io/tictactoe/",
+    title: "santosh.com",
+    thumbnail: pp,
+    link: "/",
     description:
-      "This is a simple Tic Tac Toe where you can play against AI. It has cool dark and light and some fun sound effects to make it more exciting",
+      "This is the current site you are viewing. It serves as a complete representation of my journey",
   },
   {
     id: 2,
@@ -29,15 +29,15 @@ const projects: Project[] = [
     thumbnail: taskify,
     link: "https://taskifyapp-smoky.vercel.app/",
     description:
-      "Taskify helps you effortlessly manage your tasks. Add, view, and delete with a simple swipe. Stay organized and make your day easier",
+      "A simple task manager to help you stay organized and productive.",
   },
   {
     id: 3,
-    title: "personal portfolio",
-    thumbnail: pp,
-    link: "/",
+    title: "Tic Tac Toe",
+    thumbnail: ttt,
+    link: "https://nic986.github.io/tictactoe/",
     description:
-      "This is my favorite creation that serves as a complete representation of my skills, experience, and creative journey.",
+      "This is a simple Tic Tac Toe where you can play against AI with cool themes and fun sound effects",
   },
 ];
 

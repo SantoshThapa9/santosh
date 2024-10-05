@@ -27,7 +27,10 @@
 
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(90px,15vw,300px), 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(90px, 15vw, 300px), 1fr)
+  );
   gap: 10px;
   padding: 10px;
 }
@@ -35,6 +38,9 @@
 .gridItem {
   text-align: center;
   font-size: 1rem;
+  opacity: 0;
+  transform: translateY(130px);
+  transition: opacity 1s ease-in, transform 1s ease-out;
 
   &.inView {
     opacity: 1;
@@ -66,12 +72,11 @@
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.5);
     color: white;
-    padding: 10px;
     border-radius: 5px;
-    text-align: center;
+    padding: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    width: 80%;
+    width: 100%;
     z-index: 2;
 
     .description {
