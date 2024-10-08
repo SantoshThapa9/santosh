@@ -36,6 +36,7 @@
 
     strong {
       font-size: clamp(1rem, 6vw, 2rem);
+      user-select: none;
 
       &::after {
         content: ".";
@@ -54,6 +55,7 @@
     width: 100%;
     padding-left: 17vw;
     color: transparent;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.205);
   }
 
   .typing {
@@ -64,6 +66,8 @@
       font-family: "Oswald", sans-serif;
       font-size: clamp(3rem, 11vw, 11rem);
       -webkit-text-stroke: 2px white;
+      text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.205);
+
       font-weight: 600;
       color: transparent;
     }
@@ -237,11 +241,9 @@
       -webkit-text-stroke: 1px white !important;
     }
   }
-  .socialIconsContainer {
-    margin-top: 20px !important;
-  }
+
   .cta {
-    margin-top: 30px !important;
+    margin-top: 10px !important;
   }
 }
 
@@ -253,5 +255,8 @@
 
   .typing {
     padding-left: 30vw !important;
+  }
+  .cta {
+    margin-bottom: 100px !important;
   }
 }

@@ -91,12 +91,13 @@ const FooterPage: React.FC = () => {
           </a>
         </div>
         <div className={styles.copyRight}>
-          &copy; {new Date().getFullYear()} . All rights reserved.
+          &copy; {new Date().getFullYear()} Santosh. Feel free to reach out for
+          collaboration or inquiries!
         </div>
         <hr />
       </div>
     </footer>
   );
-}; 
+};
 
 export default FooterPage;
