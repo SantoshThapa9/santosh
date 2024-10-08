@@ -77,9 +77,17 @@ const About: React.FC = () => {
 
         <div className={styles.description}>
           <p>
-            Hi I'm Santosh. I love bringing ideas to life using modern digital
-            frameworks. I'm all about creating fluent user experiences that not
-            only meet but exceed expectations.
+            Hi, I'm Santosh, a developer passionate about turning ideas into
+            interactive and engaging digital experiences.
+            <br />
+            <br />
+            My passion for clean, efficient code, combined with a strong
+            foundation in modern technologies like Next.js, HTML, SCSS, etc.,
+            drives me to continuously explore new frameworks and tools. This
+            ensures that my projects are not only functional but also luxurious
+            in appearance. I am dedicated to delivering high-quality results
+            that exceed expectations.
+            <br />
             <br />
             Let's <span>build</span> something amazing together!
           </p>
@@ -93,18 +101,20 @@ const About: React.FC = () => {
               I'm not just a designer, I'm a creative enthusiast who loves
               making every pixel count! You'll often find me immersed in the
               world of stylesheets, and I'm excited to help you with UX/UI
-              design, frontend development, responsive layouts, prototyping, and
-              branding.
+              design, frontend development, responsive layouts, prototyping,
+              branding, and more.
             </p>
           </AnimatedSection>
 
           <AnimatedSection>
             <h3>Engineering</h3>
             <p>
-              While I might not be the best backend developer, I'm all about
-              improving every day. I focus on performance and scalability, and I
-              enjoy diving into new tools. I thrive in fast-paced environments
-              and am always learning to keep up with the latest trends.
+              While I might not be the best backend developer yet, I can handle
+              the basic fundamentals of backend development. Whether it's
+              creating APIs, managing databases, building server-side logic, or
+              ensuring everything is running well, I've got you covered! I'm
+              excited to tackle new challenges and contribute to building robust
+              solutions. I am always learning to keep up with the latest trends.
             </p>
           </AnimatedSection>
         </div>
@@ -137,6 +147,14 @@ const About: React.FC = () => {
             <div className={styles.gridItem}>
               <a href="https://nodejs.org/" target="_blank">
                 <FaNodeJs style={{ color: "#68A063" }} />
+              </a>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <div className={styles.gridItem}>
+              <a href="https://nextjs.org/" target="_blank">
+                <SiNextdotjs style={{ color: "grey" }} />
               </a>
             </div>
           </AnimatedSection>
@@ -246,14 +264,6 @@ const About: React.FC = () => {
             <div className={styles.gridItem}>
               <a href="https://mui.com/" target="_blank">
                 <SiMui style={{ color: "#007FFF" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://nextjs.org/" target="_blank">
-                <SiNextdotjs style={{ color: "grey" }} />
               </a>
             </div>
           </AnimatedSection>

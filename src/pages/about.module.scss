@@ -1,16 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
-
-$font-family-oswald: "Oswald", sans-serif;
-$font-family-cabin: "Cabin", sans-serif;
-$white: #ffffff;
-$dark-background: #070707;
-$medium-background: #181818;
-$green: rgb(0, 189, 0);
-$orange: orange;
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabin:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&display=swap");
 
 body {
-  background: linear-gradient($dark-background, $medium-background, $dark-background);
+  background: linear-gradient(#070707, #181818, #070707);
 }
 
 .sectionAbout {
@@ -19,13 +10,13 @@ body {
   padding: 5vw;
   display: flex;
   justify-content: space-evenly;
-  max-width: 1500px; 
+  max-width: 1500px;
   margin: 0 auto;
 
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-evenly;
-    max-width: 1500px; 
+    max-width: 1500px;
     margin: 0 auto;
   }
 }
@@ -51,38 +42,35 @@ body {
 .heading {
   font-size: clamp(2.5rem, 10vw, 5rem);
   color: transparent;
-  font-family: $font-family-oswald;
-  -webkit-text-stroke: 0.2vw $white;
+  font-family: "Oswald", sans-serif;
+  -webkit-text-stroke: 0.2vw #ffffff;
 
   span {
-    color: $white;
+    color: #ffffff;
   }
 }
 
 .image {
   margin-top: 10px;
   background-image: url("santosh.jpg");
-  background-position: center;
   height: clamp(100px, 15vw, 300px);
-  width: clamp(100px, 15vw, 300px);
+  aspect-ratio: 1/1;
   background-size: cover;
   border-radius: 50%;
   transition: scale 0.2s ease-in-out;
-
-  @media (min-width: 768px) {
-    margin-top: 0;
-  }
+  border: 2px whitesmoke solid;
 }
 
 .description {
   font-size: clamp(0.8rem, 3vw, 2rem);
   margin-top: 1rem;
-  color: $white;
-  font-family: $font-family-cabin;
+  color: #ffffff;
+  font-family: "Cabin", sans-serif;
   margin-bottom: 5%;
+  font-weight: 600;
 
   span {
-    color: $green;
+    color: rgb(0, 228, 159);
     font-weight: bold;
   }
 }
@@ -90,22 +78,25 @@ body {
 .workHeading {
   h3 {
     font-size: clamp(2rem, 5vw, 7rem);
-    color: $orange;
-    font-family: $font-family-oswald;
+    color: orange;
+    font-family: "Oswald", sans-serif;
     margin-top: 5%;
   }
 
   p {
     font-size: clamp(0.8rem, 2vw, 2rem);
-    color: $white;
-    font-family: $font-family-cabin;
+    color: #ffffff;
+    font-family: "Cabin", sans-serif;
     margin-bottom: 10%;
   }
 }
 
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(50px, 10vw, 120px), 1fr));
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(clamp(50px, 10vw, 120px), 1fr)
+  );
   gap: 5%;
   margin-top: 5%;
 }
@@ -125,4 +116,8 @@ body {
   &:hover {
     scale: 1.1;
   }
+}
+
+@media (min-width: 768px) {
+  //pc styling
 }

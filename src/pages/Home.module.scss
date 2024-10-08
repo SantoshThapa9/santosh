@@ -1,206 +1,258 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teko:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Teko:wght@300..700&display=swap");
 
-.box1 {
+.hero {
   width: 100%;
   height: 100svh;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  color: white;
-
-  h1 {
-    position: absolute;
-    top: 0;
-    left: 1%;
-    font-weight: 900;
-    font-size: clamp(1.6rem, 4vw, 3rem);
-    font-family: "Teko", sans-serif;
-
-    &::after {
-      content: ".";
-      margin-left: 3px;
-      color: rgb(0, 245, 82);
-    }
-  }
-}
-
-.headingHighlight {
-  color: rgb(0, 255, 200);
-  display: inline-block;
-  transition: transform;
-  cursor: pointer;
-
-  &:hover {
-    animation: bounce 1s;
-  }
-}
-
-.dialog {
   color: whitesmoke;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   animation: arrive 2s ease-in-out;
-  gap: 10px;
-  transform: translateY(0);
-  margin-bottom: 10%;
 
-  h2 {
-    font-family: "Archivo Black", sans-serif;
-    font-weight: 600;
-    font-size: clamp(1.5rem, 5vw, 4rem);
-    text-align: center;
+  .headingContainer {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: not-allowed;
+    animation: none;
+    opacity: 1;
+
+    image {
+      background-image: url("../st.png");
+      background-size: cover;
+      width: clamp(30px, 5vw, 40px);
+      aspect-ratio: 1/1;
+      top: 10px;
+      left: 10px;
+    }
+
+    strong {
+      font-size: clamp(1rem, 6vw, 2rem);
+
+      &::after {
+        content: ".";
+        margin-left: 3px;
+        color: rgb(0, 245, 82);
+      }
+    }
   }
 
-  p {
-    font-size: clamp(0.8rem, 3vw, 2.5rem);
-    font-family: "Kanit", sans-serif;
+  .mainText {
+    transform: translateY(0);
+    font-size: clamp(2.5rem, 8vw, 8rem);
+    text-shadow: 1px 1px 30px black;
+    margin-top: 80px;
+    -webkit-text-stroke: 2px white;
+    font-family: "Oswald", sans-serif;
+    width: 100%;
+    padding-left: 17vw;
+    color: transparent;
   }
-}
 
-.socialIconsContainer {
-  display: flex;
-  justify-content: center;
-  gap: clamp(1rem, 5vw, 4rem);
-  position: absolute;
-  margin-top: 20vh;
-  animation: arrive 1s ease-in-out;
+  .typing {
+    margin-bottom: 20px;
+    width: 100%;
+    padding-left: 25vw;
+    span {
+      font-family: "Oswald", sans-serif;
+      text-shadow: 1px 1px 30px black;
+      font-size: clamp(3rem, 11vw, 11rem);
+      -webkit-text-stroke: 2px white;
+      font-weight: 600;
+      color: transparent;
+    }
+  }
 
-  .icon {
-    font-size: clamp(2rem, 5vw, 4rem);
-    transition: transform 0.2s;
-    color: white;
-    border-radius: 50%;
-    padding: 0.2em;
-    border: 1px whitesmoke solid;
+  .dialog {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 50px black;
 
+    p {
+      font-size: clamp(1rem, 3vw, 2.5rem);
+      font-family: "Kanit", sans-serif;
+    }
+    .headingHighlight {
+      color: rgb(0, 238, 255);
+      display: inline-block;
+      cursor: pointer;
+
+      &:active {
+        animation: bounce 1s infinite !important;
+      }
+      &:hover {
+        animation: bounce 1s;
+      }
+    }
+  }
+  .socialIconsContainer {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 5vw, 4rem);
+    margin-bottom: 50px;
+    .icon {
+      font-size: clamp(2rem, 8vw, 3rem);
+      transition: transform 0.2s;
+      color: white;
+      border-radius: 50%;
+      padding: 0.2em;
+      border: 1px whitesmoke solid;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .cta {
+    border-radius: 3em;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+    font-size: clamp(0.8rem, 2vw, 1.5rem);
+    padding: 0.6em 1.2em;
+    font-weight: bolder;
+    background: transparent;
+    color: whitesmoke;
+    border: 1px silver solid;
+    -webkit-tap-highlight-color: transparent;
+    transition: 0.1s;
+    cursor: pointer;
+    z-index: 4;
     &:hover {
-      transform: scale(1.2);
+      border: 1px grey solid;
+      scale: 0.95;
+      color: silver;
+    }
+  }
+
+  .scrollIconContainer {
+    animation: arrivescroll 2s ease-in-out, bounce 3s ease infinite;
+    transition: opacity ease-in-out;
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    bottom: -8px;
+    z-index: 3;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0.3;
+    height: 100px;
+    width: 100px;
+    &:hover .scrollIcon {
+      scale: 0.8;
+      bottom: 0;
+      opacity: 0.2;
+    }
+    .scrollIcon {
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      position: absolute;
+      transition: all 0.6s ease;
+    }
+  }
+
+  .backgroundImage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    background-size: cover;
+    background-position: center center;
+
+    // @media (max-width: 767px) {
+    //   transform: none !important;
+    // }
+  }
+
+  .overlayHeroPage {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+  }
+
+  .edgefade {
+    background-image: url("./fade.png");
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 13vh;
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  }
+
+  @keyframes arrive {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes arrivescroll {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.3;
+    }
+  }
+
+  @keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-10px);
+    }
+    60% {
+      transform: translateY(-5px);
     }
   }
 }
 
-.cta {
-  border-radius: 3em;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
-  font-size: clamp(0.8rem, 2vw, 1.5rem);
-  padding: 0.6em 1.2em;
-  font-weight: bolder;
-  background: transparent;
-  color: whitesmoke;
-  border: 1px silver solid;
-  position: absolute;
-  margin-top: 50vh;
-  -webkit-tap-highlight-color: transparent;
-  transition: 0.1s;
-  animation: arrive 1s ease-in-out;
-
-  cursor: pointer;
-
-  &:hover {
-    border: 1px grey solid;
-    scale: 0.95;
-    color: silver;
+@media (max-width: 767px) {
+  //phone styling
+  .mainText {
+    margin-top: 50px !important;
+    -webkit-text-stroke: 1px white !important;
+  }
+  .typing {
+    span {
+      -webkit-text-stroke: 1px white !important;
+    }
+  }
+  .socialIconsContainer {
+    margin-top: 20px !important;
+  }
+  .cta {
+    margin-top: 30px !important;
   }
 }
 
-.scrollIconContainer {
-  animation: arrivescroll 2s ease-in-out, bounce 3s ease infinite;
-  transition: opacity ease-in-out;
-  font-size: clamp(2rem, 4vw, 3rem);
-  cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  z-index: 3;
-  -webkit-tap-highlight-color: transparent;
-  opacity: 0.3;
-  height: 100px;
-  width: 100px;
-  &:hover .scrollIcon {
-    scale: 0.8;
-    bottom: 0;
-    opacity: 0.2;
+@media (min-width: 768px) {
+  //pc styling
+  .mainText {
+    padding-left: 20vw !important;
   }
-  .scrollIcon {
-    bottom: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    position: absolute;
-    transition: all 0.6s ease;
-  }
-}
 
-.backgroundImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  z-index: -2;
-  background-size: cover;
-  background-position: center center;
-  animation: arrive 1s ease-in-out;
-
-  @media (max-width: 767px) {
-    transform: none !important;
-  }
-}
-
-.overlayHeroPage {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-
-.edgefade {
-  background-image: url("./fade.png");
-  position: absolute;
-  bottom: 0;
-  width: 100vw;
-  height: 13vh;
-  mask-image: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 1) 100%
-  );
-  animation: arrive 0.3s ease-in-out;
-}
-
-@keyframes arrive {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes arrivescroll {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.3;
-  }
-}
-
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
+  .typing {
+    padding-left: 30vw !important;
   }
 }

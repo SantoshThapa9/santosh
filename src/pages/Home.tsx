@@ -80,17 +80,25 @@ const Home: React.FC = React.memo(() => {
   };
 
   return (
-    <div className={styles.box1}>
-      <h1>Santosh</h1>
+    <div className={styles.hero}>
+      <div className={styles.headingContainer}>
+        <image />
+        <strong>Santosh</strong>
+      </div>
+
+      <h2 className={styles.mainText}>Hey, I'm</h2>
+      <div className={styles.typing}>
+        {" "}
+        <span ref={typedRef} />
+      </div>
+
       <div className={styles.dialog}>
-        <h2>
-          Hey, I'm <span ref={typedRef} />
-        </h2>
         <p>
           who Loves bringing{" "}
           <span className={styles.headingHighlight}>Ideas</span> to Life
         </p>
       </div>
+
       <div className={styles.socialIconsContainer}>
         <a
           href="https://x.com/986nic"
@@ -143,9 +151,11 @@ const Home: React.FC = React.memo(() => {
           />
         </a>
       </div>
+
       <button onClick={() => scrollTo("contact")} className={styles.cta}>
         Connect
       </button>
+
       <motion.div
         onClick={() => scrollTo("about")}
         className={styles.scrollIconContainer}
