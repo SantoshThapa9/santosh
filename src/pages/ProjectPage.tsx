@@ -3,6 +3,7 @@ import styles from "./ProjectPage.module.scss";
 import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
 import pp from "../pages/projectThumbnails/pp.png";
+import pfc from "../pages/projectThumbnails/pfc.png";
 
 import ProjectModal from "./projectModal";
 
@@ -29,7 +30,7 @@ const projects: Project[] = [
     thumbnail: taskify,
     link: "https://taskifyapp-smoky.vercel.app/",
     description:
-      "A simple task manager to help you stay organized and productive.",
+      "A simple task manager to help you stay organized and productive. Added login feature to access your tasks anytime, anywhere.",
   },
   {
     id: 3,
@@ -38,6 +39,14 @@ const projects: Project[] = [
     link: "https://nic986.github.io/tictactoer/",
     description:
       "This is a simple Tic Tac Toe where you can play against AI with cool themes and fun sound effects",
+  },
+  {
+    id: 4,
+    title: "PFC",
+    thumbnail: pfc,
+    link: "https://pfc-app-mauve.vercel.app/",
+    description:
+      "A playful app where you can  calculate number, and it reveals the corresponding Pokemon, Perfect for fans who love a mix of math and Pokemon magic.",
   },
 ];
 

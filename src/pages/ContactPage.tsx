@@ -33,7 +33,7 @@ const ContactPage: React.FC = () => {
         .then(
           () => {
             setStatus("Message sent successfully!");
-            setFormData({ user_name: "", user_email: "", message: "" }); // Reset form after success
+            setFormData({ user_name: "", user_email: "", message: "" }); 
           },
           (error) => {
             setStatus("Failed to send message. Please try again later.");
@@ -50,7 +50,6 @@ const ContactPage: React.FC = () => {
         <p className={styles.contactSubtitle}>
           Feel free to reach out. I'm up for a chat!
         </p>
-
         <form ref={form} className={styles.contactForm} onSubmit={sendEmail}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.formLabel}>

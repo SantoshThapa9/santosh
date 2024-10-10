@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap");
+
 .ContactPage {
   display: flex;
   flex-direction: column;
@@ -19,14 +21,17 @@
 
 .contactTitle {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 9vw, 4rem);
   margin-bottom: 10px;
-  color: #333;
+  color: orange;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  font-family: "Protest Strike", sans-serif;
 }
 
 .contactSubtitle {
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 30px;
   color: #555;
 }
@@ -96,4 +101,3 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
 }
-

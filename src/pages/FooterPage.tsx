@@ -91,9 +91,10 @@ const FooterPage: React.FC = () => {
           </a>
         </div>
         <div className={styles.copyRight}>
-          &copy; {new Date().getFullYear()} Santosh. Feel free to reach out for
-          collaboration or inquiries!
+          &copy; {new Date().getFullYear()} Santosh. Open to collaborations and
+          inquiries!
         </div>
+
         <hr />
       </div>
     </footer>
