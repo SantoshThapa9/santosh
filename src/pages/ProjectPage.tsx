@@ -4,6 +4,7 @@ import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
 import pp from "../pages/projectThumbnails/pp.png";
 import pfc from "../pages/projectThumbnails/pfc.png";
+import kura from "../pages/projectThumbnails/kura.png";
 
 import ProjectModal from "./projectModal";
 
@@ -47,6 +48,14 @@ const projects: Project[] = [
     link: "https://pfc-app-mauve.vercel.app/",
     description:
       "A playful app where you can  calculate number, and it reveals the corresponding Pokemon, Perfect for fans who love a mix of math and Pokemon magic.",
+  },
+  {
+    id: 5,
+    title: "KURA.AI",
+    thumbnail: kura,
+    link: "https://kura-iota.vercel.app/",
+    description:
+      "My personal AI chat assistant is designed to answer your questions and engage in meaningful conversations. It can help you with coding and also perform tasks that ChatGPT can't!",
   },
 ];
 
