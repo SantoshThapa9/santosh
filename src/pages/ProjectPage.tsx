@@ -21,7 +21,7 @@ const projects: Project[] = [
     id: 1,
     title: "santosh.com",
     thumbnail: pp,
-    link: "/",
+    link: "https://santosh-gamma.vercel.app/",
     description:
       "This is the current site you are viewing. It serves as a complete representation of my journey",
   },
