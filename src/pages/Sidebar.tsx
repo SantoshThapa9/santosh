@@ -45,8 +45,16 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div>
-      <button className={styles.menuToggle} onClick={toggleSidebar}>
-        {isSidebarOpen ? <RxCross2 className={styles.crossBtn}/> : <MdOutlineMenu />}
+      <button
+        className={styles.menuToggle}
+        onClick={toggleSidebar}
+        aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+      >
+        {isSidebarOpen ? (
+          <RxCross2 className={styles.crossBtn} />
+        ) : (
+          <MdOutlineMenu />
+        )}
       </button>
       <div
         onClick={toggleSidebar}
