@@ -39,7 +39,8 @@
   justify-content: space-evenly;
   font-size: clamp(3.2rem, 10vw, 5rem);
   font-weight: 900;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "MyCustomFont", sans-serif;
+  font-weight: lighter;
   color: transparent;
   -webkit-text-stroke: 1px rgb(255, 255, 255);
   position: relative;
