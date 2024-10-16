@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./about.module.scss";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
+import "../global.css";
 import { FaGithub, FaJs, FaReact, FaNodeJs } from "react-icons/fa";
 
 import {

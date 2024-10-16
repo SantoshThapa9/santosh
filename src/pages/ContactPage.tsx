@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.scss";
-
+import "../global.css";
 const ContactPage: React.FC = () => {
   const form = useRef<HTMLFormElement | null>(null);
 

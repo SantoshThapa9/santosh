@@ -2,7 +2,7 @@ import React, { MouseEvent, useEffect } from "react";
 import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import styles from "./sidebar.module.scss";
-
+import "../global.css";
 interface SidebarProps {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;

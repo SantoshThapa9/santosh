@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
-import Typed from "typed.js";
+import Typewriter from "typewriter-effect";
 import { BsChevronDoubleDown } from "react-icons/bs";
-import { FaInstagram, FaGithub, FaLinkedin, FaDiscord } from "react-icons/fa";
+import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import styles from "./Home.module.scss";
 import { motion, useScroll, useTransform } from "framer-motion";
+import "../global.css";
+import styles from "./Home.module.scss";
 
 const Home: React.FC = React.memo(() => {
   const backgroundRef = useRef<HTMLDivElement | null>(null);
-  const typedRef = useRef<HTMLSpanElement | null>(null);
 
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 600], [0.3, 0]);
@@ -48,20 +48,9 @@ const Home: React.FC = React.memo(() => {
 
     if (backgroundRef.current) observer.observe(backgroundRef.current);
 
-    const typed = typedRef.current
-      ? new Typed(typedRef.current, {
-          strings: ["Santosh.", "a Developer."],
-          typeSpeed: 100,
-          backSpeed: 50,
-          backDelay: 1500,
-          loop: true,
-        })
-      : null;
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
       observer.disconnect();
-      typed?.destroy();
     };
   }, []);
 
@@ -89,9 +78,15 @@ const Home: React.FC = React.memo(() => {
       <h2 className={styles.mainText}>Hey, I'm</h2>
       <div className={styles.typing}>
         {" "}
-        <span ref={typedRef} />
+        <Typewriter
+          options={{
+            strings: ["Santosh.", "a Developer."],
+            autoStart: true,
+            loop: true,
+            delay: 75,
+          }}
+        />
       </div>
-
       <div className={styles.dialog}>
         <p>
           who Loves bringing{" "}
@@ -106,7 +101,7 @@ const Home: React.FC = React.memo(() => {
           rel="noopener noreferrer"
         >
           <FaXTwitter
-            className={styles.icon}
+            className={`${styles.icon} ${styles.icon1}`}
             style={{ backgroundColor: "#222" }}
           />
         </a>
@@ -116,7 +111,7 @@ const Home: React.FC = React.memo(() => {
           rel="noopener noreferrer"
         >
           <FaInstagram
-            className={styles.icon}
+            className={`${styles.icon} ${styles.icon2}`}
             style={{ backgroundColor: "#E1306C" }}
           />
         </a>
@@ -126,7 +121,7 @@ const Home: React.FC = React.memo(() => {
           rel="noopener noreferrer"
         >
           <FaGithub
-            className={styles.icon}
+            className={`${styles.icon} ${styles.icon3}`}
             style={{ backgroundColor: "#333" }}
           />
         </a>
@@ -136,18 +131,8 @@ const Home: React.FC = React.memo(() => {
           rel="noopener noreferrer"
         >
           <FaLinkedin
-            className={styles.icon}
+            className={`${styles.icon} ${styles.icon4}`}
             style={{ backgroundColor: "#0077B5" }}
-          />
-        </a>
-        <a
-          href="https://discord.gg/EKce6uKuZa"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaDiscord
-            className={styles.icon}
-            style={{ backgroundColor: "#7289DA" }}
           />
         </a>
       </div>

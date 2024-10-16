@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabin:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&display=swap");
-
 body {
   background: linear-gradient(#070707, #181818, #070707);
 }
@@ -40,13 +38,16 @@ body {
 }
 
 .heading {
-  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 6rem);
   color: transparent;
-  font-family: "Oswald", sans-serif;
-  -webkit-text-stroke: 0.2vw #ffffff;
-
+  -webkit-text-stroke: 1px white;
+  font-family: "Lilita One", sans-serif;
+  font-weight: lighter;
   span {
+    font-size: clamp(2.5rem, 8vw, 4rem);
     color: #ffffff;
+    font-family: "Lilita One", sans-serif;
+    font-weight: lighter;
   }
 }
 
@@ -62,12 +63,11 @@ body {
 }
 
 .description {
-  font-size: clamp(0.8rem, 3vw, 2rem);
+  font-size: clamp(0.8rem, 2.5vw, 2.1rem);
   margin-top: 1rem;
   color: #ffffff;
-  font-family: "Cabin", sans-serif;
   margin-bottom: 5%;
-  font-weight: 600;
+  font-family: "Roboto", sans-serif;
 
   span {
     color: rgb(0, 228, 159);
@@ -79,15 +79,17 @@ body {
   h3 {
     font-size: clamp(2rem, 5vw, 7rem);
     color: goldenrod;
-    font-family: "Oswald", sans-serif;
+    font-family: "Lilita One", sans-serif;
+    font-weight: lighter;
     margin-top: 5%;
+    margin-bottom: 10px;
   }
 
   p {
     font-size: clamp(0.8rem, 2vw, 2rem);
     color: #ffffff;
-    font-family: "Cabin", sans-serif;
     margin-bottom: 10%;
+    font-family: "Roboto", sans-serif;
   }
 }
 

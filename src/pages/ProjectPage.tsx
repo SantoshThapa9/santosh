@@ -5,7 +5,7 @@ import taskify from "../pages/projectThumbnails/taskify.png";
 import pp from "../pages/projectThumbnails/pp.png";
 import pfc from "../pages/projectThumbnails/pfc.png";
 import kura from "../pages/projectThumbnails/kura.png";
-
+import "../global.css";
 import ProjectModal from "./projectModal";
 
 interface Project {
