@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Suspense } from "react";
 import styles from "./ProjectPage.module.scss";
 import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
@@ -6,7 +6,8 @@ import pp from "../pages/projectThumbnails/pp.png";
 import pfc from "../pages/projectThumbnails/pfc.png";
 import kura from "../pages/projectThumbnails/kura.png";
 import "../global.css";
-import ProjectModal from "./projectModal";
+
+const ProjectModal = React.lazy(() => import("./projectModal"));
 
 interface Project {
   id: number;
@@ -47,7 +48,7 @@ const projects: Project[] = [
     thumbnail: pfc,
     link: "https://pfc-app-mauve.vercel.app/",
     description:
-      "A playful app where you can  calculate number, and it reveals the corresponding Pokemon, Perfect for fans who love a mix of math and Pokemon magic.",
+      "A playful app where you can calculate number, and it reveals the corresponding Pokemon, Perfect for fans who love a mix of math and Pokemon magic.",
   },
   {
     id: 5,
@@ -58,6 +59,20 @@ const projects: Project[] = [
       "My personal AI chat assistant is designed to answer your questions and engage in meaningful conversations. It can help you with coding and also perform tasks that ChatGPT can't!",
   },
 ];
+
+const GridItem: React.FC<{ project: Project; onClick: () => void }> =
+  React.memo(({ project, onClick }) => (
+    <div className={styles.gridItem} onClick={onClick}>
+      <img
+        src={project.thumbnail}
+        alt={project.title}
+        className={styles.thumbnail}
+        style={{ aspectRatio: "1 / 1" }}
+        loading="lazy"
+      />
+      <h3 className={styles.title}>{project.title}</h3>
+    </div>
+  ));
 
 const ProjectPage: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -120,27 +135,23 @@ const ProjectPage: React.FC = () => {
       </div>
       <div className={styles.gridContainer}>
         {projects.map((project) => (
-          <div
+          <GridItem
             key={project.id}
-            className={`${styles.gridItem}`}
+            project={project}
             onClick={() => openModal(project)}
-          >
-            <img
-              src={project.thumbnail}
-              alt={project.title}
-              className={styles.thumbnail}
-              style={{ aspectRatio: "1 / 1" }}
-            />
-            <h3 className={styles.title}>{project.title}</h3>
-          </div>
+          />
         ))}
       </div>
 
-      <ProjectModal
-        project={selectedProject}
-        isVisible={isModalVisible}
-        onClose={closeModal}
-      />
+      {isModalVisible && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <ProjectModal
+            project={selectedProject}
+            isVisible={isModalVisible}
+            onClose={closeModal}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };

@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, lazy } from "react";
 import Sidebar from "./pages/Sidebar";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import ProjectPage from "./pages/ProjectPage";
-import FooterPage from "./pages/FooterPage";
-import ContactPage from "./pages/ContactPage";
+
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const ProjectPage = lazy(() => import("./pages/ProjectPage"));
+const FooterPage = lazy(() => import("./pages/FooterPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 interface Refs {
   home: React.RefObject<HTMLDivElement>;
