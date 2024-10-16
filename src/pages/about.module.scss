@@ -43,11 +43,21 @@ body {
   -webkit-text-stroke: 1px white;
   font-family: "Lilita One", sans-serif;
   font-weight: lighter;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lilitaone/v15/i7dPIFZ9Zz-WBtRtedDbYE98RWq7.woff2)
+    format("woff2");
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
   span {
     font-size: clamp(2.5rem, 8vw, 4rem);
     color: #ffffff;
     font-family: "Lilita One", sans-serif;
     font-weight: lighter;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/lilitaone/v15/i7dPIFZ9Zz-WBtRtedDbYE98RWq7.woff2)
+      format("woff2");
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+      U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
 }
 
@@ -81,6 +91,11 @@ body {
     color: goldenrod;
     font-family: "Lilita One", sans-serif;
     font-weight: lighter;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/lilitaone/v15/i7dPIFZ9Zz-WBtRtedDbYE98RWq7.woff2)
+      format("woff2");
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+      U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
     margin-top: 5%;
     margin-bottom: 10px;
   }
