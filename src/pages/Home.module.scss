@@ -128,63 +128,103 @@
       }
     }
   }
-.icon1 {
-  animation: bounceInLeft 1s ease-in-out forwards;
-}
-.icon2 {
-  animation: bounceInLeft 1.4s ease-in-out forwards;
-}
-.icon3 {
-  animation: bounceInRight 1.6s ease-in-out forwards;
-}
-.icon4 {
-  animation: bounceInRight 1.1s ease-in-out forwards;
-}
+  .icon1 {
+    animation: slideInFlash1 1.5s ease-out forwards;
+  }
+  .icon2 {
+    animation: slideInFlash2 1.2s ease-out forwards;
+  }
+  .icon3 {
+    animation: slideInFlash3 1.1s ease-out forwards;
+  }
+  .icon4 {
+    animation: slideInFlash4 1.4s ease-out forwards;
+  }
 
-@keyframes bounceInLeft {
-  0% {
-    transform: translateX(-200px) scale(0.1);
-    opacity: 0;
+  @keyframes slideInFlash1 {
+    0% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    30% {
+      transform: translateX(-60px);
+      opacity: 0.4;
+    }
+    60% {
+      transform: translateX(5px);
+      opacity: 0.6;
+    }
+    90% {
+      transform: translateX(-3px);
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
-  30% {
-    transform: translateX(30px) scale(0.6);
-    opacity: 0.6;
+  @keyframes slideInFlash2 {
+    0% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    30% {
+      transform: translateX(-60px);
+      opacity: 0.4;
+    }
+    60% {
+      transform: translateX(5px);
+      opacity: 0.6;
+    }
+    90% {
+      transform: translateX(-3px);
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
-  60% {
-    transform: translateX(-10px) scale(1.05);
-    opacity: 0.9;
+  @keyframes slideInFlash3 {
+    0% {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    30% {
+      transform: translateX(60px);
+      opacity: 0.4;
+    }
+    60% {
+      transform: translateX(-5px);
+      opacity: 0.6;
+    }
+    90% {
+      transform: translateX(3px);
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
-  80% {
-    transform: translateX(5px);
+  @keyframes slideInFlash4 {
+    0% {
+      transform: translateX(100px);
+      opacity: 0;
+    }
+    30% {
+      transform: translateX(60px);
+      opacity: 0.4;
+    }
+    60% {
+      transform: translateX(-5px);
+      opacity: 0.6;
+    }
+    90% {
+      transform: translateX(3px);
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
-  100% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes bounceInRight {
-  0% {
-    transform: translateX(200px) scale(0.8);
-    opacity: 0;
-  }
-  30% {
-    transform: translateX(-30px) scale(0.6);
-    opacity: 0.6;
-  }
-  60% {
-    transform: translateX(10px) scale(1.05);
-    opacity: 0.9;
-  }
-  80% {
-    transform: translateX(-5px);
-  }
-  100% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
-  }
-}
-
 
   .cta {
     border-radius: 3em;
