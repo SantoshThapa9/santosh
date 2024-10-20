@@ -81,12 +81,12 @@ const About: React.FC = () => {
             interactive and engaging digital experiences.
             <br />
             <br />
-            My passion for clean, efficient code, combined with a strong
-            foundation in modern technologies like Next.js, HTML, SCSS, etc.,
-            drives me to continuously explore new frameworks and tools. This
-            ensures that my projects are not only functional but also luxurious
-            in appearance. I am dedicated to delivering high-quality results
-            that exceed expectations.
+            My passion for clean, efficient code, paired with a strong
+            foundation in modern technologies like React, Next.js, HTML5, and
+            SCSS, drives me to continually explore new frameworks and tools. I
+            strive to create projects that are not only functional but also
+            polished and visually appealing. I am committed to delivering
+            high-quality results that exceed expectations.
             <br />
             <br />
             Let's <span>build</span> something amazing together!
