@@ -3,6 +3,7 @@ import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import styles from "./sidebar.module.scss";
 import "../global.css";
+
 interface SidebarProps {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
@@ -35,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   }, [isSidebarOpen]);
 
   const handleLinkClick = (
-    e: MouseEvent<HTMLAnchorElement>,
+    e: MouseEvent<HTMLLIElement>,
     scrollFunction: () => void
   ) => {
     e.preventDefault();
@@ -62,41 +63,13 @@ const Sidebar: React.FC<SidebarProps> = ({
       >
         <nav className={styles.nav}>
           <ul>
-            <li>
-              <a
-                href="home"
-                onClick={(e) => handleLinkClick(e, scrollToHome)}
-                aria-current={isSidebarOpen ? "page" : undefined}
-              >
-                Home
-              </a>
+            <li onClick={(e) => handleLinkClick(e, scrollToHome)}>Home</li>
+            <li onClick={(e) => handleLinkClick(e, scrollToAbout)}>About</li>
+            <li onClick={(e) => handleLinkClick(e, scrollToProjectsPage)}>
+              Projects
             </li>
-            <li>
-              <a
-                href="about"
-                onClick={(e) => handleLinkClick(e, scrollToAbout)}
-                aria-current={isSidebarOpen ? "page" : undefined}
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="projects"
-                onClick={(e) => handleLinkClick(e, scrollToProjectsPage)}
-                aria-current={isSidebarOpen ? "page" : undefined}
-              >
-                Projects
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                onClick={(e) => handleLinkClick(e, scrollToContactPage)}
-                aria-current={isSidebarOpen ? "page" : undefined}
-              >
-                Contact
-              </a>
+            <li onClick={(e) => handleLinkClick(e, scrollToContactPage)}>
+              Contact
             </li>
           </ul>
         </nav>

@@ -137,8 +137,8 @@ const Home: React.FC = React.memo(() => {
         </a>
       </div>
 
-      <button onClick={() => scrollTo("contact")} className={styles.cta}>
-        Connect
+      <button onClick={() => scrollTo("projects")} className={styles.cta}>
+        PROJECTS
       </button>
 
       <motion.div

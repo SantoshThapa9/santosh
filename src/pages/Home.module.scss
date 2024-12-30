@@ -116,7 +116,7 @@
     gap: clamp(1rem, 5vw, 4rem);
     margin-bottom: 50px;
     .icon {
-      font-size: clamp(2rem, 8vw, 3rem);
+      font-size: clamp(2.5rem, 6vw, 4rem);
       color: white;
       border-radius: 50%;
       padding: 0.2em;
@@ -229,10 +229,9 @@
   .cta {
     border-radius: 3em;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
-    font-size: clamp(0.9rem, 2vw, 1.3rem);
-    padding: 0.6em 1.2em;
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+    padding: 0.6rem 1.2rem;
     margin-bottom: 30px;
-    font-weight: bolder;
     background: transparent;
     color: whitesmoke;
     border: 1px silver solid;

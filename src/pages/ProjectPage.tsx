@@ -129,7 +129,9 @@ const ProjectPage: React.FC = () => {
   };
 
   return (
-    <div className={styles.projectPage} ref={containerRef}>
+    <div id="projects" className={styles.projectPage} ref={containerRef}>
+      <hr />
+      <br />
       <div className={styles.heading}>
         <h1>PROJECTS</h1>
       </div>

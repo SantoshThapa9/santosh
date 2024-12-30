@@ -55,12 +55,15 @@ body {
 .image {
   margin-top: 10px;
   background-image: url("santosh.jpg");
-  height: clamp(100px, 15vw, 300px);
+  height: clamp(100px, 13vw, 270px);
   aspect-ratio: 1/1;
   background-size: cover;
   border-radius: 50%;
   transition: scale 0.2s ease-in-out;
-  border: 2px whitesmoke solid;
+  border: 3px rgb(245, 190, 52) solid;
+  @media (min-width: 768px) {
+    border: 5px rgb(245, 190, 52) solid;
+  }
 }
 
 .description {
