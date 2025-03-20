@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Typewriter from "typewriter-effect";
+import { Typewriter } from "react-simple-typewriter";
 import { BsChevronDoubleDown } from "react-icons/bs";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -71,7 +71,7 @@ const Home: React.FC = React.memo(() => {
   return (
     <div className={styles.hero}>
       <div className={styles.headingContainer}>
-        <image />
+        <div className={styles.image} />
         <strong>Santosh</strong>
       </div>
 
@@ -79,12 +79,13 @@ const Home: React.FC = React.memo(() => {
       <div className={styles.typing}>
         {" "}
         <Typewriter
-          options={{
-            strings: ["Santosh.", "a Developer."],
-            autoStart: true,
-            loop: true,
-            delay: 75,
-          }}
+          words={["Santosh.", "a Developer."]}
+          loop={true}
+          cursor
+          cursorStyle="|"
+          typeSpeed={100}
+          deleteSpeed={50}
+          delaySpeed={1500}
         />
       </div>
       <div className={styles.dialog}>
@@ -96,7 +97,7 @@ const Home: React.FC = React.memo(() => {
 
       <div className={styles.socialIconsContainer}>
         <a
-          href="https://x.com/986nic"
+          href="https://x.com/SantoshThapa689"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -116,7 +117,7 @@ const Home: React.FC = React.memo(() => {
           />
         </a>
         <a
-          href="https://github.com/nic986"
+          href="https://github.com/SantoshThapa9"
           target="_blank"
           rel="noopener noreferrer"
         >

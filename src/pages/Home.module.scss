@@ -22,7 +22,7 @@
     cursor: not-allowed;
     animation: none;
 
-    image {
+    .image {
       background-image: url("../st.webp");
       background-size: cover;
       width: clamp(28px, 5vw, 40px);
@@ -119,12 +119,13 @@
       font-size: clamp(2.5rem, 6vw, 4rem);
       color: white;
       border-radius: 50%;
+      box-shadow: 0 0 2px 1px rgba(141, 141, 141, 0.747);
       padding: 0.2em;
       border: 1px whitesmoke solid;
       transform: translateX(-100px);
       opacity: 0;
       &:hover {
-        transform: scale(1.06) !important;
+        transform: scale(0.95) !important;
       }
     }
   }
@@ -228,7 +229,7 @@
 
   .cta {
     border-radius: 3em;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 4px rgba(201, 201, 201, 0.747);
     font-size: clamp(0.9rem, 2vw, 1.2rem);
     padding: 0.6rem 1.2rem;
     margin-bottom: 30px;
@@ -242,7 +243,7 @@
     &:hover {
       border: 1px grey solid;
       scale: 0.95;
-      color: silver;
+      color: rgb(214, 214, 214);
     }
   }
 

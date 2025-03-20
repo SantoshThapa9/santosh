@@ -11,8 +11,7 @@ import {
   SiCss3,
   SiBootstrap,
   SiSass,
-  SiTailwindcss,
-  SiDocker,
+  SiMysql,
   SiFramer,
   SiVercel,
   SiMui,
@@ -61,32 +60,128 @@ const About: React.FC = () => {
       </motion.div>
     );
   };
+  const techStack = [
+    {
+      name: "JavaScript",
+      url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+      icon: <FaJs style={{ color: "#f0db4f" }} />,
+    },
+    {
+      name: "React",
+      url: "https://reactjs.org/",
+      icon: <FaReact style={{ color: "#61DBFB" }} />,
+    },
+    {
+      name: "Node.js",
+      url: "https://nodejs.org/",
+      icon: <FaNodeJs style={{ color: "#68A063" }} />,
+    },
+    {
+      name: "Next.js",
+      url: "https://nextjs.org/",
+      icon: <SiNextdotjs style={{ color: "grey" }} />,
+    },
+    {
+      name: "TypeScript",
+      url: "https://www.typescriptlang.org/",
+      icon: <SiTypescript style={{ color: "#007acc" }} />,
+    },
+    {
+      name: "Express.js",
+      url: "https://expressjs.com/",
+      icon: <SiExpress style={{ color: "silver" }} />,
+    },
+    {
+      name: "HTML5",
+      url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
+      icon: <SiHtml5 style={{ color: "#E34F26" }} />,
+    },
+    {
+      name: "CSS3",
+      url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
+      icon: <SiCss3 style={{ color: "#1572B6" }} />,
+    },
+    {
+      name: "Git",
+      url: "https://git-scm.com/",
+      icon: <SiGit style={{ color: "orange" }} />,
+    },
+    {
+      name: "MongoDB",
+      url: "https://www.mongodb.com/",
+      icon: <SiMongodb style={{ color: "#4DB33D" }} />,
+    },
+    {
+      name: "Framer Motion",
+      url: "https://www.framer.com/api/motion/",
+      icon: <SiFramer style={{ color: "#F15A29" }} />,
+    },
+    {
+      name: "Bootstrap",
+      url: "https://getbootstrap.com/",
+      icon: <SiBootstrap style={{ color: "#563D7C" }} />,
+    },
+    {
+      name: "Sass",
+      url: "https://sass-lang.com/",
+      icon: <SiSass style={{ color: "#CC6699" }} />,
+    },
+    {
+      name: "Vercel",
+      url: "https://vercel.com/",
+      icon: <SiVercel style={{ color: "grey" }} />,
+    },
+    {
+      name: "MUI",
+      url: "https://mui.com/",
+      icon: <SiMui style={{ color: "#007FFF" }} />,
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/",
+      icon: <FaGithub style={{ color: "grey" }} />,
+    },
+    {
+      name: "PostgreSQL",
+      url: "https://www.postgresql.org/",
+      icon: <SiPostgresql style={{ color: "#336791" }} />,
+    },
+    {
+      name: "MySQL",
+      url: "https://www.mysql.com/",
+      icon: <SiMysql style={{ color: "#00758F" }} />,
+    },
+  ];
 
   return (
     <section className={styles.sectionAbout}>
       <AnimatedSection className={styles.aboutContent}>
         <div className={styles.headingContainer}>
-          <h1 className={styles.heading}>
-            <span>Behind the Code</span>
-            <br />
-            Meet Santosh
-          </h1>
+          <span className={styles.header}> Meet Santosh</span>
+          <br />
 
           <div className={styles.image}></div>
         </div>
-
+        <span className={styles.dialog}>
+          From crafting my first 'Hello, World!' to building interactive digital
+          experiences, my journey has been fueled by curiosity and creativity.
+        </span>
+        <br />
+        <br />
+        <hr />
         <div className={styles.description}>
           <p>
-            Hi, I'm Santosh, a developer passionate about turning ideas into
-            interactive and engaging digital experiences.
+            Hi! I'm Santosh, a developer passionate about technology and design.
+            I specialize in crafting smooth and user-friendly interfaces with
+            React, Next.js, HTML5, and SCSS. While my strength is in frontend, I
+            can also work with backend technologies like Node.js, Express, and
+            databases to build functional and scalable applications.
             <br />
             <br />
-            My passion for clean, efficient code, paired with a strong
-            foundation in modern technologies like React, Next.js, HTML5, and
-            SCSS, drives me to continually explore new frameworks and tools. I
-            strive to create projects that are not only functional but also
-            polished and visually appealing. I am committed to delivering
-            high-quality results that exceed expectations.
+            I continuously explore new frameworks and methodologies to push the
+            boundaries of creativity and performance. Every project I take on is
+            an opportunity to blend aesthetic excellence with technical
+            precision, ensuring results that exceed expectations.
             <br />
             <br />
             Let's <span>build</span> something amazing together!
@@ -98,9 +193,10 @@ const About: React.FC = () => {
           <AnimatedSection>
             <h3>Designing</h3>
             <p>
-              I'm not just a designer, I'm a creative enthusiast who loves
-              making every pixel count! You'll often find me immersed in the
-              world of stylesheets, and I'm excited to help you with UX/UI
+              For me, design isn't just about looks, it's about creating
+              experiences that feel intuitive and engaging. and I'm a creative
+              enthusiast who loves making every pixel count! You'll often find
+              me immersed in the world of stylesheets, I love working with UI/UX
               design, frontend development, responsive layouts, prototyping,
               branding, and more.
             </p>
@@ -109,12 +205,10 @@ const About: React.FC = () => {
           <AnimatedSection>
             <h3>Engineering</h3>
             <p>
-              While I might not be the best backend developer yet, I can handle
-              the basic fundamentals of backend development. Whether it's
-              creating APIs, managing databases, building server-side logic, or
-              ensuring everything is running well, I've got you covered! I'm
-              excited to tackle new challenges and contribute to building robust
-              solutions. I am always learning to keep up with the latest trends.
+              While I love frontend the most, I can build APIs, work with
+              databases, and handle server-side logic when needed. Always
+              experimenting, always learning, pushing boundaries to make things
+              faster, better, and smarter.
             </p>
           </AnimatedSection>
         </div>
@@ -124,165 +218,15 @@ const About: React.FC = () => {
         <h2 className={styles.heading}>SKILLS</h2>
 
         <div className={styles.gridContainer}>
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-                target="_blank"
-              >
-                <FaJs style={{ color: "#f0db4f" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://reactjs.org/" target="_blank">
-                <FaReact style={{ color: "#61DBFB" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://nodejs.org/" target="_blank">
-                <FaNodeJs style={{ color: "#68A063" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://nextjs.org/" target="_blank">
-                <SiNextdotjs style={{ color: "grey" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://www.typescriptlang.org/" target="_blank">
-                <SiTypescript style={{ color: "#007acc" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://expressjs.com/" target="_blank">
-                <SiExpress style={{ color: "silver" }} />{" "}
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/HTML"
-                target="_blank"
-              >
-                <SiHtml5 style={{ color: "#E34F26" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://git-scm.com/" target="_blank">
-                <SiGit style={{ color: "orange" }} />{" "}
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/CSS"
-                target="_blank"
-              >
-                <SiCss3 style={{ color: "#1572B6" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://www.mongodb.com/" target="_blank">
-                <SiMongodb style={{ color: "#4DB33D" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://www.framer.com/api/motion/" target="_blank">
-                <SiFramer style={{ color: "#F15A29" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://getbootstrap.com/" target="_blank">
-                <SiBootstrap style={{ color: "#563D7C" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://sass-lang.com/" target="_blank">
-                <SiSass style={{ color: "#CC6699" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://tailwindcss.com/" target="_blank">
-                <SiTailwindcss style={{ color: "#38B2AC" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://www.docker.com/" target="_blank">
-                <SiDocker style={{ color: "#2496ED" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://vercel.com/" target="_blank">
-                <SiVercel style={{ color: "grey" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://mui.com/" target="_blank">
-                <SiMui style={{ color: "#007FFF" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://github.com/" target="_blank">
-                <FaGithub style={{ color: "grey" }} />
-              </a>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className={styles.gridItem}>
-              <a href="https://www.postgresql.org/" target="_blank">
-                <SiPostgresql style={{ color: "#336791" }} />
-              </a>
-            </div>
-          </AnimatedSection>
+          {techStack.map((tech, index) => (
+            <AnimatedSection key={index}>
+              <div className={styles.gridItem}>
+                <a href={tech.url} target="_blank" rel="noopener noreferrer">
+                  {tech.icon}
+                </a>
+              </div>
+            </AnimatedSection>
+          ))}
         </div>
       </AnimatedSection>
     </section>

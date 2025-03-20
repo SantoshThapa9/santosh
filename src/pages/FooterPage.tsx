@@ -1,11 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import {
-  FaTwitter,
-  FaLinkedin,
-  FaInstagram,
-  FaGithub,
-  FaDiscord,
-} from "react-icons/fa";
+import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 import styles from "./Footer.module.scss";
 import "../global.css";
 const FooterPage: React.FC = () => {
@@ -50,7 +44,7 @@ const FooterPage: React.FC = () => {
       <div className={styles.container}>
         <div className={styles.socialLinks}>
           <a
-            href="https://x.com/986nic"
+            href="https://x.com/SantoshThapa689"
             className={styles.socialLink}
             target="_blank"
             rel="noopener noreferrer"
@@ -80,14 +74,6 @@ const FooterPage: React.FC = () => {
             rel="noopener noreferrer"
           >
             <FaGithub className={styles.icon} />
-          </a>
-          <a
-            href="https://discord.gg/EKce6uKuZa"
-            className={styles.socialLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FaDiscord className={styles.icon} />
           </a>
         </div>
         <div className={styles.copyRight}>

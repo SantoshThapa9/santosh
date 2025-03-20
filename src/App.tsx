@@ -8,11 +8,11 @@ const FooterPage = lazy(() => import("./pages/FooterPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 interface Refs {
-  home: React.RefObject<HTMLDivElement>;
-  about: React.RefObject<HTMLDivElement>;
-  projectPage: React.RefObject<HTMLDivElement>;
-  footerPage: React.RefObject<HTMLDivElement>;
-  contactPage: React.RefObject<HTMLDivElement>;
+  home: React.RefObject<HTMLDivElement | null>;
+  about: React.RefObject<HTMLDivElement | null>;
+  projectPage: React.RefObject<HTMLDivElement | null>;
+  footerPage: React.RefObject<HTMLDivElement | null>;
+  contactPage: React.RefObject<HTMLDivElement | null>;
 }
 
 const App: React.FC = () => {

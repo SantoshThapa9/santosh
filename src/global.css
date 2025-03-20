@@ -4,3 +4,6 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+html {
+  background-color: rgb(14, 14, 14);
+}

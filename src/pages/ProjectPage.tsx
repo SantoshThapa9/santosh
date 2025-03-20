@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef, Suspense } from "react";
 import styles from "./ProjectPage.module.scss";
 import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
-import pp from "../pages/projectThumbnails/pp.png";
 import pfc from "../pages/projectThumbnails/pfc.png";
-import kura from "../pages/projectThumbnails/kura.png";
+import kura from "../pages/projectThumbnails/kuraxchatgpt.png";
 import "../global.css";
 
 const ProjectModal = React.lazy(() => import("./projectModal"));
@@ -20,11 +19,11 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "santosh.com",
-    thumbnail: pp,
-    link: "https://santosh-gamma.vercel.app/",
+    title: "KURA.AI",
+    thumbnail: kura,
+    link: "https://kura-iota.vercel.app/",
     description:
-      "This is the current site you are viewing. It serves as a complete representation of my journey",
+      "KURA.AI is A ChatGPT Clone with Dark Mode & Free Premium Voice Chat.",
   },
   {
     id: 2,
@@ -32,7 +31,7 @@ const projects: Project[] = [
     thumbnail: taskify,
     link: "https://taskifyapp-smoky.vercel.app/",
     description:
-      "A simple task manager to help you stay organized and productive. Added login feature to access your tasks anytime, anywhere.",
+      "Taskify is A Simple, Distraction-Free Task Manager with Gmail Login & Cloud Sync.",
   },
   {
     id: 3,
@@ -48,15 +47,7 @@ const projects: Project[] = [
     thumbnail: pfc,
     link: "https://pfc-app-mauve.vercel.app/",
     description:
-      "A playful app where you can calculate number, and it reveals the corresponding Pokemon, Perfect for fans who love a mix of math and Pokemon magic.",
-  },
-  {
-    id: 5,
-    title: "KURA.AI",
-    thumbnail: kura,
-    link: "https://kura-iota.vercel.app/",
-    description:
-      "My personal AI chat assistant is designed to answer your questions and engage in meaningful conversations. It can help you with coding and also perform tasks that ChatGPT can't!",
+      "A Small, playful app where you can calculate number, and it reveals the corresponding Pokemon, using API ",
   },
 ];
 
