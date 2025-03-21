@@ -37,7 +37,7 @@ const projects: Project[] = [
     id: 3,
     title: "Tic Tac Toe",
     thumbnail: ttt,
-    link: "https://nic986.github.io/tictactoer/",
+    link: "https://santoshthapa9.github.io/tictactoer/",
     description:
       "This is a simple Tic Tac Toe where you can play against AI with cool themes and fun sound effects",
   },
