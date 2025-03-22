@@ -45,6 +45,12 @@
       }
     }
   }
+  .seoHeading {
+    position: absolute;
+    left: -9999px;
+    visibility: hidden;
+  }
+
   @font-face {
     font-family: "MyCustomFont";
     src: url("../assets/fonts/LilitaOne-Regular.ttf") format("truetype");

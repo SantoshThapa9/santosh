@@ -162,57 +162,55 @@ const About: React.FC = () => {
 
           <div className={styles.image}></div>
         </div>
-        <span className={styles.dialog}>
-          From crafting my first 'Hello, World!' to building interactive digital
-          experiences, my journey has been fueled by curiosity and creativity.
-        </span>
-        <br />
-        <br />
-        <hr />
-        <div className={styles.description}>
-          <p>
-            Hi! I'm Santosh, a developer passionate about technology and design.
-            I specialize in crafting smooth and user-friendly interfaces with
-            React, Next.js, HTML5, and SCSS. While my strength is in frontend, I
-            can also work with backend technologies like Node.js, Express, and
-            databases to build functional and scalable applications.
-            <br />
-            <br />
-            I continuously explore new frameworks and methodologies to push the
-            boundaries of creativity and performance. Every project I take on is
-            an opportunity to blend aesthetic excellence with technical
-            precision, ensuring results that exceed expectations.
-            <br />
-            <br />
-            Let's <span>build</span> something amazing together!
-          </p>
-        </div>
-
-        <hr />
-        <div className={styles.workHeading}>
-          <AnimatedSection>
-            <h3>Designing</h3>
+        <article>
+          <span className={styles.dialog}>
+            From crafting my first 'Hello, World!' to building interactive
+            digital experiences, my journey has been fueled by curiosity and
+            creativity.
+          </span>
+          <br />
+          <br />
+          <hr />
+          <div className={styles.description}>
             <p>
-              For me, design isn't just about looks, it's about creating
-              experiences that feel intuitive and engaging. and I'm a creative
-              enthusiast who loves making every pixel count! You'll often find
-              me immersed in the world of stylesheets, I love working with UI/UX
-              design, frontend development, responsive layouts, prototyping,
-              branding, and more.
+              Hi! I'm Santosh, passionate about Web Developement. I love working
+              with React, Next.js, HTML5, and SCSS to create responsive and
+              accessible web interfaces. I also work with backend technologies
+              like Node.js, Express, and databases to build scalable
+              applications
+              <br />
+              <br />
+              I continuously explore new frameworks and methodologies to push
+              the boundaries of creativity and performance. Every project I take
+              on is an opportunity to blend aesthetic excellence with technical
+              precision, ensuring results that exceed expectations.
+              <br />
+              <br />
+              Let's <span>build</span> something amazing together!
             </p>
-          </AnimatedSection>
+          </div>
 
-          <AnimatedSection>
-            <h3>Engineering</h3>
-            <p>
-              While I love frontend the most, I can build APIs, work with
-              databases, and handle server-side logic when needed. Always
-              experimenting, always learning, pushing boundaries to make things
-              faster, better, and smarter.
-            </p>
-          </AnimatedSection>
-        </div>
+          <hr />
+          <div className={styles.workHeading}>
+            <AnimatedSection>
+              <h3>Designing</h3>
+              <p>
+                I'm a creative enthusiast who enjoys perfecting every pixel. My
+                expertise spans UI/UX design, frontend development, responsive
+                layouts, prototyping, and branding.
+              </p>
+            </AnimatedSection>
 
+            <AnimatedSection>
+              <h3>Engineering</h3>
+              <p>
+                Although I love frontend, I can also work on APIs, databases,
+                and server-side logic. I'm always learning and experimenting to
+                make applications faster and better
+              </p>
+            </AnimatedSection>
+          </div>
+        </article>
         <hr />
         <br />
         <h2 className={styles.heading}>SKILLS</h2>

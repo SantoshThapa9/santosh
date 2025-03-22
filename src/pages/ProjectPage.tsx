@@ -120,13 +120,13 @@ const ProjectPage: React.FC = () => {
   };
 
   return (
-    <div id="projects" className={styles.projectPage} ref={containerRef}>
+    <section id="projects" className={styles.projectPage} ref={containerRef}>
       <hr />
       <br />
       <div className={styles.heading}>
         <h1>PROJECTS</h1>
       </div>
-      <div className={styles.gridContainer}>
+      <article className={styles.gridContainer}>
         {projects.map((project) => (
           <GridItem
             key={project.id}
@@ -134,7 +134,7 @@ const ProjectPage: React.FC = () => {
             onClick={() => openModal(project)}
           />
         ))}
-      </div>
+      </article>
 
       {isModalVisible && (
         <Suspense fallback={<div>Loading...</div>}>
@@ -145,7 +145,7 @@ const ProjectPage: React.FC = () => {
           />
         </Suspense>
       )}
-    </div>
+    </section>
   );
 };
 

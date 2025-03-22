@@ -10,6 +10,11 @@ createRoot(document.getElementById("root")!).render(
       <Helmet>
         <title>Santosh Thapa | Software Engineer - React, UI/UX</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <meta
+          name="google-site-verification"
+          content="uFwgXeEWgbDk0K6XTWti6Ke4WJYQeKe86lbinlidq70"
+        />
         <meta
           name="description"
           content="Welcome to The personal portfolio of Santosh Thapa, a skilled Software Engineer specializing in React, Next.js, and UI/UX development. Check out my latest projects, blogs, and coding expertise."

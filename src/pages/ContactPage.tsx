@@ -33,7 +33,7 @@ const ContactPage: React.FC = () => {
         .then(
           () => {
             setStatus("Message sent successfully!");
-            setFormData({ user_name: "", user_email: "", message: "" }); 
+            setFormData({ user_name: "", user_email: "", message: "" });
           },
           (error) => {
             setStatus("Failed to send message. Please try again later.");
@@ -44,7 +44,7 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div id="contact" className={styles.ContactPage}>
+    <section id="contact" className={styles.ContactPage}>
       <div className={styles.contactContainer}>
         <h1 className={styles.contactTitle}>Get in Touch</h1>
         <p className={styles.contactSubtitle}>
@@ -81,7 +81,7 @@ const ContactPage: React.FC = () => {
               required
             />
           </div>
-          <div className={styles.formGroup}>
+          <address className={styles.formGroup}>
             <label htmlFor="message" className={styles.formLabel}>
               Message
             </label>
@@ -94,7 +94,7 @@ const ContactPage: React.FC = () => {
               onChange={handleChange}
               required
             ></textarea>
-          </div>
+          </address>
           <button type="submit" value="send" className={styles.submitButton}>
             Send Message
           </button>
@@ -102,7 +102,7 @@ const ContactPage: React.FC = () => {
 
         {status && <p className={styles.statusMessage}>{status}</p>}
       </div>
-    </div>
+    </section>
   );
 };
 

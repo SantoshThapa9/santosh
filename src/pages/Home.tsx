@@ -69,12 +69,15 @@ const Home: React.FC = React.memo(() => {
   };
 
   return (
-    <div className={styles.hero}>
+    <main className={styles.hero}>
       <div className={styles.headingContainer}>
         <div className={styles.image} />
         <strong>Santosh</strong>
       </div>
-
+      <h1 className={styles.seoHeading}>
+        Santosh Thapa | Frontend Developer, Software Engineer | React, Next.js,
+        JavaScript, UI/UX, Web Development
+      </h1>
       <h2 className={styles.mainText}>Hey, I'm</h2>
       <div className={styles.typing}>
         {" "}
@@ -156,7 +159,7 @@ const Home: React.FC = React.memo(() => {
       />
       <div className={styles.overlayHeroPage} />
       <div className={styles.edgefade} />
-    </div>
+    </main>
   );
 });
 export default Home;
