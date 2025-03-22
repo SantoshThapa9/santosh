@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")!).render(
         />
         <meta
           name="keywords"
-          content="Santosh Thapa, Frontend Developer, Software Engineer, React, Next.js, UI/UX, Web Developer"
+          content="Santosh Thapa, Software Engineer, React, Frontend Developer, Next.js, UI/UX, Web Developer"
         />
         <meta name="author" content="Santosh Thapa" />
         <meta

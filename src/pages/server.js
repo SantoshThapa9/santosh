@@ -16,7 +16,6 @@ const transporter = nodemailer.createTransport({
 
 const validateEmail = [
   check("name").notEmpty().withMessage("Name is required"),
-  check("email").isEmail().withMessage("Please provide a valid email"),
   check("message").notEmpty().withMessage("Message is required"),
 ];
 
@@ -26,7 +25,7 @@ app.post("/send", validateEmail, (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { name, email, message } = req.body;
+  const { name, message } = req.body;
 
   const mailOptions = {
     from: email,

@@ -7,7 +7,6 @@ const ContactPage: React.FC = () => {
 
   const [formData, setFormData] = useState({
     user_name: "",
-    user_email: "",
     message: "",
   });
 
@@ -33,7 +32,7 @@ const ContactPage: React.FC = () => {
         .then(
           () => {
             setStatus("Message sent successfully!");
-            setFormData({ user_name: "", user_email: "", message: "" });
+            setFormData({ user_name: "", message: "" });
           },
           (error) => {
             setStatus("Failed to send message. Please try again later.");
@@ -50,6 +49,7 @@ const ContactPage: React.FC = () => {
         <p className={styles.contactSubtitle}>
           Feel free to reach out. I'm up for a chat!
         </p>
+        <span className={styles.emailSpan}>st8493510@gmail.com</span>
         <form ref={form} className={styles.contactForm} onSubmit={sendEmail}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.formLabel}>
@@ -66,21 +66,7 @@ const ContactPage: React.FC = () => {
               required
             />
           </div>
-          <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.formLabel}>
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="user_email"
-              className={styles.formInput}
-              placeholder="Your email"
-              value={formData.user_email}
-              onChange={handleChange}
-              required
-            />
-          </div>
+
           <address className={styles.formGroup}>
             <label htmlFor="message" className={styles.formLabel}>
               Message
