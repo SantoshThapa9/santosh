@@ -74,6 +74,8 @@
   display: block;
   margin-bottom: 5px;
   color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
 }
 
 .formInput,
@@ -84,6 +86,7 @@
   border-radius: 5px;
   font-size: 1rem;
   font-family: Arial, Helvetica, sans-serif;
+  resize: none;
 }
 
 .submitButton {
