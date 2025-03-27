@@ -23,7 +23,7 @@ const projects: Project[] = [
     thumbnail: kura,
     link: "https://kura-iota.vercel.app/",
     description:
-      "KURA.AI is A ChatGPT Clone with Dark Mode & Free Premium Voice Chat.",
+      "KURA.AI is A ChatGPT Clone with Free Unlimited Image Generation & Premium Voice Chat.",
   },
   {
     id: 2,

@@ -20,6 +20,7 @@ import {
   SiMongodb,
   SiPostgresql,
   SiGit,
+  SiDocker,
 } from "react-icons/si";
 
 const About: React.FC = () => {
@@ -75,6 +76,11 @@ const About: React.FC = () => {
       name: "Node.js",
       url: "https://nodejs.org/",
       icon: <FaNodeJs style={{ color: "#68A063" }} />,
+    },
+    {
+      name: "Docker",
+      url: "https://www.docker.com/",
+      icon: <SiDocker style={{ color: "#2496ED" }} />,
     },
     {
       name: "Next.js",
@@ -164,26 +170,33 @@ const About: React.FC = () => {
         </div>
         <article>
           <span className={styles.dialog}>
-            From crafting my first 'Hello, World!' to building interactive
-            digital experiences, my journey has been fueled by curiosity and
-            creativity.
+            From crafting my first Hello World! to building interactive digital
+            experiences, my journey has been fueled by curiosity and creativity.
           </span>
           <br />
           <br />
           <hr />
           <div className={styles.description}>
             <p>
-              Hi! I'm Santosh, passionate about Web Developement. I love working
-              with React, Next.js, HTML5, and SCSS to create responsive and
-              accessible web interfaces. I also work with backend technologies
-              like Node.js, Express, and databases to build scalable
-              applications
+              Hi! I am Santosh, a passionate Web Developer specializing in
+              React, Next.js, HTML5, and SCSS like technologies. I thrive on
+              creating responsive and visually engaging web interfaces with a
+              keen eye for detail.
               <br />
               <br />
-              I continuously explore new frameworks and methodologies to push
-              the boundaries of creativity and performance. Every project I take
-              on is an opportunity to blend aesthetic excellence with technical
-              precision, ensuring results that exceed expectations.
+              My expertise spans UI/UX design, frontend development, responsive
+              layouts, prototyping, and branding. While I love working on the
+              frontend, I also have experience with APIs, databases, and
+              server-side logic. I'm constantly learning and experimenting to
+              enhance application performance and user experience.
+              <br />
+              <br />
+              <p>
+                I actively explore new frameworks and methodologies to push the
+                boundaries of creativity and efficiency. Every project I take on
+                is an opportunity to blend aesthetic excellence with technical
+                precision, delivering results that exceed expectations.
+              </p>
               <br />
               <br />
               Let's <span>build</span> something amazing together!
@@ -191,25 +204,6 @@ const About: React.FC = () => {
           </div>
 
           <hr />
-          <div className={styles.workHeading}>
-            <AnimatedSection>
-              <h3>Designing</h3>
-              <p>
-                I'm a creative enthusiast who enjoys perfecting every pixel. My
-                expertise spans UI/UX design, frontend development, responsive
-                layouts, prototyping, and branding.
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection>
-              <h3>Engineering</h3>
-              <p>
-                Although I love frontend, I can also work on APIs, databases,
-                and server-side logic. I'm always learning and experimenting to
-                make applications faster and better
-              </p>
-            </AnimatedSection>
-          </div>
         </article>
         <hr />
         <br />
