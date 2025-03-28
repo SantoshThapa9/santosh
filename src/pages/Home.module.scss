@@ -51,12 +51,6 @@
     visibility: hidden;
   }
 
-  @font-face {
-    font-family: "MyCustomFont";
-    src: url("../assets/fonts/LilitaOne-Regular.ttf") format("truetype");
-    font-display: swap;
-    font-style: normal;
-  }
   .mainText {
     margin-top: 11svh;
     font-size: clamp(3.5rem, 13svw, 7rem);

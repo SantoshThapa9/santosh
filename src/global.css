@@ -5,5 +5,10 @@
   scroll-behavior: smooth;
 }
 html {
-  background-color: rgb(14, 14, 14);
+  background-color: rgb(12, 12, 12);
+}
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("./assets/fonts/LilitaOne-Regular.ttf") format("truetype");
+  font-style: normal;
 }

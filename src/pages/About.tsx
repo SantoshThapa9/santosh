@@ -179,9 +179,9 @@ const About: React.FC = () => {
           <div className={styles.description}>
             <p>
               Hi! I am Santosh, a passionate Web Developer specializing in
-              React, Next.js, HTML5, and SCSS like technologies. I thrive on
-              creating responsive and visually engaging web interfaces with a
-              keen eye for detail.
+              Next.js, HTML5, and SASS like technologies. I thrive on creating
+              responsive and visually engaging web interfaces with a keen eye
+              for detail.
               <br />
               <br />
               My expertise spans UI/UX design, frontend development, responsive
