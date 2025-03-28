@@ -9,7 +9,6 @@ import styles from "./Home.module.scss";
 
 const Home: React.FC = React.memo(() => {
   const backgroundRef = useRef<HTMLDivElement | null>(null);
-
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 600], [0.3, 0]);
 
@@ -23,6 +22,15 @@ const Home: React.FC = React.memo(() => {
   };
 
   useEffect(() => {
+    const loadImage = async () => {
+      if (backgroundRef.current) {
+        backgroundRef.current.style.backgroundImage = `url(${await getRandomImage()})`;
+      }
+    };
+
+    // Load image immediately on mount
+    loadImage();
+
     const handleScroll = () => {
       document.querySelectorAll(".parallax").forEach((el) => {
         const speed = (el as HTMLElement).dataset.speed;

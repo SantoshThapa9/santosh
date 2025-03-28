@@ -1,7 +1,6 @@
 import React, { useRef, useState, lazy } from "react";
 import Sidebar from "./pages/Sidebar";
-
-const Home = lazy(() => import("./pages/Home"));
+import Home from "./pages/Home";
 const About = lazy(() => import("./pages/About"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 const FooterPage = lazy(() => import("./pages/FooterPage"));
