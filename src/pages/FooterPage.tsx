@@ -68,7 +68,7 @@ const FooterPage: React.FC = () => {
             <FaInstagram className={styles.icon} />
           </a>
           <a
-            href="https://github.com/nic986"
+            href="https://github.com/SantoshThapa9"
             className={styles.socialLink}
             target="_blank"
             rel="noopener noreferrer"
