@@ -73,6 +73,7 @@ createRoot(document.getElementById("root")!).render(
         <meta name="twitter:site" content="@SantoshThapa689" />
       </Helmet>
       <App />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

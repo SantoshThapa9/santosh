@@ -82,8 +82,8 @@ const Home: React.FC = React.memo(() => {
         <strong>Santosh</strong>
       </div>
       <h1 className={styles.seoHeading}>
-        Santosh Thapa | Frontend Developer, Software Engineer | React, Next.js,
-        JavaScript, UI/UX, Web Development
+        Santosh Thapa Software Engineer Portfolio Frontend Developer React,
+        Next.js, JavaScript, UI/UX, Web Development
       </h1>
       <h2 className={styles.mainText}>Hey, I'm</h2>
       <div className={styles.typing}>
@@ -98,6 +98,7 @@ const Home: React.FC = React.memo(() => {
           delaySpeed={1500}
         />
       </div>
+
       <div className={styles.dialog}>
         <p>
           who Loves bringing{" "}
@@ -137,7 +138,7 @@ const Home: React.FC = React.memo(() => {
           />
         </a>
         <a
-          href="https://linkedin.com/in/santosh986"
+          href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -52,7 +52,7 @@ const FooterPage: React.FC = () => {
             <FaTwitter className={styles.icon} />
           </a>
           <a
-            href="https://linkedin.com/in/santosh986"
+            href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
             className={styles.socialLink}
             target="_blank"
             rel="noopener noreferrer"

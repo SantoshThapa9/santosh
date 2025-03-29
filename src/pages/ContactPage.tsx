@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.scss";
 import "../global.css";
@@ -11,7 +11,7 @@ const ContactPage: React.FC = () => {
   });
 
   const [status, setStatus] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -20,8 +20,9 @@ const ContactPage: React.FC = () => {
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (form.current) {
+      setLoading(true);
+
       emailjs
         .sendForm(
           "service_rr0tckm",
@@ -33,14 +34,25 @@ const ContactPage: React.FC = () => {
           () => {
             setStatus("Message sent successfully!");
             setFormData({ user_name: "", message: "" });
+            setLoading(false);
           },
           (error) => {
             setStatus("Failed to send message. Please try again later.");
             console.error("Failed...", error.text);
+            setLoading(false);
           }
         );
     }
   };
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => {
+        setStatus("");
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
   return (
     <section id="contact" className={styles.ContactPage}>
@@ -82,7 +94,7 @@ const ContactPage: React.FC = () => {
             ></textarea>
           </address>
           <button type="submit" value="send" className={styles.submitButton}>
-            Send Message
+            {loading ? "Sending Message" : "Send Message"}
           </button>
         </form>
 
