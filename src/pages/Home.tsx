@@ -28,7 +28,6 @@ const Home: React.FC = React.memo(() => {
       }
     };
 
-    // Load image immediately on mount
     loadImage();
 
     const handleScroll = () => {
@@ -163,7 +162,7 @@ const Home: React.FC = React.memo(() => {
       <div
         ref={backgroundRef}
         className={`${styles.backgroundImage} parallax`}
-        data-speed="0.3"
+        data-speed="0.5"
       />
       <div className={styles.overlayHeroPage} />
       <div className={styles.edgefade} />
