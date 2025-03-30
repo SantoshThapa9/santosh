@@ -24,7 +24,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   useEffect(() => {
     const scrollbarWidth =
       window.innerWidth - document.documentElement.clientWidth;
-    console.log("Scrollbar width:", scrollbarWidth);
 
     if (isSidebarOpen) {
       document.body.style.overflow = "hidden";

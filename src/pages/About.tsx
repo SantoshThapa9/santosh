@@ -191,12 +191,10 @@ const About: React.FC = () => {
               enhance application performance and user experience.
               <br />
               <br />
-              <p>
-                I actively explore new frameworks and methodologies to push the
-                boundaries of creativity and efficiency. Every project I take on
-                is an opportunity to blend aesthetic excellence with technical
-                precision, delivering results that exceed expectations.
-              </p>
+              I actively explore new frameworks and methodologies to push the
+              boundaries of creativity and efficiency. Every project I take on
+              is an opportunity to blend aesthetic excellence with technical
+              precision, delivering results that exceed expectations.
               <br />
               <br />
               Let's <span>build</span> something amazing together!

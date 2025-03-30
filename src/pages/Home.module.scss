@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "MyCustomFont";
+  src: url("../assets/fonts/LilitaOne-Regular.ttf") format("truetype");
+  font-style: normal;
+}
+
 .hero {
   width: 100%;
   height: 100svh;
@@ -54,7 +60,7 @@
   .mainText {
     margin-top: 11svh;
     font-size: clamp(3.5rem, 13svw, 7rem);
-    -webkit-text-stroke: 1px white;
+    -webkit-text-stroke: 2px rgb(235, 235, 235);
     width: 100%;
     color: transparent;
     display: flex;
@@ -63,7 +69,7 @@
     font-weight: lighter;
 
     @media (min-width: 768px) {
-      -webkit-text-stroke: 1px white;
+      -webkit-text-stroke: 2.5px whitrgb(235, 235, 235);
       margin-top: 15svh;
     }
   }
@@ -77,13 +83,13 @@
 
     span {
       font-size: clamp(3rem, 9svw, 6rem);
-      -webkit-text-stroke: 1px white;
+      -webkit-text-stroke: 2px rgb(235, 235, 235);
       color: transparent;
       font-family: "MyCustomFont", sans-serif;
       font-weight: lighter;
 
       @media (min-width: 768px) {
-        -webkit-text-stroke: 1px white;
+        -webkit-text-stroke: 2.5px rgb(235, 235, 235);
       }
     }
   }
