@@ -1,6 +1,6 @@
 @font-face {
   font-family: "MyCustomFont";
-  src: url("../assets/fonts/LilitaOne-Regular.ttf") format("truetype");
+  src: url("/assets/fonts/LilitaOne-Regular.ttf") format("truetype");
   font-style: normal;
 }
 
@@ -29,7 +29,7 @@
     animation: none;
 
     .image {
-      background-image: url("../santosh.png");
+      background-image: url("/santosh.png");
       background-size: cover;
       width: clamp(28px, 5vw, 40px);
       aspect-ratio: 1/1;

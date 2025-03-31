@@ -50,7 +50,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div>
+    <main>
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
@@ -60,24 +60,24 @@ const App: React.FC = () => {
         scrollToContactPage={() => scrollTo("contactPage")}
       />
       <div style={contentStyle}>
-        <div ref={refs.home}>
+        <section ref={refs.home}>
           <Home />
-        </div>
-        <div ref={refs.about}>
+        </section>
+        <section ref={refs.about}>
           <About />
-        </div>
-        <div ref={refs.projectPage}>
+        </section>
+        <section ref={refs.projectPage}>
           <ProjectPage />
-        </div>
-        <div ref={refs.contactPage}>
+        </section>
+        <section ref={refs.contactPage}>
           <ContactPage />
-        </div>
-        <div ref={refs.footerPage}>
+        </section>
+        <footer ref={refs.footerPage}>
           <FooterPage />
-        </div>
+        </footer>
       </div>
       <div style={overlayStyle} onClick={toggleSidebar} />
-    </div>
+    </main>
   );
 };
 
