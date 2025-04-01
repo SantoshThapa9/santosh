@@ -61,7 +61,7 @@ const GridItem: React.FC<{ project: Project; onClick: () => void }> =
         style={{ aspectRatio: "1 / 1" }}
         loading="lazy"
       />
-      <h3 className={styles.title}>{project.title}</h3>
+      <span className={styles.title}>{project.title}</span>
     </div>
   ));
 

@@ -111,6 +111,7 @@ const Home: React.FC = React.memo(() => {
           href="https://x.com/SantoshThapa689"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Santosh Thapa on X"
         >
           <FaXTwitter
             className={`${styles.icon} ${styles.icon1}`}
@@ -121,6 +122,7 @@ const Home: React.FC = React.memo(() => {
           href="https://instagram.com/santoshh689"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Santosh Thapa on Instagram"
         >
           <FaInstagram
             className={`${styles.icon} ${styles.icon2}`}
@@ -131,6 +133,7 @@ const Home: React.FC = React.memo(() => {
           href="https://github.com/SantoshThapa9"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Santosh Thapa on Github"
         >
           <FaGithub
             className={`${styles.icon} ${styles.icon3}`}
@@ -141,6 +144,7 @@ const Home: React.FC = React.memo(() => {
           href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Santosh Thapa on Linkedin"
         >
           <FaLinkedin
             className={`${styles.icon} ${styles.icon4}`}

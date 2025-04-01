@@ -48,6 +48,7 @@ const FooterPage: React.FC = () => {
             className={styles.socialLink}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Santosh Thapa on X"
           >
             <FaTwitter className={styles.icon} />
           </a>
@@ -56,6 +57,7 @@ const FooterPage: React.FC = () => {
             className={styles.socialLink}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Santosh Thapa on Linkedin"
           >
             <FaLinkedin className={styles.icon} />
           </a>
@@ -64,6 +66,7 @@ const FooterPage: React.FC = () => {
             className={styles.socialLink}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Santosh Thapa on Instagram"
           >
             <FaInstagram className={styles.icon} />
           </a>
@@ -72,6 +75,7 @@ const FooterPage: React.FC = () => {
             className={styles.socialLink}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Santosh Thapa on Github"
           >
             <FaGithub className={styles.icon} />
           </a>
