@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.scss";
-import "../global.css";
 const ContactPage: React.FC = () => {
   const form = useRef<HTMLFormElement | null>(null);
 
@@ -23,12 +22,13 @@ const ContactPage: React.FC = () => {
     if (form.current) {
       setLoading(true);
 
+      emailjs;
       emailjs
         .sendForm(
-          "service_rr0tckm",
-          "template_oimik4p",
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
           form.current,
-          "AMutHry9f-LdcdnOm"
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
         )
         .then(
           () => {

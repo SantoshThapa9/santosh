@@ -1,17 +1,18 @@
 .sectionAbout {
   width: 100%;
   min-height: 100vh;
-  padding: 5vw;
+  padding: 1.4rem;
   display: flex;
   justify-content: space-evenly;
-  max-width: 1500px;
   margin: 0 auto;
+  line-height: 1.6;
 
   @media (min-width: 768px) {
     display: flex;
     justify-content: space-evenly;
-    max-width: 1500px;
+    max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 80px;
   }
 }
 
@@ -25,6 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  line-height: 1.6;
 
   @media (min-width: 768px) {
     flex-direction: row;
@@ -52,19 +54,25 @@
 }
 .dialog {
   color: rgb(255, 255, 255);
-  font-size: clamp(0.9rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.4rem);
   font-family: "Roboto", sans-serif;
 }
 .description {
-  font-size: clamp(0.9rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 1.4rem);
   margin-top: 3rem;
   color: #ffffff;
   margin-bottom: 5%;
   font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+  cursor: pointer;
 
   span {
     color: rgb(0, 228, 159);
     font-weight: bold;
+    transition: 1s ease;
+    &:hover {
+      color: orange;
+    }
   }
 }
 

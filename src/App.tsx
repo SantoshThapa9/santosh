@@ -1,11 +1,11 @@
 import React, { useRef, useState, lazy } from "react";
 import Sidebar from "./pages/Sidebar";
 import Home from "./pages/Home";
+import styles from "./App.module.scss";
 const About = lazy(() => import("./pages/About"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 const FooterPage = lazy(() => import("./pages/FooterPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
-
 interface Refs {
   home: React.RefObject<HTMLDivElement | null>;
   about: React.RefObject<HTMLDivElement | null>;
@@ -59,6 +59,54 @@ const App: React.FC = () => {
         scrollToHome={() => scrollTo("home")}
         scrollToContactPage={() => scrollTo("contactPage")}
       />
+      <header className={styles.seo}>
+        <h1>
+          Santosh Thapa - Expert Software Engineer, Frontend Developer & UI/UX
+          Specialist | Personal Portfolio
+        </h1>
+        <h2>
+          Welcome to my portfolio! I am a passionate software engineer with a
+          focus on frontend development and UI/UX design...
+        </h2>
+      </header>
+      <ul className={styles.seo}>
+        <li>
+          <a href="/home" aria-label="home page link">
+            Home
+          </a>
+        </li>
+        <li>
+          <a href="/about" aria-label="about page link">
+            About Us
+          </a>
+        </li>
+        <li>
+          <a href="/blog" aria-label="blog page link">
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/services" aria-label="services page link">
+            Services
+          </a>
+        </li>
+        <li>
+          <a href="/contact" aria-label="contact page link">
+            Contact
+          </a>
+        </li>
+        <li>
+          <a href="/article" aria-label="article page link">
+            article
+          </a>
+        </li>
+        <li>
+          <a href="/footer" aria-label="footer page link">
+            footer
+          </a>
+        </li>
+      </ul>
+
       <div style={contentStyle}>
         <section ref={refs.home}>
           <Home />

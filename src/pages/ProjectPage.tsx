@@ -4,7 +4,6 @@ import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
 import pfc from "../pages/projectThumbnails/pfc.png";
 import kura from "../pages/projectThumbnails/kuraxchatgpt.png";
-import "../global.css";
 
 const ProjectModal = React.lazy(() => import("./projectModal"));
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { Typewriter } from "react-simple-typewriter";
+
 import { BsChevronDoubleDown } from "react-icons/bs";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { motion, useScroll, useTransform } from "framer-motion";
-import "../global.css";
 import styles from "./Home.module.scss";
 
 const Home: React.FC = React.memo(() => {
@@ -74,7 +74,7 @@ const Home: React.FC = React.memo(() => {
       }
     }
   };
-
+  const words = ["Santosh.", "a Developer."];
   return (
     <main className={styles.hero}>
       <div className={styles.headingContainer}>
@@ -87,15 +87,15 @@ const Home: React.FC = React.memo(() => {
       </h1>
       <h2 className={styles.mainText}>Hey, I'm</h2>
       <div className={styles.typing}>
-        {" "}
         <Typewriter
-          words={["Santosh.", "a Developer."]}
+          words={words}
           loop={true}
           cursor
           cursorStyle="|"
           typeSpeed={100}
           deleteSpeed={50}
           delaySpeed={1500}
+          aria-live="polite"
         />
       </div>
 
