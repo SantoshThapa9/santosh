@@ -61,13 +61,19 @@ const App: React.FC = () => {
       />
       <header className={styles.seo}>
         <h1>
-          Santosh Thapa - Expert Software Engineer, Frontend Developer & UI/UX
-          Specialist | Personal Portfolio
+          Santosh Thapa | Software Engineer & Frontend Developer Portfolio.
         </h1>
         <h2>
-          Welcome to my portfolio! I am a passionate software engineer with a
-          focus on frontend development and UI/UX design...
+          Santosh Thapa is a Professional Software Engineer specializing in
+          React.js, Next.js, HTML5, SASS, and other modern web technologies.
         </h2>
+        <h3>
+          Explore the professional portfolio of Santosh Thapa, a highly skilled
+          Software Engineer and Frontend Developer with expertise in React.js, Next.js,
+          HTML5, SASS, and modern web technologies. Discover projects, learn
+          about Santosh's experience, and get in touch for collaborations or
+          inquiries.
+        </h3>
       </header>
       <ul className={styles.seo}>
         <li>

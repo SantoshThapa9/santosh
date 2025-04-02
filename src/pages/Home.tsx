@@ -81,11 +81,9 @@ const Home: React.FC = React.memo(() => {
         <div className={styles.image} />
         <strong>Santosh</strong>
       </div>
-      <h1 className={styles.seoHeading}>
-        Santosh Thapa Software Engineer Portfolio Frontend Developer React,
-        Next.js, JavaScript, UI/UX, Web Development
-      </h1>
+    
       <h2 className={styles.mainText}>Hey, I'm</h2>
+
       <div className={styles.typing}>
         <Typewriter
           words={words}

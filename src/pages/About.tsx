@@ -213,10 +213,10 @@ const About: React.FC = () => {
           <hr />
           <div className={styles.description}>
             <p>
-              Hello, I'm Santosh, a dedicated Web Developer specializing in
-              Next.js, HTML5, and SASS like Technologies. I excel at crafting
-              responsive and visually captivating web interfaces with meticulous
-              attention to detail.
+              Hello, I'm Santosh, a passionate Software Engineer specializing in
+              React.js, Next.js, HTML5, SASS, and modern web technologies. I
+              excel at crafting responsive and visually captivating web
+              interfaces with meticulous attention to detail.
               <br />
               <br />
               My expertise includes Frontend Development, UI/UX design,
@@ -228,7 +228,7 @@ const About: React.FC = () => {
               <br />
               I actively explore new frameworks and methodologies to push the
               boundaries of creativity and efficiency. Every project I take on
-              is anopportunity to blend aesthetic excellence with technical
+              is an opportunity to blend aesthetic excellence with technical
               precision, delivering exceptional results.
               <br />
               <br />
