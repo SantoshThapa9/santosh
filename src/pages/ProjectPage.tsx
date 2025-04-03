@@ -3,7 +3,7 @@ import styles from "./ProjectPage.module.scss";
 import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
 import pfc from "../pages/projectThumbnails/pfc.png";
-import kura from "../pages/projectThumbnails/kuraxchatgpt.png";
+import kura from "../pages/projectThumbnails/kura.png";
 
 const ProjectModal = React.lazy(() => import("./projectModal"));
 
@@ -18,11 +18,11 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "KURA.AI",
+    title: "KURA AI",
     thumbnail: kura,
     link: "https://kura-iota.vercel.app/",
     description:
-      "KURA.AI is A ChatGPT Clone with Free Unlimited Image Generation & Premium Voice Chat.",
+      "KURA AI is A ChatGPT Clone with Free Unlimited Image Generation & Premium Voice Chat.",
   },
   {
     id: 2,
