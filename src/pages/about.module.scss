@@ -1,127 +1,116 @@
 .sectionAbout {
-  width: 100%;
-  min-height: 100vh;
   padding: 1.4rem;
-  display: flex;
-  justify-content: space-evenly;
   margin: 0 auto;
   line-height: 1.6;
-
-  @media (min-width: 768px) {
-    display: flex;
-    justify-content: space-evenly;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 80px;
-  }
+  max-width: 1200px;
 }
 
 .aboutContent {
-  width: 100%;
   text-align: center;
-  margin-top: 5%;
 }
 
 .headingContainer {
+  flex-direction: row;
+  justify-content: space-evenly;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  line-height: 1.6;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-evenly;
+  @media (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    line-height: 1.6;
   }
 
   .header {
     font-size: clamp(2.5rem, 8vw, 4rem);
-    color: #ffffff;
-    font-family: "MyCustomFont", sans-serif;
+    font-family: "Bebas", sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
   }
 
   .image {
-    margin-top: 10px;
     background-image: url("santosh.jpg");
-    height: clamp(140px, 20vw, 270px);
+    height: clamp(150px, 20vw, 250px);
     aspect-ratio: 1/1;
     background-size: cover;
     border-radius: 50%;
-    transition: scale 0.2s ease-in-out;
     margin-bottom: 30px;
-    border: 4px rgb(255, 185, 55) solid;
+    border: 4px rgba(255, 174, 22, 0.808) solid;
   }
 }
+
 .dialog {
-  color: rgb(255, 255, 255);
   font-size: clamp(1rem, 2vw, 1.4rem);
-  font-family: "Roboto", sans-serif;
 }
 .description {
   font-size: clamp(1rem, 2vw, 1.4rem);
   margin-top: 3rem;
-  color: #ffffff;
   margin-bottom: 5%;
-  font-family: "Roboto", sans-serif;
   line-height: 1.6;
   cursor: pointer;
 
   span {
     color: rgb(0, 228, 159);
     font-weight: bold;
-    transition: 1s ease;
     &:hover {
-      color: orange;
+      animation: colorChange 4s ease infinite;
     }
   }
 }
-
-.workHeading {
-  h3 {
-    font-size: clamp(1.5rem, 4vw, 3rem);
-    color: goldenrod;
-    font-family: "MyCustomFont", sans-serif;
-    font-weight: lighter;
-    margin-top: 5%;
-    margin-bottom: 10px;
+@keyframes colorChange {
+  0% {
+    color: rgb(0, 228, 159);
   }
-
-  p {
-    font-size: clamp(0.9rem, 2.1vw, 2rem);
-    color: #ffffff;
-    margin-bottom: 10%;
-    font-family: "Roboto", sans-serif;
+  20% {
+    color: #ff5733;
+  }
+  40% {
+    color: #3498db;
+  }
+  60% {
+    color: #9b59b6;
+  }
+  80% {
+    color: #f39c12;
+  }
+  100% {
+    color: rgb(0, 228, 159);
   }
 }
+
 .heading {
-  font-size: clamp(1.9rem, 5vw, 3rem);
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(235, 235, 235, 0.89);
-  font-family: "MyCustomFont", sans-serif;
+  font-size: clamp(3rem, 10vw, 4rem);
+  font-family: "Bebas", sans-serif;
+  font-weight: 700;
+  letter-spacing: 3px;
 }
+
+.subHeading {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+}
+
 .gridContainer {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(clamp(50px, 10vw, 120px), 1fr)
-  );
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 5%;
   margin-top: 5vh;
-}
 
-.gridItem {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  width: 100%;
-  font-size: clamp(50px, 8vw, 100px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5%;
-  transition: 0.3s ease;
+  .gridItem {
+    border-radius: 8px;
+    transition: 0.3s ease;
 
-  &:hover {
-    scale: 1.1;
+    &:hover {
+      scale: 1.1;
+    }
+    a {
+      text-decoration: none;
+    }
+    svg {
+      font-size: 50px;
+    }
+    .techName {
+      font-size: 0.9rem;
+    }
   }
 }

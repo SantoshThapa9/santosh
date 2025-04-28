@@ -1,92 +1,79 @@
 .projectPage {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  padding: 20px;
-  margin-top: 10%;
+  margin: 50px auto;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
 
-  @media (min-width: 768px) {
-    max-width: 1200px;
-    margin: 0 auto;
+  hr {
+    width: 100%;
   }
 }
 
 .heading {
-  font-size: clamp(1.3rem, 4vw, 2rem);
-  font-family: "MyCustomFont", sans-serif;
-  font-weight: lighter;
-  display: flex;
-  color: goldenrod;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.gridContainer {
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(clamp(90px, 15vw, 300px), 1fr)
-  );
-  gap: 50px;
-  padding: 20px;
-}
-
-.gridItem {
   text-align: center;
-  font-size: 1rem;
-  opacity: 0;
-  transform: translateY(130px);
-  transition: opacity 1s ease-in, transform 1s ease-out;
+  margin: 40px;
 
-  &.inView {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  &:hover {
-    .title {
-      opacity: 1;
-    }
-
-    .thumbnail {
-      transform: scale(1.05);
-    }
-  }
-
-  .thumbnail {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-  }
-
-  .title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border-radius: 5px;
-    padding: 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    width: 100%;
-    z-index: 2;
-    font-family: "MyCustomFont", sans-serif;
-
-    .description {
-      font-size: 0.875em;
-      margin: 10px 0 0;
-    }
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    font-family: "Bebas", sans-serif;
+    letter-spacing: 2px;
   }
 }
 
-.projectLink {
-  text-decoration: none;
-  color: inherit;
+.projectBlock {
+  padding: 30px;
+  margin-bottom: 40px;
+  text-align: center;
+
+  .projectTitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .projectImage {
+    width: 150px;
+    aspect-ratio: 1;
+    margin-bottom: 20px;
+  }
+
+  .projectDescription {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .skillsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px;
+    list-style: none;
+    justify-content: center;
+    .skillItem {
+      background-color: white;
+      color: black;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      user-select: none;
+    }
+  }
+
+  .projectLink {
+    font-size: 18px;
+    color: #00bcd4;
+    text-decoration: none;
+    border-bottom: 2px solid #00bcd4;
+    transition: color 0.3s, border-color 0.3s;
+
+    &:hover {
+      color: #007f8c;
+      border-bottom: 2px solid #007f8c;
+    }
+  }
 }

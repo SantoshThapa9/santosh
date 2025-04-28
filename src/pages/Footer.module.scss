@@ -1,5 +1,4 @@
 .footer {
-  color: white;
   text-align: center;
   padding: 1vw;
 }
@@ -39,12 +38,12 @@
   justify-content: space-evenly;
   font-size: clamp(3.2rem, 10vw, 5rem);
   font-weight: 900;
-  font-family: "MyCustomFont", sans-serif;
   font-weight: lighter;
   color: transparent;
   -webkit-text-stroke: 1px rgb(255, 255, 255);
   position: relative;
   opacity: 0;
+  font-family: "Bebas", sans-serif;
   transition: opacity 1s ease, transform 1s ease;
 
   &.animate {
@@ -58,7 +57,7 @@
 
       &:hover {
         font-weight: 900;
-        color: #fff0bc;
+        color: #ffe0bc;
         -webkit-text-stroke: 0;
         scale: 1.3;
         user-select: none;

@@ -1,13 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 import { Typewriter } from "react-simple-typewriter";
-
 import { BsChevronDoubleDown } from "react-icons/bs";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "./Home.module.scss";
 
-const Home: React.FC = React.memo(() => {
+const Home: React.FC = memo(() => {
   const backgroundRef = useRef<HTMLDivElement | null>(null);
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 600], [0.3, 0]);
@@ -74,16 +73,14 @@ const Home: React.FC = React.memo(() => {
       }
     }
   };
-  const words = ["Santosh.", "a Developer."];
+  const words = ["Santosh", "Developer"];
   return (
     <main className={styles.hero}>
       <div className={styles.headingContainer}>
         <div className={styles.image} />
         <strong>Santosh</strong>
       </div>
-    
       <h2 className={styles.mainText}>Hey, I'm</h2>
-
       <div className={styles.typing}>
         <Typewriter
           words={words}
@@ -96,14 +93,12 @@ const Home: React.FC = React.memo(() => {
           aria-live="polite"
         />
       </div>
-
       <div className={styles.dialog}>
         <p>
-          who Loves bringing{" "}
-          <span className={styles.headingHighlight}>Ideas</span> to Life
+          Who Loves Bringing{" "}
+          <span className={styles.headingHighlight}>Ideas</span> To Life
         </p>
       </div>
-
       <div className={styles.socialIconsContainer}>
         <a
           href="https://x.com/SantoshThapa689"
@@ -154,7 +149,6 @@ const Home: React.FC = React.memo(() => {
       <button onClick={() => scrollTo("projects")} className={styles.cta}>
         PROJECTS
       </button>
-
       <motion.div
         onClick={() => scrollTo("about")}
         className={styles.scrollIconContainer}
@@ -165,7 +159,7 @@ const Home: React.FC = React.memo(() => {
       <div
         ref={backgroundRef}
         className={`${styles.backgroundImage} parallax`}
-        data-speed="0.5"
+        data-speed="0.4"
       />
       <div className={styles.overlayHeroPage} />
       <div className={styles.edgefade} />
