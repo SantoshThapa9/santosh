@@ -1,0 +1,29 @@
+
+User-agent: *
+Disallow: /admin/
+Disallow: /login/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /search/
+Disallow: /private/
+
+Sitemap: https://santosh-gamma.vercel.app//sitemap.xml
+
+User-agent: BadBot
+Disallow: /
+
+Allow: /
+
+Disallow: /*?sessionid=
+Disallow: /*?sort=
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /images/
+
+User-agent: Googlebot-Image
+Allow: /images/
+Disallow: /private/images/
+
+User-agent: Bingbot
+Disallow: /private/
