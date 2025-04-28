@@ -96,7 +96,7 @@ const ProjectPage: React.FC = () => {
   };
 
   return (
-    <section className={styles.projectPage}>
+    <section id="projects" className={styles.projectPage}>
       <hr />
       <AnimatedSection>
         <div className={styles.heading}>
