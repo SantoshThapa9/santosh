@@ -1,10 +1,4 @@
-@font-face {
-  font-family: "Bebas";
-  src: url("BebasNeue-Regular.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 .hero {
   height: 110dvh;
@@ -37,7 +31,7 @@
 
     strong {
       font-size: clamp(1.3rem, 5vw, 1.8rem);
-      font-family: "Bebas", sans-serif;
+      font-family: "Bebas Neue", sans-serif;
       letter-spacing: 1px;
       &::after {
         content: ".";
@@ -51,7 +45,7 @@
   .mainText {
     margin-top: 15dvh;
     font-size: clamp(3.5rem, 13svw, 7rem);
-    font-family: "Bebas", sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     text-align: center;
     font-weight: 700;
     letter-spacing: 2px;
@@ -62,7 +56,7 @@
     margin-left: 5dvh;
     letter-spacing: 2px;
     font-size: clamp(3.5rem, 13svw, 7rem);
-    font-family: "Bebas", sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     font-weight: 700;
   }
 
