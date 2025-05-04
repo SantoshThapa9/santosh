@@ -208,125 +208,102 @@ const About: React.FC = () => {
 
   return (
     <section className={styles.sectionAbout}>
-      <AnimatedSection>
-        <div className={styles.aboutContent}>
+      <div id="about" className={styles.aboutContent}>
+        <div className={styles.headingContainer}>
           <AnimatedSection>
-            <div className={styles.headingContainer}>
-              <AnimatedSection>
-                <span className={styles.header}>Meet Santosh</span>
-              </AnimatedSection>
-              <br />
-              <AnimatedSection>
-                <div className={styles.image}></div>
-              </AnimatedSection>
-            </div>
+            <span className={styles.header}>About Me</span>
+          </AnimatedSection>
+          <br />
+          <AnimatedSection>
+            <div className={styles.image}></div>
+          </AnimatedSection>
+        </div>
+
+        <article>
+          <AnimatedSection>
+            <span className={styles.dialog}>
+              From "Hello World!" to building dynamic user interfaces, my
+              journey is fueled by curiosity and creativity.
+            </span>
           </AnimatedSection>
 
-          <article>
+          <br />
+          <br />
+
+          <AnimatedSection>
+            <hr />
+          </AnimatedSection>
+
+          <div className={styles.description}>
             <AnimatedSection>
-              <span className={styles.dialog}>
-                From crafting my first Hello World! to building interactive
-                digital experiences, my journey has been fueled by curiosity and
-                creativity.
-              </span>
+              Hi, I'm Santosh, an aspiring Software Engineer with a strong
+              passion for building responsive and interactive web applications.
+              I have experience with technologies such as React.js, Next.js,
+              HTML5, CSS/SASS, and Git. I am passionate about creating
+              user-friendly applications with a focus on SEO, web performance
+              optimization, and attention to detail.
+            </AnimatedSection>
+            <br />
+
+            <AnimatedSection>
+              I'm constantly learning about new frameworks and techniques to
+              improve creativity and efficiency. <br /> Every project I work on
+              gives me the chance to blend solid functionality with smooth,
+              engaging user interfaces, aiming to achieve the best results.
+              <br />
+              <br />
             </AnimatedSection>
 
-            <br />
-            <br />
-
             <AnimatedSection>
-              <hr />
+              Let's <span>build</span> something amazing together!
             </AnimatedSection>
+          </div>
 
-            <AnimatedSection>
-              <div className={styles.description}>
+          <AnimatedSection>
+            <hr />
+          </AnimatedSection>
+
+          <br />
+
+          <AnimatedSection>
+            <h2 className={styles.heading}>SKILLS</h2>
+          </AnimatedSection>
+
+          {Object.entries(techStack).map(([category, items]) => (
+            <AnimatedSection key={category}>
+              <div>
                 <AnimatedSection>
-                  <AnimatedSection>
-                    Hi, I'm Santosh, a passionate Software Engineer specializing
-                    in React.js, Next.js, HTML5, SASS, Vercel, and modern web
-                    technologies. I excel at building responsive, interactive
-                    web applications with a strong focus on SEO, web performance
-                    optimization, and meticulous attention to detail.
-                    <br />
-                    <br />
-                  </AnimatedSection>
-                  <AnimatedSection>
-                    My expertise focuses on Frontend Development, including
-                    building responsive layouts, integrating APIs, and
-                    optimizing application performance. I am proficient in
-                    working with databases, server-side logic, and ensuring
-                    smooth user experiences through clean, scalable code. I'm
-                    committed to continuous learning and staying up-to-date with
-                    the latest development practices to deliver high-quality,
-                    efficient web applications.
-                    <br />
-                    <br />
-                  </AnimatedSection>
-                  <AnimatedSection>
-                    I actively explore new frameworks and methodologies to push
-                    the boundaries of creativity and efficiency. Every project I
-                    take on is an opportunity to blend aesthetic excellence with
-                    technical precision, delivering exceptional results.
-                    <br />
-                    <br />
-                  </AnimatedSection>
-                  <AnimatedSection>
-                    Let's <span>build</span> something amazing together!
-                  </AnimatedSection>
+                  <h3 className={styles.subHeading}>
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </h3>
                 </AnimatedSection>
+
+                <div className={styles.gridContainer}>
+                  {items.map((tech, index) => (
+                    <AnimatedSection key={index}>
+                      <div className={styles.gridItem}>
+                        <AnimatedSection>
+                          <a
+                            href={tech.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${tech.name} URL`}
+                          >
+                            {tech.icon}
+                          </a>
+                        </AnimatedSection>
+                        <AnimatedSection>
+                          <span className={styles.techName}>{tech.name}</span>
+                        </AnimatedSection>
+                      </div>
+                    </AnimatedSection>
+                  ))}
+                </div>
               </div>
             </AnimatedSection>
-
-            <AnimatedSection>
-              <hr />
-            </AnimatedSection>
-
-            <br />
-
-            <AnimatedSection>
-              <h2 className={styles.heading}>SKILLS</h2>
-            </AnimatedSection>
-
-            {Object.entries(techStack).map(([category, items]) => (
-              <AnimatedSection key={category}>
-                <div>
-                  <AnimatedSection>
-                    <h3 className={styles.subHeading}>
-                      {category.charAt(0).toUpperCase() + category.slice(1)}
-                    </h3>
-                  </AnimatedSection>
-
-                  <AnimatedSection>
-                    <div className={styles.gridContainer}>
-                      {items.map((tech, index) => (
-                        <AnimatedSection key={index}>
-                          <div className={styles.gridItem}>
-                            <AnimatedSection>
-                              <a
-                                href={tech.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={`${tech.name} URL`}
-                              >
-                                {tech.icon}
-                              </a>
-                            </AnimatedSection>
-                            <AnimatedSection>
-                              <span className={styles.techName}>
-                                {tech.name}
-                              </span>
-                            </AnimatedSection>
-                          </div>
-                        </AnimatedSection>
-                      ))}
-                    </div>
-                  </AnimatedSection>
-                </div>
-              </AnimatedSection>
-            ))}
-          </article>
-        </div>
-      </AnimatedSection>
+          ))}
+        </article>
+      </div>
     </section>
   );
 };

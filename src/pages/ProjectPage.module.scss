@@ -1,11 +1,11 @@
 .projectPage {
-  margin: 50px auto;
-  max-width: 1200px;
+  margin: auto;
+  max-width: 1100px;
   display: flex;
   flex-direction: column;
+  padding: 1.5rem;
   align-items: center;
   justify-content: space-evenly;
-
   hr {
     width: 100%;
   }
@@ -24,7 +24,6 @@
 }
 
 .projectBlock {
-  padding: 30px;
   margin-bottom: 40px;
   text-align: center;
 
@@ -41,9 +40,9 @@
   }
 
   .projectDescription {
-    font-size: 18px;
+    font-size: clamp(1rem, 2vw, 1.4rem);
     margin-bottom: 20px;
-    line-height: 1.4;
+    line-height: 2;
   }
 
   .skillsList {

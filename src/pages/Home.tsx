@@ -61,35 +61,35 @@ const Home: React.FC = memo(() => {
   }, []);
 
   const scrollTo = (targetId: string) => {
-    const element =
-      targetId === "about"
-        ? window.innerHeight
-        : document.getElementById(targetId);
+    const element = document.getElementById(targetId);
+
     if (element) {
-      if (typeof element === "number") {
-        window.scrollTo({ top: element, behavior: "smooth" });
-      } else {
-        element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // If the element is not found, try to scroll to a specific position
+      const position = parseInt(targetId, 10);
+      if (!isNaN(position)) {
+        window.scrollTo({ top: position, behavior: "smooth" });
       }
     }
   };
-  const words = ["Santosh", "Developer"];
+
+  const words = ["Santosh", "a Developer"];
   return (
     <main className={styles.hero}>
       <div className={styles.headingContainer}>
         <div className={styles.image} />
         <strong>Santosh</strong>
       </div>
-      <h2 className={styles.mainText}>Hey, I'm</h2>
+      <h2 className={styles.mainText}>Hi, I'm</h2>
       <div className={styles.typing}>
         <Typewriter
           words={words}
           loop={true}
           cursor
-          cursorStyle="|"
           typeSpeed={100}
           deleteSpeed={50}
-          delaySpeed={1500}
+          delaySpeed={2000}
           aria-live="polite"
         />
       </div>

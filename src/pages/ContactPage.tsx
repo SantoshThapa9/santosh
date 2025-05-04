@@ -59,9 +59,9 @@ const ContactPage: React.FC = () => {
       <div className={styles.contactContainer}>
         <h1 className={styles.contactTitle}>Get in Touch</h1>
         <p className={styles.contactSubtitle}>
-          Feel free to reach out. I'm up for a chat!
+          Feel free to reach out. I'm up for a chat! <br />
+          st8493510@gmail.com
         </p>
-        <span className={styles.emailSpan}>st8493510@gmail.com</span>
         <form ref={form} className={styles.contactForm} onSubmit={sendEmail}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.formLabel}>

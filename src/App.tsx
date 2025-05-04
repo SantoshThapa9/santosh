@@ -69,10 +69,10 @@ const App: React.FC = () => {
         </h2>
         <h3>
           Explore the professional portfolio of Santosh Thapa, a highly skilled
-          Software Engineer and Frontend Developer with expertise in React.js, Next.js,
-          HTML5, SASS, and modern web technologies. Discover projects, learn
-          about Santosh's experience, and get in touch for collaborations or
-          inquiries.
+          Software Engineer and Frontend Developer with expertise in React.js,
+          Next.js, HTML5, SASS, and modern web technologies. Discover projects,
+          learn about Santosh's experience, and get in touch for collaborations
+          or inquiries.
         </h3>
       </header>
       <ul className={styles.seo}>
