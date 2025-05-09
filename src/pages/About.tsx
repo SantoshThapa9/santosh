@@ -1,7 +1,5 @@
-import React from "react";
 import styles from "./about.module.scss";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { easeInOut, motion } from "framer-motion";
 import { FaGithub, FaJs, FaReact, FaNodeJs } from "react-icons/fa";
 import {
   SiTypescript,
@@ -11,18 +9,16 @@ import {
   SiSass,
   SiFramer,
   SiVercel,
-  SiMui,
   SiFirebase,
   SiNextdotjs,
   SiExpress,
-  SiChartdotjs,
-  SiAntdesign,
   SiGit,
-  SiChakraui,
   SiMongodb,
+  SiTailwindcss,
+  SiFigma,
 } from "react-icons/si";
 
-const About: React.FC = () => {
+const About = () => {
   const AnimatedSection = ({
     children,
     className,
@@ -30,26 +26,13 @@ const About: React.FC = () => {
     children: React.ReactNode;
     className?: string;
   }) => {
-    const { ref, inView } = useInView({ threshold: 0 });
-    const controls = useAnimation();
-
-    React.useEffect(() => {
-      if (inView) controls.start("visible");
-    }, [inView, controls]);
-
     return (
       <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: "100px" }}
-        animate={controls}
-        variants={{
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 1, ease: "easeInOut" },
-          },
-        }}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: easeInOut }}
         className={className}
+        viewport={{ once: true, amount: 0.2 }}
       >
         {children}
       </motion.div>
@@ -58,13 +41,6 @@ const About: React.FC = () => {
 
   const techStack = {
     frontend: [
-      {
-        name: "JavaScript",
-        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-        icon: (
-          <FaJs style={{ color: "#f0db4f" }} aria-label="JavaScript Icon" />
-        ),
-      },
       {
         name: "React",
         url: "https://reactjs.org/",
@@ -75,6 +51,13 @@ const About: React.FC = () => {
         url: "https://nextjs.org/",
         icon: (
           <SiNextdotjs style={{ color: "grey" }} aria-label="Next.js Icon" />
+        ),
+      },
+      {
+        name: "JavaScript",
+        url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        icon: (
+          <FaJs style={{ color: "#f0db4f" }} aria-label="JavaScript Icon" />
         ),
       },
       {
@@ -96,6 +79,31 @@ const About: React.FC = () => {
         name: "CSS3",
         url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
         icon: <SiCss3 style={{ color: "#1572B6" }} aria-label="CSS3 Icon" />,
+      },
+      {
+        name: "Sass",
+        url: "https://sass-lang.com/",
+        icon: <SiSass style={{ color: "#CC6699" }} aria-label="Sass Icon" />,
+      },
+      {
+        name: "Tailwind CSS",
+        url: "https://tailwindcss.com/",
+        icon: (
+          <SiTailwindcss
+            style={{ color: "#06B6D4" }}
+            aria-label="Tailwind CSS Icon"
+          />
+        ),
+      },
+      {
+        name: "Bootstrap",
+        url: "https://getbootstrap.com/",
+        icon: (
+          <SiBootstrap
+            style={{ color: "#563D7C" }}
+            aria-label="Bootstrap Icon"
+          />
+        ),
       },
     ],
     backend: [
@@ -128,48 +136,6 @@ const About: React.FC = () => {
         ),
       },
     ],
-    uiLibraries: [
-      {
-        name: "MUI",
-        url: "https://mui.com/",
-        icon: <SiMui style={{ color: "#007FFF" }} aria-label="MUI Icon" />,
-      },
-      {
-        name: "Chakra UI",
-        url: "https://chakra-ui.com/",
-        icon: (
-          <SiChakraui
-            style={{ color: "#319795" }}
-            aria-label="Chakra UI Icon"
-          />
-        ),
-      },
-      {
-        name: "Ant Design",
-        url: "https://ant.design/",
-        icon: (
-          <SiAntdesign
-            style={{ color: "#1890FF" }}
-            aria-label="Ant Design Icon"
-          />
-        ),
-      },
-      {
-        name: "Bootstrap",
-        url: "https://getbootstrap.com/",
-        icon: (
-          <SiBootstrap
-            style={{ color: "#563D7C" }}
-            aria-label="Bootstrap Icon"
-          />
-        ),
-      },
-      {
-        name: "Sass",
-        url: "https://sass-lang.com/",
-        icon: <SiSass style={{ color: "#CC6699" }} aria-label="Sass Icon" />,
-      },
-    ],
     tools: [
       {
         name: "Git",
@@ -187,14 +153,9 @@ const About: React.FC = () => {
         icon: <SiVercel style={{ color: "grey" }} aria-label="Vercel Icon" />,
       },
       {
-        name: "Chart.js",
-        url: "https://www.chartjs.org/",
-        icon: (
-          <SiChartdotjs
-            style={{ color: "#FF6384" }}
-            aria-label="Chart.js Icon"
-          />
-        ),
+        name: "Figma",
+        url: "https://www.figma.com/",
+        icon: <SiFigma style={{ color: "#F24E1E" }} aria-label="Figma Icon" />,
       },
       {
         name: "Motion",
@@ -266,7 +227,7 @@ const About: React.FC = () => {
           <br />
 
           <AnimatedSection>
-            <h2 className={styles.heading}>SKILLS</h2>
+            <h2 className={styles.heading}>Technical Skills</h2>
           </AnimatedSection>
 
           {Object.entries(techStack).map(([category, items]) => (
@@ -308,4 +269,4 @@ const About: React.FC = () => {
   );
 };
 
-export default React.memo(About);
+export default About;

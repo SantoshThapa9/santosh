@@ -8,11 +8,8 @@
   cursor: pointer;
   z-index: 9999;
   color: white;
-  &:focus {
-    outline: none;
-  }
 }
-@media (min-width: 768px) {
+@media (min-width: 481px) {
   .crossBtn {
     margin-right: 10px;
   }
@@ -30,7 +27,6 @@
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   z-index: 999;
-
   &.open {
     transform: translateX(0);
   }
@@ -49,7 +45,7 @@
     align-items: center;
     justify-content: center;
     height: 20dvh;
-    list-style: none; 
+    list-style: none;
     font-family: "Bebas Neue", sans-serif;
     width: 100dvw;
     font-size: 1.5rem;
@@ -58,7 +54,7 @@
     transition: all 0.3s ease;
     user-select: none;
     &:hover {
-      background-color: rgba(70, 70, 70, 0.247);
+      background-color: rgba(70, 70, 70, 0.308);
       font-size: 1.3rem;
     }
   }

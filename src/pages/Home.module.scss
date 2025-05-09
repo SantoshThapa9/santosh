@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 .hero {
-  height: 110dvh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,8 +8,9 @@
   justify-content: center;
   overflow: hidden;
   animation: arrive 1s ease-in-out;
+  gap: 30px;
 
-  .headingContainer {
+  .brand {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -19,8 +19,7 @@
     cursor: not-allowed;
     gap: 7px;
 
-    .image {
-      background-image: url("/santosh.png");
+    img {
       background-size: cover;
       width: clamp(28px, 5vw, 40px);
       aspect-ratio: 1;
@@ -38,32 +37,40 @@
     }
   }
 
-  .mainText {
-    margin-top: 15dvh;
-    font-size: clamp(3rem, 9dvw, 6rem);
-    font-family: "Bebas Neue", sans-serif;
-    text-align: center;
-    font-weight: 700;
-    letter-spacing: 1dvw;
-  }
+  header {
+    width: 100%;
 
-  .typing {
-    text-align: center;
-    margin-left: 5dvh;
-    letter-spacing: 1dvw;
-    font-size: clamp(3rem, 9dvw, 6rem);
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 700;
+    h1 {
+      font-size: clamp(3rem, 9dvw, 6rem);
+      font-family: "Bebas Neue", sans-serif;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1dvw;
+      span {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+      }
+    }
+    h2 {
+      text-align: center;
+      margin-left: 6%;
+      letter-spacing: 1dvw;
+      font-size: clamp(3rem, 9dvw, 6rem);
+      font-family: "Bebas Neue", sans-serif;
+      font-weight: 700;
+    }
   }
-
   .dialog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: clamp(1rem, 3vw, 1.6rem);
-    margin: 4dvh;
     letter-spacing: 0.5dvw;
-    .headingHighlight {
+    span {
       color: rgb(0, 255, 213);
       display: inline-flex;
       cursor: pointer;
+      margin: 0 1dvw;
       &:hover {
         animation: bounce 1s infinite;
       }
@@ -72,7 +79,6 @@
   .socialIconsContainer {
     gap: 5dvw;
     display: flex;
-    margin-bottom: 50px;
     .icon {
       font-size: clamp(2.5rem, 6vw, 4rem);
       color: white;
@@ -82,29 +88,27 @@
       border: 1px solid white;
       transform: translateX(-100px);
       opacity: 0;
-      animation: slideInFlash var(--duration, 1.5s) ease-out forwards;
-
+      animation: slideInFlash var(--duration, 1s) ease-out forwards;
       &:hover {
-        opacity: 0.9 !important;
-        transform: scale(0.99) !important;
+        transform: scale(0.98) !important;
         border: 1px solid;
         box-shadow: none;
       }
     }
 
     .icon1 {
-      --duration: 1.9s;
-    }
-    .icon2 {
       --duration: 1.6s;
     }
+    .icon2 {
+      --duration: 1.3s;
+    }
     .icon3 {
-      --duration: 1.5s;
+      --duration: 1.2s;
       transform: translateX(100px);
       animation: slideInFlashRight var(--duration) ease-out forwards;
     }
     .icon4 {
-      --duration: 1.9s;
+      --duration: 1.3s;
       transform: translateX(100px);
       animation: slideInFlashRight var(--duration) ease-out forwards;
     }
@@ -159,15 +163,14 @@
     box-shadow: 0 0 3px rgba(255, 255, 255, 0.507);
     font-size: clamp(0.9rem, 2vw, 1.2rem);
     padding: 13px;
-    margin-bottom: 15dvh;
     background: transparent;
     border: 1px silver solid;
-    transition: 0.3s ease;
+    transition: 0.2s ease;
     cursor: pointer;
     z-index: 4;
     color: white;
     &:hover {
-      transform: scale(0.95);
+      transform: scale(0.98);
       opacity: 0.8;
     }
   }
@@ -178,10 +181,14 @@
     font-size: 2rem;
     cursor: pointer;
     position: absolute;
-    bottom: 10dvh;
+    bottom: 0;
     opacity: 0.3;
     height: 100px;
     width: 100px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
     &:hover .scrollIcon {
       scale: 0.8;
       bottom: 0;
@@ -199,19 +206,16 @@
   .backgroundImage {
     position: absolute;
     width: 100dvw;
-    height: 110dvh;
+    height: 100%;
     z-index: -2;
     background-size: cover;
     background-position: center center;
-    @media (max-width: 480px) {
-      transform: none !important;
-    }
   }
   .overlayHeroPage {
     position: absolute;
     width: 100dvw;
     height: 110dvh;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: -2;
   }
 
@@ -220,7 +224,7 @@
     position: absolute;
     bottom: 0;
     width: 100vw;
-    height: 30vh;
+    height: 40%;
     z-index: -2;
 
     background: linear-gradient(

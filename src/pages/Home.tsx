@@ -1,23 +1,35 @@
-import { useEffect, useRef, memo } from "react";
+import { useEffect, useRef } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { BsChevronDoubleDown } from "react-icons/bs";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { motion, useScroll, useTransform } from "framer-motion";
 import styles from "./Home.module.scss";
+import { easeInOut, motion } from "framer-motion";
+const imageModules = import.meta.glob("./pics/*.{jpg,jpeg,png}");
 
-const Home: React.FC = memo(() => {
-  const backgroundRef = useRef<HTMLDivElement | null>(null);
-  const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 600], [0.3, 0]);
-
+const Home = () => {
+  const backgroundRef = useRef<HTMLDivElement>(null);
   const getRandomImage = async (): Promise<string> => {
-    const images = await Promise.all(
-      Object.values(import.meta.glob("./pics/*.{jpg,jpeg,png}")).map(
-        (importImage) => importImage() as Promise<{ default: string }>
-      )
-    );
-    return images[Math.floor(Math.random() * images.length)].default;
+    const paths = Object.keys(imageModules);
+    const randomPath = paths[Math.floor(Math.random() * paths.length)];
+    const image = (await imageModules[randomPath]()) as { default: string };
+    return image.default;
+  };
+
+  const handleScroll = () => {
+    if (backgroundRef.current) {
+      const parallaxElement = document.querySelectorAll(".parallax");
+      parallaxElement.forEach((el) => {
+        const speed = (el as HTMLElement).dataset.speed;
+        if (speed) {
+          requestAnimationFrame(() => {
+            (el as HTMLElement).style.transform = `translateY(${
+              window.scrollY * parseFloat(speed)
+            }px)`;
+          });
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -26,37 +38,16 @@ const Home: React.FC = memo(() => {
         backgroundRef.current.style.backgroundImage = `url(${await getRandomImage()})`;
       }
     };
-
     loadImage();
 
-    const handleScroll = () => {
-      document.querySelectorAll(".parallax").forEach((el) => {
-        const speed = (el as HTMLElement).dataset.speed;
-        if (speed) {
-          (el as HTMLElement).style.transform = `translateY(${
-            window.scrollY * parseFloat(speed)
-          }px)`;
-        }
-      });
-    };
-
+    const heroPage = document.getElementById("heroPage");
+    if (heroPage) {
+      const height = window.innerHeight * 0.01;
+      heroPage.style.height = `${height * 100}px`;
+    }
     window.addEventListener("scroll", handleScroll);
-
-    const observer = new IntersectionObserver(
-      async ([entry]) => {
-        if (entry.isIntersecting && backgroundRef.current) {
-          backgroundRef.current.style.backgroundImage = `url(${await getRandomImage()})`;
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (backgroundRef.current) observer.observe(backgroundRef.current);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
     };
   }, []);
 
@@ -65,40 +56,56 @@ const Home: React.FC = memo(() => {
 
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-    } else {
-      // If the element is not found, try to scroll to a specific position
-      const position = parseInt(targetId, 10);
-      if (!isNaN(position)) {
-        window.scrollTo({ top: position, behavior: "smooth" });
-      }
     }
   };
 
-  const words = ["Santosh", "a Developer"];
   return (
-    <main className={styles.hero}>
-      <div className={styles.headingContainer}>
-        <div className={styles.image} />
+    <main className={styles.hero} id="heroPage">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, ease: easeInOut }}
+        className={styles.brand}
+      >
+        <img loading="lazy" src="santosh.png" alt="Santosh thapa logo" />
         <strong>Santosh</strong>
-      </div>
-      <h2 className={styles.mainText}>Hi, I'm</h2>
-      <div className={styles.typing}>
-        <Typewriter
-          words={words}
-          loop={true}
-          cursor
-          typeSpeed={100}
-          deleteSpeed={50}
-          delaySpeed={2000}
+      </motion.div>
+      <header>
+        <motion.h1
+          initial={{ opacity: 0, x: -150 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: easeInOut }}
+        >
+          Hi, I'm <span>Santosh</span>
+        </motion.h1>
+        <motion.h2
+          initial={{ opacity: 0, x: 150 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: easeInOut }}
           aria-live="polite"
-        />
-      </div>
-      <div className={styles.dialog}>
-        <p>
-          Who Loves Bringing{" "}
-          <span className={styles.headingHighlight}>Ideas</span> To Life
-        </p>
-      </div>
+          role="status"
+        >
+          <Typewriter
+            words={["santosh", "a developer"]}
+            loop={true}
+            cursor
+            typeSpeed={100}
+            deleteSpeed={50}
+            delaySpeed={1500}
+            aria-live="polite"
+          />
+        </motion.h2>
+      </header>
+
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+        className={styles.dialog}
+      >
+        Who Loves Bringing<span>Ideas</span>To Life
+      </motion.p>
+
       <div className={styles.socialIconsContainer}>
         <a
           href="https://x.com/SantoshThapa689"
@@ -146,16 +153,21 @@ const Home: React.FC = memo(() => {
         </a>
       </div>
 
-      <button onClick={() => scrollTo("projects")} className={styles.cta}>
-        PROJECTS
-      </button>
       <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: easeInOut }}
+      >
+        <button className={styles.cta} onClick={() => scrollTo("projects")}>
+          PROJECTS
+        </button>
+      </motion.div>
+      <button
         onClick={() => scrollTo("about")}
         className={styles.scrollIconContainer}
-        style={{ opacity }}
       >
         <BsChevronDoubleDown className={styles.scrollIcon} />
-      </motion.div>
+      </button>
       <div
         ref={backgroundRef}
         className={`${styles.backgroundImage} parallax`}
@@ -165,5 +177,5 @@ const Home: React.FC = memo(() => {
       <div className={styles.edgefade} />
     </main>
   );
-});
+};
 export default Home;

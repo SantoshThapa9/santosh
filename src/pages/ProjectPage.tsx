@@ -3,8 +3,7 @@ import ttt from "../pages/projectThumbnails/ttt.png";
 import taskify from "../pages/projectThumbnails/taskify.png";
 import pfc from "../pages/projectThumbnails/pfc.png";
 import kura from "../pages/projectThumbnails/kura.png";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { motion, easeInOut } from "framer-motion";
 import React from "react";
 
 interface Project {
@@ -63,25 +62,12 @@ const ProjectPage: React.FC = () => {
     children: React.ReactNode;
     className?: string;
   }) => {
-    const { ref, inView } = useInView({ threshold: 0 });
-    const controls = useAnimation();
-
-    React.useEffect(() => {
-      if (inView) controls.start("visible");
-    }, [inView, controls]);
-
     return (
       <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: "100px" }}
-        animate={controls}
-        variants={{
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 1, ease: "easeInOut" },
-          },
-        }}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: easeInOut }}
+        viewport={{ once: true, amount: 0.2 }}
         className={className}
       >
         {children}
@@ -97,6 +83,7 @@ const ProjectPage: React.FC = () => {
           <h1>PROJECTS</h1>
         </div>
       </AnimatedSection>
+
       {projects.map((project) => (
         <AnimatedSection key={project.id} className={styles.projectBlock}>
           <AnimatedSection>

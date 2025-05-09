@@ -2,6 +2,7 @@ import React, { MouseEvent, useEffect } from "react";
 import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import styles from "./sidebar.module.scss";
+import { easeInOut, motion } from "framer-motion";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
@@ -44,17 +45,20 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div>
-      <button
+      <motion.button
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1, ease: easeInOut }}
         className={styles.menuToggle}
         onClick={toggleSidebar}
-        aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+        aria-label="menu button"
       >
         {isSidebarOpen ? (
           <RxCross2 className={styles.crossBtn} />
         ) : (
           <MdOutlineMenu />
         )}
-      </button>
+      </motion.button>
       <div
         onClick={toggleSidebar}
         className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}
