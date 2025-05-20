@@ -1,5 +1,4 @@
 import styles from "./about.module.scss";
-import { easeInOut, motion } from "framer-motion";
 import { FaGithub, FaJs, FaReact, FaNodeJs } from "react-icons/fa";
 import {
   SiTypescript,
@@ -17,28 +16,10 @@ import {
   SiTailwindcss,
   SiFigma,
 } from "react-icons/si";
+import AnimateView from "./animate/AnimateView";
+import clsx from "clsx";
 
 const About = () => {
-  const AnimatedSection = ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-  }) => {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: easeInOut }}
-        className={className}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        {children}
-      </motion.div>
-    );
-  };
-
   const techStack = {
     frontend: [
       {
@@ -168,103 +149,97 @@ const About = () => {
   };
 
   return (
-    <section className={styles.sectionAbout}>
-      <div id="about" className={styles.aboutContent}>
-        <div className={styles.headingContainer}>
-          <AnimatedSection>
-            <span className={styles.header}>About Me</span>
-          </AnimatedSection>
+    <section id="about" className={clsx(styles.aboutSection)}>
+      <div className={styles.headingContainer}>
+        <AnimateView>
+          <span className={styles.header}>About Me</span>
+        </AnimateView>
+        <br />
+        <AnimateView>
+          <img loading="lazy" src="santosh.png" alt="profile photo" />
+        </AnimateView>
+      </div>
+
+      <article>
+        <AnimateView>
+          <span className={styles.dialog}>
+            From "Hello World!" to building dynamic user interfaces, my journey
+            is fueled by curiosity and creativity.
+          </span>
+        </AnimateView>
+
+        <br />
+        <br />
+
+        <AnimateView>
+          <hr />
+        </AnimateView>
+
+        <div className={styles.description}>
+          <AnimateView>
+            Hi, I'm Santosh, an aspiring Software Engineer with a strong passion
+            for building responsive and interactive web applications. I have
+            experience with technologies such as React.js, Next.js, HTML5,
+            CSS/SASS, and Git. I am passionate about creating user-friendly
+            applications with a focus on SEO, web performance optimization, and
+            attention to detail.
+          </AnimateView>
           <br />
-          <AnimatedSection>
-            <div className={styles.image}></div>
-          </AnimatedSection>
+
+          <AnimateView>
+            I'm constantly learning about new frameworks and techniques to
+            improve creativity and efficiency. <br /> Every project I work on
+            gives me the chance to blend solid functionality with smooth,
+            engaging user interfaces, aiming to achieve the best results.
+            <br />
+            <br />
+          </AnimateView>
+
+          <AnimateView>
+            Let's <span>build</span> something amazing together!
+          </AnimateView>
         </div>
 
-        <article>
-          <AnimatedSection>
-            <span className={styles.dialog}>
-              From "Hello World!" to building dynamic user interfaces, my
-              journey is fueled by curiosity and creativity.
-            </span>
-          </AnimatedSection>
+        <AnimateView>
+          <hr />
+        </AnimateView>
 
-          <br />
-          <br />
+        <br />
 
-          <AnimatedSection>
-            <hr />
-          </AnimatedSection>
+        <AnimateView>
+          <h2 className={styles.heading}>Technical Skills</h2>
+        </AnimateView>
 
-          <div className={styles.description}>
-            <AnimatedSection>
-              Hi, I'm Santosh, an aspiring Software Engineer with a strong
-              passion for building responsive and interactive web applications.
-              I have experience with technologies such as React.js, Next.js,
-              HTML5, CSS/SASS, and Git. I am passionate about creating
-              user-friendly applications with a focus on SEO, web performance
-              optimization, and attention to detail.
-            </AnimatedSection>
-            <br />
+        {Object.entries(techStack).map(([category, items]) => (
+          <div key={category}>
+            <AnimateView>
+              <h3 className={styles.subHeading}>
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </h3>
+            </AnimateView>
 
-            <AnimatedSection>
-              I'm constantly learning about new frameworks and techniques to
-              improve creativity and efficiency. <br /> Every project I work on
-              gives me the chance to blend solid functionality with smooth,
-              engaging user interfaces, aiming to achieve the best results.
-              <br />
-              <br />
-            </AnimatedSection>
-
-            <AnimatedSection>
-              Let's <span>build</span> something amazing together!
-            </AnimatedSection>
-          </div>
-
-          <AnimatedSection>
-            <hr />
-          </AnimatedSection>
-
-          <br />
-
-          <AnimatedSection>
-            <h2 className={styles.heading}>Technical Skills</h2>
-          </AnimatedSection>
-
-          {Object.entries(techStack).map(([category, items]) => (
-            <AnimatedSection key={category}>
-              <div>
-                <AnimatedSection>
-                  <h3 className={styles.subHeading}>
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                  </h3>
-                </AnimatedSection>
-
-                <div className={styles.gridContainer}>
-                  {items.map((tech, index) => (
-                    <AnimatedSection key={index}>
-                      <div className={styles.gridItem}>
-                        <AnimatedSection>
-                          <a
-                            href={tech.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label={`${tech.name} URL`}
-                          >
-                            {tech.icon}
-                          </a>
-                        </AnimatedSection>
-                        <AnimatedSection>
-                          <span className={styles.techName}>{tech.name}</span>
-                        </AnimatedSection>
-                      </div>
-                    </AnimatedSection>
-                  ))}
+            <div className={styles.gridContainer}>
+              {items.map((tech, index) => (
+                <div key={index} className={styles.gridItem}>
+                  <AnimateView>
+                    <a
+                      href={tech.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${tech.name} URL`}
+                    >
+                      {tech.icon}
+                    </a>
+                  </AnimateView>
+                  <AnimateView>
+                    <span className={styles.techName}>{tech.name}</span>
+                  </AnimateView>
                 </div>
-              </div>
-            </AnimatedSection>
-          ))}
-        </article>
-      </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </article>
     </section>
   );
 };

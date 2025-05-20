@@ -1,78 +1,90 @@
 .projectPage {
-  margin: auto;
-  max-width: 1100px;
-  display: flex;
-  flex-direction: column;
   padding: 1.5rem;
-  align-items: center;
-  justify-content: space-evenly;
-  hr {
-    width: 100%;
-  }
-}
-
-.heading {
-  text-align: center;
-  margin: 40px;
-
-  h1 {
-    font-size: 36px;
-    font-weight: 700;
-    font-family: "Bebas Neue", sans-serif;
-    letter-spacing: 2px;
-  }
-}
-
-.projectBlock {
-  margin-bottom: 40px;
+  margin: 0 auto;
+  max-width: 1300px;
   text-align: center;
 
-  .projectTitle {
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
+  .heading {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.1em;
   }
 
-  .projectImage {
-    width: 150px;
-    aspect-ratio: 1;
-    margin-bottom: 20px;
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
   }
 
-  .projectDescription {
-    font-size: clamp(1rem, 2vw, 1.4rem);
-    margin-bottom: 20px;
-    line-height: 2;
-  }
-
-  .skillsList {
+  .card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 20px;
-    list-style: none;
-    justify-content: center;
-    .skillItem {
-      background-color: white;
-      color: black;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      user-select: none;
-    }
-  }
-
-  .projectLink {
-    font-size: 18px;
-    color: #00bcd4;
-    text-decoration: none;
-    border-bottom: 2px solid #00bcd4;
-    transition: color 0.3s, border-color 0.3s;
+    flex-direction: column;
+    transition: transform 0.3s ease;
 
     &:hover {
-      color: #007f8c;
-      border-bottom: 2px solid #007f8c;
+      transform: translateY(-4px);
+    }
+    .logoCtn {
+      display: flex;
+      padding: 10px;
+      align-items: center;
+      .image {
+        width: clamp(40px, 10dvw, 50px);
+        height: clamp(40px, 10dvw, 50px);
+        object-fit: contains;
+      }
+
+      .title {
+        font-size: 1.5rem;
+        margin: 1rem;
+        color: #222;
+      }
+    }
+
+    .about {
+      flex: 1;
+      margin: 0 1rem 1rem;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 1rem 1rem;
+      gap: 0.5rem;
+
+      li {
+        background: #eef;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        color: #334;
+      }
+    }
+
+    .link {
+      display: block;
+      text-align: center;
+      margin: 1rem;
+      padding: 0.6rem 0;
+      text-decoration: none;
+      font-weight: 600;
+      border-top: 1px solid #eee;
+      color: #007acc;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: rgba(0, 122, 204, 0.1);
+      }
     }
   }
 }

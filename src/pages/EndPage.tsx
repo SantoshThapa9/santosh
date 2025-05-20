@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
-import styles from "./Footer.module.scss";
-const FooterPage: React.FC = () => {
+import styles from "./end.module.scss";
+const EndPage: React.FC = () => {
   const footerRef = useRef<HTMLDivElement>(null);
   const nameContainerRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,7 @@ const FooterPage: React.FC = () => {
   }, []);
 
   return (
-    <footer ref={footerRef} className={styles.footer}>
+    <div ref={footerRef} className={styles.footer}>
       <div ref={nameContainerRef} className={styles.nameContainer}>
         <div className={styles.letterS}>S</div>
         <div className={styles.letterA}>A</div>
@@ -86,8 +86,8 @@ const FooterPage: React.FC = () => {
 
         <hr />
       </div>
-    </footer>
+    </div>
   );
 };
 
-export default FooterPage;
+export default EndPage;

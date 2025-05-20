@@ -1,178 +1,220 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-
 .hero {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
   animation: arrive 1s ease-in-out;
-  gap: 30px;
-
-  .brand {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    align-items: center;
-    cursor: not-allowed;
-    gap: 7px;
-
-    img {
-      background-size: cover;
-      width: clamp(28px, 5vw, 40px);
-      aspect-ratio: 1;
-    }
-
-    strong {
-      font-size: clamp(1.3rem, 5vw, 1.8rem);
-      font-family: "Bebas Neue", sans-serif;
-      letter-spacing: 2px;
-      &::after {
-        content: ".";
-        font-family: "Roboto", sans-serif;
-        color: rgb(0, 245, 82);
-      }
-    }
-  }
+  background: white;
+  color: var(--accent-color1);
 
   header {
+    font-family: var(--font3);
+    font-weight: bolder;
+    margin-top: 17rem;
+    margin-bottom: 3rem;
     width: 100%;
-
+    text-align: center;
+    @media (max-width: 768px) {
+      margin-top: 14rem;
+    }
     h1 {
-      font-size: clamp(3rem, 9dvw, 6rem);
-      font-family: "Bebas Neue", sans-serif;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 1dvw;
-      span {
+      font-size: clamp(1.8rem, 9dvw, 3.5rem);
+      strong {
         position: absolute;
         clip: rect(0, 0, 0, 0);
       }
     }
+    div {
+      font-size: clamp(1.5rem, 8dvw, 3rem);
+    }
     h2 {
       text-align: center;
-      margin-left: 6%;
-      letter-spacing: 1dvw;
-      font-size: clamp(3rem, 9dvw, 6rem);
-      font-family: "Bebas Neue", sans-serif;
-      font-weight: 700;
-    }
-  }
-  .dialog {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: clamp(1rem, 3vw, 1.6rem);
-    letter-spacing: 0.5dvw;
-    span {
-      color: rgb(0, 255, 213);
-      display: inline-flex;
-      cursor: pointer;
-      margin: 0 1dvw;
-      &:hover {
-        animation: bounce 1s infinite;
+      font-size: clamp(0.8rem, 3vw, 1rem);
+      letter-spacing: 2px;
+      font-weight: 500;
+      font-family: "Roboto", sans-serif;
+      margin-top: 1rem;
+      span {
+        color: var(--accent-bg);
+        cursor: pointer;
+        display: inline-block;
+        &:hover {
+          animation: bounce 1s infinite;
+        }
       }
     }
   }
+  .cta {
+    border-radius: 3em;
+    font-size: clamp(0.8rem, 1vw, 1.1rem);
+    padding: 10px 25px;
+    background: transparent;
+    // border: 2px var(--accent-color1) solid;
+    border: none;
+    box-shadow: 0 1px 3px 2px var(--accent-color1), 0 2px 0 4px var(--white),
+      0 0 0 5px var(--accent-color1);
+
+    transition: 0.3s ease;
+    cursor: pointer;
+    z-index: 4;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: var(--accent-color1);
+    // @media (max-width: 768px) {
+    // }
+    &:hover {
+      box-shadow: 0 0 1px 1px var(--accent-color1), 0 2px 0 4px var(--white),
+        0 0 0 5px var(--accent-color1);
+    }
+    &:active {
+      box-shadow: 0 0 1px 0px var(--accent-color1), 0 2px 0 4px var(--white),
+        0 0 0 5px var(--accent-color1);
+    }
+  }
+
   .socialIconsContainer {
-    gap: 5dvw;
     display: flex;
+    gap: 5dvw;
+    position: absolute;
+    bottom: 240px;
+    @media (max-width: 768px) {
+      bottom: 110px;
+    }
     .icon {
-      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-size: clamp(3rem, 6vw, 4rem);
       color: white;
       border-radius: 50%;
-      box-shadow: 0 0 3px rgba(255, 255, 255, 0.507);
+      box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
       padding: 20%;
-      border: 1px solid white;
-      transform: translateX(-100px);
-      opacity: 0;
-      animation: slideInFlash var(--duration, 1s) ease-out forwards;
+      transform: translateY(-100px);
+      animation: dropAndFloat var(--drop-duration, 1.5s) ease-out forwards,
+        float 2s ease-in-out var(--float-delay, 2s) infinite alternate;
+      z-index: 99999 !important;
+      border: 1px solid transparent;
+      transition: 0.6s ease;
       &:hover {
-        transform: scale(0.98) !important;
-        border: 1px solid;
-        box-shadow: none;
+        filter: brightness(1.2) saturate(0.6);
       }
     }
 
     .icon1 {
-      --duration: 1.6s;
+      --drop-duration: 1.2s;
+      --float-delay: 1.4s;
     }
     .icon2 {
-      --duration: 1.3s;
+      --drop-duration: 1.4s;
+      --float-delay: 1.6s;
     }
     .icon3 {
-      --duration: 1.2s;
-      transform: translateX(100px);
-      animation: slideInFlashRight var(--duration) ease-out forwards;
+      --drop-duration: 1.6s;
+      --float-delay: 1.8s;
     }
     .icon4 {
-      --duration: 1.3s;
-      transform: translateX(100px);
-      animation: slideInFlashRight var(--duration) ease-out forwards;
+      --drop-duration: 1.8s;
+      --float-delay: 2s;
     }
   }
-
-  @keyframes slideInFlash {
+  @keyframes dropAndFloat {
     0% {
-      transform: translateX(-100px);
+      transform: translateY(-200px);
       opacity: 0;
     }
-    30% {
-      transform: translateX(-60px);
-      opacity: 0.1;
-    }
     60% {
-      transform: translateX(5px);
-      opacity: 0.5;
+      transform: translateY(10px);
     }
-    90% {
-      transform: translateX(-3px);
+    80% {
+      transform: translateY(-4px);
+      opacity: 1;
     }
     100% {
-      transform: translateX(0);
-      opacity: 1;
+      transform: translateY(0);
     }
   }
 
-  @keyframes slideInFlashRight {
+  @keyframes float {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-40px);
+    }
+  }
+
+  .waveCtn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+
+    svg {
+      position: absolute;
+      height: 600px;
+      bottom: 0;
+      width: 200%;
+      @media (max-width: 768px) {
+        height: 300px;
+      }
+    }
+    .wave1 {
+      fill: #1982a1;
+      animation: Wave 15s linear infinite;
+    }
+
+    .wave2 {
+      fill: #236b97;
+      transform: scaleX(-1);
+      animation: Wave 10s linear infinite;
+    }
+
+    .wave3 {
+      fill: #318199;
+      animation: Wave2 5s linear infinite;
+    }
+  }
+  @keyframes Wave {
     0% {
-      transform: translateX(100px);
+      left: -100%;
+      bottom: 0%;
       opacity: 0;
     }
-    30% {
-      transform: translateX(60px);
-      opacity: 0.1;
-    }
-    60% {
-      transform: translateX(-5px);
+    50% {
       opacity: 0.5;
     }
-    90% {
-      transform: translateX(3px);
+    100% {
+      left: 00%;
+      bottom: -40%;
+      opacity: 0;
+    }
+  }
+  @keyframes Wave2 {
+    0% {
+      left: 0;
+      bottom: 0;
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
     }
     100% {
-      transform: translateX(0);
-      opacity: 1;
+      left: -100%;
+      bottom: 40%;
+      opacity: 0;
     }
   }
 
-  .cta {
-    border-radius: 3em;
-    box-shadow: 0 0 3px rgba(255, 255, 255, 0.507);
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-    padding: 13px;
-    background: transparent;
-    border: 1px silver solid;
-    transition: 0.2s ease;
-    cursor: pointer;
-    z-index: 4;
-    color: white;
-    &:hover {
-      transform: scale(0.98);
-      opacity: 0.8;
-    }
+  .edgefade {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    height: 25%;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 255, 200, 0) 0,
+      var(--accent-bg) 100%
+    );
   }
 
   .scrollIconContainer {
@@ -201,37 +243,6 @@
       position: absolute;
       transition: all 0.6s ease;
     }
-  }
-
-  .backgroundImage {
-    position: absolute;
-    width: 100dvw;
-    height: 100%;
-    z-index: -2;
-    background-size: cover;
-    background-position: center center;
-  }
-  .overlayHeroPage {
-    position: absolute;
-    width: 100dvw;
-    height: 110dvh;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: -2;
-  }
-
-  .edgefade {
-    background-image: url("./fade.png");
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
-    height: 40%;
-    z-index: -2;
-
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0) 0%,
-      rgb(32, 32, 32) 100%
-    );
   }
 
   @keyframes arrive {

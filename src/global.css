@@ -1,14 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --black: #333;
+  --white: whitesmoke;
+  --accent-color1: #226ec5;
+  --accent-color2: #fae8d0;
+  --accent-bg: #052e5c;
+  --font3: "Orbitron", sans-serif;
+  --font2: "Bebas Neue", sans-serif;
+  --font1: "Roboto", sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-html {
-  background-color: rgb(32, 32, 32);
-  color: white;
+html,
+body {
+  background: var(--accent-bg);
+  color: var(--white);
   scroll-behavior: smooth;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font1);
 }
 
 ::-webkit-scrollbar {

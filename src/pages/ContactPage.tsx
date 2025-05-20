@@ -55,7 +55,7 @@ const ContactPage: React.FC = () => {
   }, [status]);
 
   return (
-    <section id="contact" className={styles.ContactPage}>
+    <div id="contact" className={styles.ContactPage}>
       <div className={styles.contactContainer}>
         <h1 className={styles.contactTitle}>Get in Touch</h1>
         <p className={styles.contactSubtitle}>
@@ -100,7 +100,7 @@ const ContactPage: React.FC = () => {
 
         {status && <p className={styles.statusMessage}>{status}</p>}
       </div>
-    </section>
+    </div>
   );
 };
 

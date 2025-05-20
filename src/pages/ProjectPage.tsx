@@ -1,15 +1,17 @@
 import styles from "./ProjectPage.module.scss";
-import ttt from "../pages/projectThumbnails/ttt.png";
-import taskify from "../pages/projectThumbnails/taskify.png";
-import pfc from "../pages/projectThumbnails/pfc.png";
-import kura from "../pages/projectThumbnails/kura.png";
-import { motion, easeInOut } from "framer-motion";
-import React from "react";
+import taskify from "/taskify.png";
+import pfc from "/pfc.png";
+import ttt from "/ttt.png";
+import kura from "/kura.png";
+import focusflow from "/focusflow.ico";
+import softsell from "/softsell.ico";
+
+import AnimateView from "./animate/AnimateView";
 
 interface Project {
   id: number;
   title: string;
-  thumbnail: string;
+  logo: string;
   link: string;
   about: string;
   skillsUsed: string[];
@@ -18,115 +20,102 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "KURA AI - ChatGPT Clone",
-    thumbnail: kura,
+    title: "KURA AI",
+    logo: kura,
     link: "https://kura-iota.vercel.app/",
     about:
-      "KURA AI is a ChatGPT Clone I built to offer human-like conversations, AI-powered coding assistance, image generation, voice chat, and creative content tools all completely free. I created it to explore advanced AI integrations and improve my skills in building real-world, interactive AI applications.",
-    skillsUsed: ["Next.js", "API integration", "Web APIs", "Vercel"],
+      "A ChatGPT-style app with image-gen, voice chat, and code assist—100% free.",
+    skillsUsed: ["Next.js", "API Integration", "Web APIs", "Vercel"],
   },
   {
     id: 2,
-    title: "Taskify",
-    thumbnail: taskify,
-    link: "https://taskifyapp-smoky.vercel.app/",
+    title: "SoftSell",
+    logo: softsell,
+    link: "https://soft-sell-two-lime.vercel.app/",
     about:
-      "Taskify is a task management platform I built to help users stay organized and boost productivity with features like real-time sync, customizable views, and secure user authentication. I created it using Next.js and Firebase to provide a seamless, intuitive experience for managing tasks and projects efficiently.",
-    skillsUsed: ["Next.js", "Firebase", "RESTful API", "Vercel"],
+      "Classic X/O game with AI opponent, sound effects, and light/dark modes.",
+    skillsUsed: ["HTML", "CSS", "React", "Git"],
   },
   {
     id: 3,
-    title: "PFC",
-    thumbnail: pfc,
-    link: "https://pfc-app-mauve.vercel.app/",
+    title: "Taskify",
+    logo: taskify,
+    link: "https://taskifyapp-smoky.vercel.app/",
     about:
-      "PFC is a fun and simple number calculator that shows the corresponding Pokemon for any number you calculate. Using the Poke API, this app adds an interactive twist to your basic calculator, bringing a bit of fun while you learn about the world of Pokemon.",
-    skillsUsed: ["React.js", " PokeAPI", "CSS/SASS", "Vercel"],
+      "Real-time todo manager with custom views and secure auth via Firebase.",
+    skillsUsed: ["Next.js", "Firebase", "REST API", "Vercel"],
   },
   {
     id: 4,
+    title: "PFC",
+    logo: pfc,
+    link: "https://pfc-app-mauve.vercel.app/",
+    about:
+      "Calculator meets Pokémon™—enter any number, see its Poke-counterpart.",
+    skillsUsed: ["React", "PokeAPI", "SASS", "Vercel"],
+  },
+  {
+    id: 5,
     title: "Tic Tac Toe",
-    thumbnail: ttt,
+    logo: ttt,
     link: "https://santoshthapa9.github.io/tictactoer/",
     about:
-      "Tic Tac Toe is a simple yet engaging game that I created using HTML5, CSS3, and React. It features both Player vs Player and Player vs AI modes with easy and hard difficulty levels. Enjoy the interactive experience with fun sound effects and a theme toggle between light and dark modes.",
-    skillsUsed: ["HTML", "CSS", "React.js", "Git"],
+      "Classic X/O game with AI opponent, sound effects, and light/dark modes.",
+    skillsUsed: ["HTML", "CSS", "React", "Git"],
+  },
+  {
+    id: 6,
+    title: "Focus Flow",
+    logo: focusflow,
+    link: "https://focus-flow-productivity-timer.vercel.app/",
+    about:
+      "Classic X/O game with AI opponent, sound effects, and light/dark modes.",
+    skillsUsed: ["HTML", "CSS", "React", "Git"],
   },
 ];
 
-const ProjectPage: React.FC = () => {
-  const AnimatedSection = ({
-    children,
-    className,
-  }: {
-    children: React.ReactNode;
-    className?: string;
-  }) => {
-    return (
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: easeInOut }}
-        viewport={{ once: true, amount: 0.2 }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    );
-  };
+const ProjectPage: React.FC = () => (
+  <section id="projects" className={styles.projectPage}>
+    <hr />
+    <AnimateView>
+      <h1 className={styles.heading}>PROJECTS</h1>
+    </AnimateView>
+    <div className={styles.grid}>
+      {projects.map((p) => (
+        <div key={p.id} className={styles.card}>
+          <AnimateView>
+            <div className={styles.logoCtn}>
+              <img
+                src={p.logo}
+                alt={p.title}
+                className={styles.image}
+                loading="lazy"
+              />
 
-  return (
-    <section id="projects" className={styles.projectPage}>
-      <hr />
-      <AnimatedSection>
-        <div className={styles.heading}>
-          <h1>PROJECTS</h1>
-        </div>
-      </AnimatedSection>
+              <h2 className={styles.title}>{p.title}</h2>
+            </div>
+            <p className={styles.about}>{p.about}</p>
 
-      {projects.map((project) => (
-        <AnimatedSection key={project.id} className={styles.projectBlock}>
-          <AnimatedSection>
-            <h2 className={styles.projectTitle}>{project.title}</h2>
-          </AnimatedSection>
-          <AnimatedSection>
-            <img
-              src={project.thumbnail}
-              alt={project.title}
-              className={styles.projectImage}
-              loading="lazy"
-            />
-          </AnimatedSection>
-          <AnimatedSection>
-            <p className={styles.projectDescription}>{project.about}</p>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <h3>Skills Used</h3>
-            <ul className={styles.skillsList}>
-              {project.skillsUsed.map((skill, index) => (
-                <AnimatedSection key={index} className={styles.skillItem}>
-                  {skill}
-                </AnimatedSection>
+            <ul className={styles.skills}>
+              {p.skillsUsed.map((s, i) => (
+                <li key={i}>{s}</li>
               ))}
             </ul>
-          </AnimatedSection>
 
-          <AnimatedSection>
             <a
-              href={project.link}
+              href={p.link}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.projectLink}
+              className={styles.link}
             >
-              Know more
+              Learn More
             </a>
-          </AnimatedSection>
-        </AnimatedSection>
+          </AnimateView>
+        </div>
       ))}
-      <hr />
-    </section>
-  );
-};
+    </div>
+    <hr />
+  </section>
+);
 
 export default ProjectPage;
