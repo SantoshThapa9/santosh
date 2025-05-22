@@ -1,65 +1,125 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.scss";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
+
 const ContactPage: React.FC = () => {
   const form = useRef<HTMLFormElement | null>(null);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [formData, setFormData] = useState({
     user_name: "",
+    user_email: "",
     message: "",
   });
 
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const lastSubmitTime = useRef<number | null>(null);
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (form.current) {
-      setLoading(true);
+    const now = Date.now();
+    if (lastSubmitTime.current && now - lastSubmitTime.current < 10000) {
+      setStatus("Please wait before sending again.");
+      return;
+    }
+    if (!form.current || !executeRecaptcha) return;
+    lastSubmitTime.current = now;
 
-      emailjs;
-      emailjs
-        .sendForm(
-          import.meta.env.VITE_EMAILJS_SERVICE_ID,
-          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-          form.current,
-          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-        )
-        .then(
-          () => {
-            setStatus("Message sent successfully!");
-            setFormData({ user_name: "", message: "" });
-            setLoading(false);
+    setLoading(true);
+
+    try {
+      const token = await executeRecaptcha("contact_form");
+
+      const recaptchaRes = await fetch(
+        "http://localhost:5000/verify-recaptcha",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-          (error) => {
-            setStatus("Failed to send message. Please try again later.");
-            console.error("Failed...", error.text);
-            setLoading(false);
-          }
-        );
+          body: JSON.stringify({ token }),
+        }
+      );
+
+      const recaptchaJson = await recaptchaRes.json();
+
+      if (!recaptchaJson.success) {
+        setStatus("Failed reCAPTCHA verification.");
+        setLoading(false);
+        return;
+      }
+
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        form.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      setStatus("Message sent successfully!");
+      setFormData({ user_name: "", user_email: "", message: "" });
+    } catch (error: any) {
+      setStatus("Failed to send message. Please try again later.");
+      console.error("Email send error:", error?.text || error);
+    } finally {
+      setLoading(false);
     }
   };
-  useEffect(() => {
-    if (status) {
-      const timer = setTimeout(() => {
-        setStatus("");
-      }, 10000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [status]);
 
   return (
     <div id="contact" className={styles.ContactPage}>
       <div className={styles.contactContainer}>
+        {" "}
+        <div className={styles.socialLinks}>
+          <a
+            href="https://x.com/SantoshThapa689"
+            className={styles.socialLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Santosh Thapa on X"
+          >
+            <FaTwitter className={styles.icon} />
+          </a>
+          <a
+            href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
+            className={styles.socialLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Santosh Thapa on Linkedin"
+          >
+            <FaLinkedin className={styles.icon} />
+          </a>
+          <a
+            href="https://instagram.com/santoshh689"
+            className={styles.socialLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Santosh Thapa on Instagram"
+          >
+            <FaInstagram className={styles.icon} />
+          </a>
+          <a
+            href="https://github.com/SantoshThapa9"
+            className={styles.socialLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Santosh Thapa on Github"
+          >
+            <FaGithub className={styles.icon} />
+          </a>
+        </div>
         <h1 className={styles.contactTitle}>Get in Touch</h1>
         <p className={styles.contactSubtitle}>
-          Feel free to reach out. I'm up for a chat! <br />
+          Open to collaborations and inquiries! <br />
           st8493510@gmail.com
         </p>
         <form ref={form} className={styles.contactForm} onSubmit={sendEmail}>
@@ -78,8 +138,22 @@ const ContactPage: React.FC = () => {
               required
             />
           </div>
-
-          <address className={styles.formGroup}>
+          <div className={styles.formGroup}>
+            <label htmlFor="email" className={styles.formLabel}>
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="user_email"
+              className={styles.formInput}
+              placeholder="Your email"
+              value={formData.user_email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className={styles.formGroup}>
             <label htmlFor="message" className={styles.formLabel}>
               Message
             </label>
@@ -92,12 +166,16 @@ const ContactPage: React.FC = () => {
               onChange={handleChange}
               required
             ></textarea>
-          </address>
-          <button type="submit" value="send" className={styles.submitButton}>
-            {loading ? "Sending Message" : "Send Message"}
+          </div>
+
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={loading}
+          >
+            {loading ? "Sending..." : "Send"}
           </button>
         </form>
-
         {status && <p className={styles.statusMessage}>{status}</p>}
       </div>
     </div>

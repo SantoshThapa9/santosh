@@ -1,15 +1,22 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import Home from "./pages/Home";
 import Navbar from "./pages/Navbar";
 import styles from "./App.module.scss";
 const About = lazy(() => import("./pages/About"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
-const EndPage = lazy(() => import("./pages/EndPage"));
+const Footer = lazy(() => import("./pages/Footer"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 const App = () => {
   return (
-    <>
+    <Suspense
+      fallback={
+        <div className={styles.loaderCtn}>
+          <div className={styles.loader} />
+        </div>
+      }
+    >
       <Navbar />
       <header className={styles.seo}>
         <h1>Hi, I'm Santosh Thapa - Software Engineer & Frontend Developer</h1>
@@ -29,12 +36,15 @@ const App = () => {
         <Home />
         <About />
         <ProjectPage />
+        <GoogleReCaptchaProvider
+          reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+        >
+          <ContactPage />
+        </GoogleReCaptchaProvider>
       </main>
-      <footer>
-        <ContactPage />
-        <EndPage />
-      </footer>
-    </>
+
+      <Footer />
+    </Suspense>
   );
 };
 

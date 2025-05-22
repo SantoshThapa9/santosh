@@ -23,6 +23,7 @@
       font-family: "Bebas Neue", sans-serif;
       font-weight: 700;
       letter-spacing: 2px;
+      color: var(--accent-color);
     }
 
     img {
@@ -78,7 +79,7 @@
 
   .gridContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50px, 2fr));
     gap: 5%;
     margin-top: 5vh;
 
@@ -97,6 +98,12 @@
       }
       .techName {
         font-size: 0.9rem;
+      }
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(50px, 3fr));
+        svg {
+          font-size: 30px;
+        }
       }
     }
   }

@@ -6,35 +6,32 @@
   overflow: hidden;
   animation: arrive 1s ease-in-out;
   background: white;
-  color: var(--accent-color1);
+  color: var(--accent-color);
 
-  header {
+  .mainTxtCtn {
     font-family: var(--font3);
-    font-weight: bolder;
-    margin-top: 17rem;
-    margin-bottom: 3rem;
+    font-weight: bold;
+    margin-top: 19rem;
     width: 100%;
     text-align: center;
+    font-size: clamp(1.7rem, 6dvw, 3rem);
     @media (max-width: 768px) {
       margin-top: 14rem;
     }
-    h1 {
-      font-size: clamp(1.8rem, 9dvw, 3.5rem);
+    p {
       strong {
         position: absolute;
         clip: rect(0, 0, 0, 0);
       }
     }
-    div {
-      font-size: clamp(1.5rem, 8dvw, 3rem);
-    }
-    h2 {
+
+    .dialogue {
       text-align: center;
       font-size: clamp(0.8rem, 3vw, 1rem);
       letter-spacing: 2px;
       font-weight: 500;
       font-family: "Roboto", sans-serif;
-      margin-top: 1rem;
+      margin-top: 20px;
       span {
         color: var(--accent-bg);
         cursor: pointer;
@@ -50,26 +47,27 @@
     font-size: clamp(0.8rem, 1vw, 1.1rem);
     padding: 10px 25px;
     background: transparent;
-    // border: 2px var(--accent-color1) solid;
     border: none;
-    box-shadow: 0 1px 3px 2px var(--accent-color1), 0 2px 0 4px var(--white),
-      0 0 0 5px var(--accent-color1);
+    box-shadow: 0 1px 3px 2px var(--accent-color), 0 2px 0 4px var(--bg),
+      0 0 0 5px var(--accent-color);
 
     transition: 0.3s ease;
     cursor: pointer;
     z-index: 4;
     font-weight: bold;
     letter-spacing: 1.5px;
-    color: var(--accent-color1);
-    // @media (max-width: 768px) {
-    // }
+    color: var(--accent-color);
+    margin-top: 2rem;
+    @media (max-width: 768px) {
+      margin-top: 3rem;
+    }
     &:hover {
-      box-shadow: 0 0 1px 1px var(--accent-color1), 0 2px 0 4px var(--white),
-        0 0 0 5px var(--accent-color1);
+      box-shadow: 0 0 1px 1px var(--accent-color), 0 2px 0 4px var(--bg),
+        0 0 0 5px var(--accent-color);
     }
     &:active {
-      box-shadow: 0 0 1px 0px var(--accent-color1), 0 2px 0 4px var(--white),
-        0 0 0 5px var(--accent-color1);
+      box-shadow: 0 0 1px 0px var(--accent-color), 0 2px 0 4px var(--bg),
+        0 0 0 5px var(--accent-color);
     }
   }
 
@@ -79,7 +77,7 @@
     position: absolute;
     bottom: 240px;
     @media (max-width: 768px) {
-      bottom: 110px;
+      bottom: 150px;
     }
     .icon {
       font-size: clamp(3rem, 6vw, 4rem);
@@ -154,7 +152,7 @@
       bottom: 0;
       width: 200%;
       @media (max-width: 768px) {
-        height: 300px;
+        height: 400px;
       }
     }
     .wave1 {
@@ -218,27 +216,27 @@
   }
 
   .scrollIconContainer {
-    animation: arrivescroll 2s ease-in-out, bounce 3s ease infinite;
+    animation: arrive 2s ease-in-out, bounce 3s ease infinite;
     transition: opacity ease-in-out;
     font-size: 2rem;
     cursor: pointer;
     position: absolute;
     bottom: 0;
-    opacity: 0.3;
     height: 100px;
     width: 100px;
     background-color: transparent;
     border: none;
     outline: none;
-    color: white;
+    z-index: 99;
+
     &:hover .scrollIcon {
       scale: 0.8;
       bottom: 0;
-      opacity: 0.2;
     }
     .scrollIcon {
       bottom: 10%;
       left: 50%;
+      color: var(--accent-bg);
       transform: translateX(-50%);
       position: absolute;
       transition: all 0.6s ease;
@@ -251,15 +249,6 @@
     }
     to {
       opacity: 1;
-    }
-  }
-
-  @keyframes arrivescroll {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 0.3;
     }
   }
 

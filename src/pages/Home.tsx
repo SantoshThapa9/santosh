@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { BsChevronDoubleDown } from "react-icons/bs";
 import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
@@ -28,7 +28,7 @@ const Home = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
-  const heroRef = useRef<HTMLElement | null>(null);
+  const heroRef = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -38,7 +38,7 @@ const Home = () => {
   const left: MotionValue<number> = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0, 0, -100]
+    [0, 0, -200]
   );
   const bottom: MotionValue<number> = useTransform(
     scrollYProgress,
@@ -49,24 +49,28 @@ const Home = () => {
   const opacity: MotionValue<number> = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [1, 1, 0.1]
+    [1, 1, 0]
   );
-  const [hasAnimated, setHasAnimated] = useState<boolean>(false);
 
   return (
-    <main className={styles.hero} ref={heroRef} id="home">
-      <header>
-        <motion.h1
-          initial={{ opacity: 0, x: -150 }}
-          animate={{ opacity: 1, x: 0 }}
+    <div className={styles.hero} ref={heroRef} id="home">
+      <div className={styles.mainTxtCtn}>
+        <motion.p
+          style={{
+            opacity: opacity,
+          }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: easeInOut }}
-          onAnimationComplete={() => setHasAnimated(true)}
         >
           Hi, I'm <strong>Santosh</strong>
-        </motion.h1>
+        </motion.p>
         <motion.div
-          initial={{ opacity: 0, x: 150 }}
-          animate={{ opacity: 1, x: 0 }}
+          style={{
+            opacity: opacity,
+          }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: easeInOut }}
           aria-live="polite"
           role="status"
@@ -82,18 +86,25 @@ const Home = () => {
           />
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, ease: easeInOut }}
+          className={styles.dialogue}
+          style={{
+            opacity: opacity,
+          }}
         >
           Who Loves Bringing <span>Ideas</span> To Life
-        </motion.h2>
-      </header>
+        </motion.p>
+      </div>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: easeInOut }}
+        style={{
+          opacity: opacity,
+        }}
       >
         <button className={styles.cta} onClick={() => scrollTo("projects")}>
           PROJECTS
@@ -102,8 +113,8 @@ const Home = () => {
       <div className={styles.socialIconsContainer}>
         <motion.div
           style={{
-            x: hasAnimated ? left : 0,
-            y: hasAnimated ? bottom : 0,
+            x: left,
+            y: bottom,
             opacity: opacity,
           }}
         >
@@ -121,8 +132,8 @@ const Home = () => {
         </motion.div>
         <motion.div
           style={{
-            x: hasAnimated ? left : 0,
-            y: hasAnimated ? bottom : 0,
+            x: left,
+            y: bottom,
             opacity: opacity,
           }}
         >
@@ -140,8 +151,8 @@ const Home = () => {
         </motion.div>
         <motion.div
           style={{
-            x: hasAnimated ? left : 0,
-            y: hasAnimated ? bottom : 0,
+            x: left,
+            y: bottom,
             opacity: opacity,
           }}
         >
@@ -159,7 +170,7 @@ const Home = () => {
         </motion.div>
         <motion.div
           style={{
-            x: hasAnimated ? left : 0,
+            x: left,
             opacity: opacity,
           }}
         >
@@ -227,7 +238,7 @@ const Home = () => {
         </svg>
       </div>
       <div className={styles.edgefade} />
-    </main>
+    </div>
   );
 };
 export default Home;

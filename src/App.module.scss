@@ -2,3 +2,30 @@
   position: absolute;
   clip-path: rect(0 0 0 0);
 }
+
+.loaderCtn {
+  height: 100dvh;
+  width: 100dvw;
+  display: grid;
+  place-items: center;
+  .loader {
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #3385f0;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    animation: l1 2s infinite cubic-bezier(0.3, 1, 0, 1);
+  }
+  @keyframes l1 {
+    33% {
+      border-radius: 0;
+      background: #1123c5;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    66% {
+      border-radius: 0;
+      background: #075da3;
+      clip-path: polygon(50% 0, 50% 0, 100% 100%, 0 100%);
+    }
+  }
+}

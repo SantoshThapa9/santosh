@@ -12,7 +12,6 @@ import {
   SiNextdotjs,
   SiExpress,
   SiGit,
-  SiMongodb,
   SiTailwindcss,
   SiFigma,
 } from "react-icons/si";
@@ -21,7 +20,7 @@ import clsx from "clsx";
 
 const About = () => {
   const techStack = {
-    frontend: [
+    skills: [
       {
         name: "React",
         url: "https://reactjs.org/",
@@ -86,8 +85,6 @@ const About = () => {
           />
         ),
       },
-    ],
-    backend: [
       {
         name: "Node.js",
         url: "https://nodejs.org/",
@@ -109,14 +106,8 @@ const About = () => {
           <SiFirebase style={{ color: "#FFCA28" }} aria-label="Firebase Icon" />
         ),
       },
-      {
-        name: "MongoDB",
-        url: "https://www.mongodb.com/",
-        icon: (
-          <SiMongodb style={{ color: "#47A248" }} aria-label="MongoDB Icon" />
-        ),
-      },
     ],
+
     tools: [
       {
         name: "Git",
@@ -149,7 +140,8 @@ const About = () => {
   };
 
   return (
-    <section id="about" className={clsx(styles.aboutSection)}>
+    <div id="about" className={clsx(styles.aboutSection)}>
+      <hr />
       <div className={styles.headingContainer}>
         <AnimateView>
           <span className={styles.header}>About Me</span>
@@ -159,8 +151,7 @@ const About = () => {
           <img loading="lazy" src="santosh.png" alt="profile photo" />
         </AnimateView>
       </div>
-
-      <article>
+      <div>
         <AnimateView>
           <span className={styles.dialog}>
             From "Hello World!" to building dynamic user interfaces, my journey
@@ -239,8 +230,8 @@ const About = () => {
             </div>
           </div>
         ))}
-      </article>
-    </section>
+      </div>
+    </div>
   );
 };
 

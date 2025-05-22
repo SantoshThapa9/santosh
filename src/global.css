@@ -1,12 +1,14 @@
 :root {
-  --black: #333;
-  --white: whitesmoke;
-  --accent-color1: #226ec5;
-  --accent-color2: #fae8d0;
+  --color: #333;
+  --bg: whitesmoke;
+  --accent-color: #226ec5;
   --accent-bg: #052e5c;
   --font3: "Orbitron", sans-serif;
   --font2: "Bebas Neue", sans-serif;
   --font1: "Roboto", sans-serif;
+}
+.grecaptcha-badge {
+  visibility: hidden !important;
 }
 
 * {
@@ -16,10 +18,11 @@
 }
 html,
 body {
-  background: var(--accent-bg);
-  color: var(--white);
+  color: var(--color);
+  background-color: var(--bg);
   scroll-behavior: smooth;
   font-family: var(--font1);
+  position: relative;
 }
 
 ::-webkit-scrollbar {
