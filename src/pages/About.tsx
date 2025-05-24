@@ -1,5 +1,5 @@
 import styles from "./about.module.scss";
-import { FaReact, FaJs, FaNodeJs, FaGithub} from "react-icons/fa";
+import { FaReact, FaJs, FaNodeJs, FaGithub } from "react-icons/fa";
 import {
   SiNextdotjs,
   SiTypescript,
@@ -330,7 +330,7 @@ const About = () => {
                           >
                             {skill.icon}
                           </a>
-                          <span>{skill.name}</span>
+                          <p>{skill.name}</p>
                         </li>
                       ))}
                     </ul>
