@@ -19,7 +19,7 @@ import {
 } from "react-icons/si";
 import AnimateView from "./animate/AnimateView";
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import {  useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const About = () => {
@@ -255,18 +255,6 @@ const About = () => {
     },
   ];
 
-  const marqueeRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const stripRefs = useRef<(HTMLUListElement | null)[]>([]);
-
-  useEffect(() => {
-    marqueeRefs.current.forEach((marquee, idx) => {
-      const strip = stripRefs.current[idx];
-      if (marquee && strip) {
-        const shouldAnimate = strip.scrollWidth > marquee.clientWidth;
-        marquee.classList.toggle(styles.animate, shouldAnimate);
-      }
-    });
-  }, []);
   const secRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -313,14 +301,8 @@ const About = () => {
                 <AnimateView>
                   <p className={styles.title}>{set.title}</p>
                   <p className={styles.description}>{set.description}</p>
-                  <div
-                    ref={(el) => (marqueeRefs.current[idx] = el)}
-                    className={styles.skillsMarquee}
-                  >
-                    <ul
-                      ref={(el) => (stripRefs.current[idx] = el)}
-                      className={styles.skillsStrip}
-                    >
+                  <div className={styles.skillsMarquee}>
+                    <ul className={styles.skillsStrip}>
                       {[...set.skills, ...set.skills].map((skill, idx) => (
                         <li key={idx}>
                           <a

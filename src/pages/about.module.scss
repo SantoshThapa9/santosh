@@ -118,17 +118,13 @@
           list-style: none;
           white-space: nowrap;
           gap: 2rem;
+          animation: scrollLeft 30s linear infinite;
+
           li {
             display: inline-flex;
             svg {
-              margin-top: 0.3rem;
+              margin-top: 0.2rem;
             }
-          }
-        }
-
-        &.animate {
-          .skillsStrip {
-            animation: scrollLeft 30s linear infinite;
           }
         }
 

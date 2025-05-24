@@ -1,76 +1,46 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.scss";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
 const ContactPage: React.FC = () => {
-  const form = useRef<HTMLFormElement | null>(null);
-  const { executeRecaptcha } = useGoogleReCaptcha();
-
-  const [formData, setFormData] = useState({
-    user_name: "",
-    user_email: "",
-    message: "",
-  });
-
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const form = useRef<HTMLFormElement | null>(null);
   const lastSubmitTime = useRef<number | null>(null);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const now = Date.now();
-    if (lastSubmitTime.current && now - lastSubmitTime.current < 1000) {
-      setStatus("Please wait before sending again.");
+    if (lastSubmitTime.current && Date.now() - lastSubmitTime.current < 1000) {
+      setStatus("Please wait a second before sending again.");
       return;
     }
-    if (!form.current || !executeRecaptcha) return;
-    lastSubmitTime.current = now;
-
+    lastSubmitTime.current = Date.now();
     setLoading(true);
-
     try {
-      const token = await executeRecaptcha("contact_form");
-
-      const recaptchaRes = await fetch("/api/verify-recaptcha", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token }),
-      });
-
-      const recaptchaJson = await recaptchaRes.json();
-
-      if (!recaptchaJson.success) {
-        setStatus("Failed reCAPTCHA verification.");
-        setLoading(false);
-        return;
-      }
-
       await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        form.current,
+        form.current!,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      setStatus("Message sent successfully!");
-      setFormData({ user_name: "", user_email: "", message: "" });
-    } catch (error: any) {
-      setStatus("Failed to send message. Please try again later.");
-      console.error("Email send error:", error?.text || error);
+      setStatus("Message sent!");
+      form.current?.reset();
+    } catch (error) {
+      setStatus("Error sending message.");
+      console.error(error);
     } finally {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    if (status) {
+      const timeout = setTimeout(() => setStatus(""), 4000);
+      return () => clearTimeout(timeout);
+    }
+  }, [status]);
 
   return (
     <div id="contact" className={styles.ContactPage}>
@@ -134,8 +104,6 @@ const ContactPage: React.FC = () => {
               name="user_name"
               className={styles.formInput}
               placeholder="Your name"
-              value={formData.user_name}
-              onChange={handleChange}
               required
             />
           </div>
@@ -149,8 +117,6 @@ const ContactPage: React.FC = () => {
               name="user_email"
               className={styles.formInput}
               placeholder="Your email"
-              value={formData.user_email}
-              onChange={handleChange}
               required
             />
           </div>
@@ -163,8 +129,6 @@ const ContactPage: React.FC = () => {
               name="message"
               className={styles.formTextarea}
               placeholder="Your message"
-              value={formData.message}
-              onChange={handleChange}
               required
             ></textarea>
           </div>
@@ -177,7 +141,11 @@ const ContactPage: React.FC = () => {
             {loading ? "Sending..." : "Send"}
           </button>
         </form>
-        {status && <p className={styles.statusMessage}>{status}</p>}
+        {status && (
+          <p className={styles.statusMessage} aria-live="polite">
+            {status}
+          </p>
+        )}
       </div>
     </div>
   );

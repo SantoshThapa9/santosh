@@ -6,7 +6,6 @@ const About = lazy(() => import("./pages/About"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 const Footer = lazy(() => import("./pages/Footer"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
 const App = () => {
   return (
@@ -36,11 +35,7 @@ const App = () => {
         <Home />
         <About />
         <ProjectPage />
-        <GoogleReCaptchaProvider
-          reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-        >
-          <ContactPage />
-        </GoogleReCaptchaProvider>
+        <ContactPage />
       </main>
 
       <Footer />
