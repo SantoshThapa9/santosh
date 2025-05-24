@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@vercel/node": "^5.1.16",
+    "axios": "^1.9.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
     "framer-motion": "^12.9.4",
@@ -20,9 +22,11 @@
     "react-google-recaptcha-v3": "^1.10.1",
     "react-icons": "^5.3.0",
     "react-intersection-observer": "^9.16.0",
-    "react-simple-typewriter": "^5.0.1"
+    "react-simple-typewriter": "^5.0.1",
+    "scheduler": "^0.26.0"
   },
   "devDependencies": {
+    "@types/node": "^22.15.21",
     "@types/react": "^18.2.41",
     "@types/react-dom": "^18.2.14",
     "@types/react-google-recaptcha": "^2.1.9",

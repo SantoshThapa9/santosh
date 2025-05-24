@@ -16,7 +16,7 @@ export default defineConfig({
     port: 3000,
 
     proxy: {
-      "/verify-recaptcha": "http://localhost:5000",
+      "/api/verify-recaptcha": "http://localhost:5000",
     },
   },
 });

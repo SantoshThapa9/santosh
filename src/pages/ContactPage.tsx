@@ -39,7 +39,7 @@ const ContactPage: React.FC = () => {
     try {
       const token = await executeRecaptcha("contact_form");
 
-      const recaptchaRes = await fetch("/verify-recaptcha", {
+      const recaptchaRes = await fetch("/api/verify-recaptcha", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
