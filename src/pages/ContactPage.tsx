@@ -27,7 +27,7 @@ const ContactPage: React.FC = () => {
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const now = Date.now();
-    if (lastSubmitTime.current && now - lastSubmitTime.current < 10000) {
+    if (lastSubmitTime.current && now - lastSubmitTime.current < 1000) {
       setStatus("Please wait before sending again.");
       return;
     }
@@ -39,16 +39,13 @@ const ContactPage: React.FC = () => {
     try {
       const token = await executeRecaptcha("contact_form");
 
-      const recaptchaRes = await fetch(
-        "http://localhost:5000/verify-recaptcha",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token }),
-        }
-      );
+      const recaptchaRes = await fetch("/verify-recaptcha", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      });
 
       const recaptchaJson = await recaptchaRes.json();
 
