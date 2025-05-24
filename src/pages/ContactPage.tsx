@@ -78,50 +78,54 @@ const ContactPage: React.FC = () => {
   return (
     <div id="contact" className={styles.ContactPage}>
       <div className={styles.contactContainer}>
-        {" "}
-        <div className={styles.socialLinks}>
-          <a
-            href="https://x.com/SantoshThapa689"
-            className={styles.socialLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Santosh Thapa on X"
-          >
-            <FaTwitter className={styles.icon} />
-          </a>
-          <a
-            href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
-            className={styles.socialLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Santosh Thapa on Linkedin"
-          >
-            <FaLinkedin className={styles.icon} />
-          </a>
-          <a
-            href="https://instagram.com/santoshh689"
-            className={styles.socialLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Santosh Thapa on Instagram"
-          >
-            <FaInstagram className={styles.icon} />
-          </a>
-          <a
-            href="https://github.com/SantoshThapa9"
-            className={styles.socialLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Santosh Thapa on Github"
-          >
-            <FaGithub className={styles.icon} />
-          </a>
+        <div className={styles.contactSection}>
+          <h2 className={styles.contactTitle}>Get in Touch</h2>
+          <div className={styles.socialLinks}>
+            <a
+              href="https://x.com/SantoshThapa689"
+              className={styles.socialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Santosh Thapa on X"
+            >
+              <FaTwitter className={styles.icon} />
+            </a>
+            <a
+              href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
+              className={styles.socialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Santosh Thapa on Linkedin"
+            >
+              <FaLinkedin className={styles.icon} />
+            </a>
+            <a
+              href="https://instagram.com/santoshh689"
+              className={styles.socialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Santosh Thapa on Instagram"
+            >
+              <FaInstagram className={styles.icon} />
+            </a>
+            <a
+              href="https://github.com/SantoshThapa9"
+              className={styles.socialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Santosh Thapa on Github"
+            >
+              <FaGithub className={styles.icon} />
+            </a>
+          </div>
+          <p className={styles.contactSubtitle}>
+            Open to collaborations and inquiries! <br />
+            <a href="mailto:st8493510@gmail.com" className={styles.email}>
+              st8493510@gmail.com
+            </a>
+          </p>
         </div>
-        <h1 className={styles.contactTitle}>Get in Touch</h1>
-        <p className={styles.contactSubtitle}>
-          Open to collaborations and inquiries! <br />
-          st8493510@gmail.com
-        </p>
+
         <form ref={form} className={styles.contactForm} onSubmit={sendEmail}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.formLabel}>

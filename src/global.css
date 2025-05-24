@@ -3,8 +3,7 @@
   --bg: whitesmoke;
   --accent-color: #226ec5;
   --accent-bg: #052e5c;
-  --font3: "Orbitron", sans-serif;
-  --font2: "Bebas Neue", sans-serif;
+  --font2: "Orbitron", sans-serif;
   --font1: "Roboto", sans-serif;
 }
 .grecaptcha-badge {
@@ -30,11 +29,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent;
+  background-color: rgb(164, 170, 173);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: grey;
+  background-color: white;
   border-radius: 20px;
   border: 3px solid transparent;
   background-clip: content-box;

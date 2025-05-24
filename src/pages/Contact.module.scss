@@ -2,104 +2,124 @@
   padding: 20px;
   display: flex;
   justify-content: center;
-}
 
-.contactContainer {
-  max-width: 700px;
-  width: 100%;
-  padding: 30px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+  .contactSection {
+    text-align: center;
+    padding: 4rem 1rem;
 
-.contactTitle {
-  text-align: center;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  margin-bottom: 10px;
-  font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 2px;
-}
+    .contactTitle {
+      font-weight: 700;
+      font-size: clamp(2rem, 3dvw + 1rem, 3rem);
+      color: var(--accent-color);
+      font-family: var(--font2);
+      letter-spacing: 2px;
+      text-align: center;
+      margin: 2rem auto;
+    }
 
-.contactSubtitle {
-  text-align: center;
-  font-size: clamp(0.8rem, 2vw, 1.3rem);
-  margin-bottom: 20px;
-}
+    .socialLinks {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
 
-.contactDetails {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
-}
+    .socialLink {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem;
+      border-radius: 50%;
+      transition: 1s ease;
+    }
 
-.detailItem {
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-}
+    .socialLink:hover {
+      background-color: #1f6feb;
+      transform: scale(1.1);
+      .icon {
+        color: white;
+      }
+    }
 
-.icon {
-  margin-right: 10px;
-  color: rgb(0, 155, 207);
-}
-.contactForm {
-  background-color: greed;
-  width: 100%;
-}
-.formGroup {
-  margin-bottom: 20px;
-  width: 100%;
-}
+    .icon {
+      width: 1.6rem;
+      height: 1.6rem;
+      color: var(--color);
+    }
 
-.formLabel {
-  display: block;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  color: #333;
-  font-style: normal;
-}
+    .contactSubtitle {
+      font-size: clamp(1rem, 0.9rem + 0.3vw, 1.2rem);
+      line-height: 1.6;
+      color: var(--color);
+    }
 
-.formInput,
-.formTextarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  resize: none;
-  font-family: "Roboto", sans-serif;
-}
+    .email {
+      display: inline-block;
+      color: #58a6ff;
+      text-decoration: underline;
+      margin-top: 0.5rem;
+      transition: color 0.3s ease;
+    }
 
-.submitButton {
-  border-radius: 3em;
-  font-size: clamp(0.8rem, 1vw, 1.1rem);
-  padding: 10px 25px;
-  background: transparent;
-  border: none;
-  box-shadow: 0 1px 3px 2px var(--accent-color), 0 2px 0 4px var(--bg),
-    0 0 0 5px var(--accent-color);
-  transition: 0.3s ease;
-  cursor: pointer;
-  z-index: 4;
-  font-weight: bold;
-  letter-spacing: 1.5px;
-  color: var(--accent-color);
-
-  &:hover {
-    box-shadow: 0 0 1px 1px var(--accent-color), 0 2px 0 4px var(--bg),
-      0 0 0 5px var(--accent-color);
+    .email:hover {
+      color: #1f6feb;
+    }
   }
-  &:active {
-    box-shadow: 0 0 1px 0px var(--accent-color), 0 2px 0 4px var(--bg),
-      0 0 0 5px var(--accent-color);
+  .contactForm {
+    width: 100%;
   }
-}
-.statusMessage {
-  margin-top: 10px;
-  color: rgb(0, 119, 255);
-  font-weight: 500;
+  .formGroup {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .formLabel {
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    color: #333;
+    font-style: normal;
+  }
+
+  .formInput,
+  .formTextarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: none;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .submitButton {
+    border-radius: 3em;
+    font-size: clamp(0.8rem, 1vw, 1.1rem);
+    padding: 10px 25px;
+    background: transparent;
+    border: none;
+    box-shadow: 0 1px 3px 2px var(--accent-color), 0 2px 0 4px var(--bg),
+      0 0 0 5px var(--accent-color);
+    transition: 0.3s ease;
+    cursor: pointer;
+    z-index: 4;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    color: var(--accent-color);
+
+    &:hover {
+      box-shadow: 0 0 1px 1px var(--accent-color), 0 2px 0 4px var(--bg),
+        0 0 0 5px var(--accent-color);
+    }
+    &:active {
+      box-shadow: 0 0 1px 0px var(--accent-color), 0 2px 0 4px var(--bg),
+        0 0 0 5px var(--accent-color);
+    }
+  }
+  .statusMessage {
+    margin-top: 10px;
+    color: rgb(0, 119, 255);
+    font-weight: 500;
+  }
 }

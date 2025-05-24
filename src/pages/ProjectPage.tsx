@@ -7,7 +7,7 @@ import focusflow from "/focusflow.ico";
 import softsell from "/softsell.ico";
 import p1 from "/p1.jpg";
 import p2 from "/p2.jpg";
-import p3 from "/p3.jpg";
+import p3 from "/p3.png";
 
 import AnimateView from "./animate/AnimateView";
 
@@ -18,55 +18,64 @@ interface Project {
   thumbnail?: string;
   link: string;
   about: string;
-  highlights?: string[];
+
   skillsUsed: string[];
 }
 const projects: Project[] = [
   {
     id: 1,
-    title: "ChatGPT Clone Kura AI",
+    title: "Kura AI",
     logo: kura,
     thumbnail: p1,
     link: "https://kura-iota.vercel.app/",
     about:
-      "KURA AI is an advanced ChatGPT alternative with real-time voice chat, unlimited AI image generation, and adaptive conversations.",
-    highlights: [
-      "Real-time voice interaction and unlimited AI image generation powered by Web Speech API and Stable Diffusion.",
-      "Smart Markdown & code formatting",
-      "Fully responsive with dark/light mode toggle",
+      "KURA AI is a ChatGPT clone with real-time voice chat, AI image generation, neat code/text formatting, and seamless light & dark responsive layouts.",
+
+    skillsUsed: [
+      "SASS",
+      "React.js",
+      "Next.js",
+      "Web APIs",
+      "Context API",
+      "Gemini API",
     ],
-    skillsUsed: ["Next.js", "Gemini API", "Web APIs", "Git"],
   },
   {
     id: 2,
-    title: "SoftSell - Software reselling company",
+    title: "SoftSell",
     logo: softsell,
     thumbnail: p2,
     link: "https://soft-sell-two-lime.vercel.app/",
     about:
-      "SoftSell is a sleek, responsive landing platform for software license reselling, featuring AI assistance and modern UI animations.",
-    highlights: [
-      "Integrated Gemini API to power an AI assistant that guides users through the selling process.",
-      "Framer Motion animations for smooth, engaging transitions and a premium UI feel.",
-      "Responsive layout with polished sections for benefits, testimonials, and CTAs.",
+      "SoftSell is a landing page for reselling software licenses, with an AI assistant for guidance, smooth animations for engagement, and a clean, responsive design.",
+
+    skillsUsed: [
+      "React.js",
+      "Next.js",
+      "Framer Motion",
+      "Gemini API",
+      "Git",
+      "Vercel",
     ],
-    skillsUsed: ["Next.js", "Framer Motion", "Gemini API", "Git"],
   },
   {
     id: 3,
-    title: "Taskify - Task Management app",
+    title: "Taskify",
     logo: taskify,
     thumbnail: p3,
     link: "https://taskifyapp-smoky.vercel.app/",
     about:
-      "Taskify is a modern task management app built with Next.js and Firebase, designed for speed, clarity, and productivity.",
-    highlights: [
-      "Real-time sync with Firebase Firestore for instant updates and collaboration.",
-      "Customizable grid/list views with persistent layout preferences using local storage.",
-      "Inline task editing and bulk deletion with confirmation safeguards.",
-      "Theme switching and responsive design for a fast, mobile-friendly user experience.",
+      "Taskify is a task management app with real-time syncing, customizable views, inline editing, bulk actions, and theme switching in a fast, clear, responsive design.",
+
+    skillsUsed: [
+      "Next.js",
+      "Firebase",
+      "Vercel",
+      "REST API",
+      "Git",
+      "JavaScript",
+      "Context API",
     ],
-    skillsUsed: ["Next.js", "Firebase", "REST API", "Git"],
   },
   {
     id: 4,
@@ -90,9 +99,10 @@ const projects: Project[] = [
     logo: focusflow,
     link: "https://focus-flow-productivity-timer.vercel.app/",
     about: "Minimalist Pomodoro app for focused work and regular breaks.",
-    skillsUsed: ["TypeScript", "Tailwind", "Next.js", "Git"],
+    skillsUsed: ["TypeScript", "Tailwind", "Next.js", "Vercel"],
   },
 ];
+
 const ProjectPage: React.FC = () => {
   return (
     <div id="projects" className={styles.projectPage}>
@@ -124,25 +134,22 @@ const ProjectPage: React.FC = () => {
                   <h2 className={styles.title}>{p.title}</h2>
                 </div>
                 <p className={styles.about}>{p.about}</p>
-                {p.highlights && (
-                  <ul className={styles.highlights}>
-                    {p.highlights.map((point, index) => (
-                      <li key={index}>{point}</li>
+
+                <div className={styles.skillsMarquee}>
+                  <ul className={styles.skillsStrip}>
+                    {p.skillsUsed.concat(p.skillsUsed).map((s, i) => (
+                      <li key={i}>{s}</li>
                     ))}
                   </ul>
-                )}
-                <ul className={styles.skills}>
-                  {p.skillsUsed.map((s, i) => (
-                    <li key={i}>{s}</li>
-                  ))}
-                </ul>
+                </div>
+
                 <a
                   href={p.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.link}
                 >
-                  Learn More
+                  try now
                 </a>
               </div>
             </div>
@@ -162,14 +169,12 @@ const ProjectPage: React.FC = () => {
                 ))}
               </ul>
               <a href={p.link} target="_blank" className={styles.gridLink}>
-                Visit
+                try now
               </a>
             </div>
           </AnimateView>
         ))}
       </div>
-
-      <hr />
     </div>
   );
 };

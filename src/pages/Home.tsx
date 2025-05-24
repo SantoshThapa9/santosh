@@ -97,19 +97,20 @@ const Home = () => {
         >
           Who Loves Bringing <span>Ideas</span> To Life
         </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: easeInOut }}
+          style={{
+            opacity: opacity,
+          }}
+        >
+          <button className={styles.cta} onClick={() => scrollTo("projects")}>
+            PROJECTS
+          </button>
+        </motion.div>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: easeInOut }}
-        style={{
-          opacity: opacity,
-        }}
-      >
-        <button className={styles.cta} onClick={() => scrollTo("projects")}>
-          PROJECTS
-        </button>
-      </motion.div>
+
       <div className={styles.socialIconsContainer}>
         <motion.div
           style={{
