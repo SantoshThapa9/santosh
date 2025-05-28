@@ -5,11 +5,9 @@ import {
   SiTypescript,
   SiHtml5,
   SiCss3,
-  SiExpress,
   SiFirebase,
   SiGit,
   SiVercel,
-  SiFramer,
   SiFigma,
   SiTailwindcss,
   SiBootstrap,
@@ -19,15 +17,15 @@ import {
 } from "react-icons/si";
 import AnimateView from "./animate/AnimateView";
 import clsx from "clsx";
-import {  useRef } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const About = () => {
   const skillCategories = [
     {
-      title: "UI & Design",
+      title: "UI/UX & Visual Design",
       description:
-        "Creating intuitive, accessible, and visually engaging user interfaces.",
+        "Crafting responsive, accessible, and visually engaging user experiences with modern design principles.",
       skills: [
         {
           name: "Figma",
@@ -73,22 +71,12 @@ const About = () => {
           url: "https://sass-lang.com/",
           icon: <SiSass style={{ color: "#CC6699" }} aria-label="Sass Icon" />,
         },
-        {
-          name: "Framer Motion",
-          url: "https://www.framer.com/motion/",
-          icon: (
-            <SiFramer
-              style={{ color: "#0055FF" }}
-              aria-label="Framer Motion Icon"
-            />
-          ),
-        },
       ],
     },
     {
-      title: "Development",
+      title: "Frontend Development",
       description:
-        "Building dynamic and scalable web applications using modern JavaScript frameworks and libraries.",
+        "Developing performant, scalable, and maintainable web applications using modern frameworks.",
       skills: [
         {
           name: "React",
@@ -128,16 +116,6 @@ const About = () => {
             <FaNodeJs style={{ color: "#68A063" }} aria-label="Node.js Icon" />
           ),
         },
-        {
-          name: "Express.js",
-          url: "https://expressjs.com/",
-          icon: (
-            <SiExpress
-              style={{ color: "silver" }}
-              aria-label="Express.js Icon"
-            />
-          ),
-        },
 
         {
           name: "Firebase",
@@ -152,9 +130,9 @@ const About = () => {
       ],
     },
     {
-      title: "Deployment & DevOps",
+      title: "Deployment & Version Control",
       description:
-        "Deploying, maintaining, and managing applications with performance and version control in mind.",
+        "Efficiently managing code versioning, CI/CD, and seamless cloud deployments.",
       skills: [
         {
           name: "GitHub",
@@ -193,9 +171,9 @@ const About = () => {
       ],
     },
     {
-      title: "Performance & SEO",
+      title: "Performance & SEO Optimization",
       description:
-        "Improving page load speed, search engine visibility, and overall user experience.",
+        "Enhancing site speed, search engine rankings, and accessibility for an optimized user experience.",
       skills: [
         {
           name: "PageSpeed Insights",
@@ -285,9 +263,7 @@ const About = () => {
       </AnimateView>
       <div className={styles.desc}>
         <AnimateView>
-          specializing in modern front-end development, with a strong focus on
-          building responsive, interactive, and user-centric web applications.
-          With expertise in...
+          Specializing in modern, responsive, and user-focused web applications.
         </AnimateView>
         <div ref={secRef} className={styles.skillSec}>
           {skillCategories.map((set, idx) => {

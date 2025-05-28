@@ -93,7 +93,7 @@
       transition: transform 0.3s ease;
       text-align: start;
       .title {
-        font-size: 1.5rem;
+        font-size: clamp(1.1rem, 5dvw, 1.6rem);
         font-weight: 600;
         margin-bottom: 0.5rem;
         color: #333;
@@ -117,11 +117,12 @@
           position: absolute;
           list-style: none;
           white-space: nowrap;
-          gap: 2rem;
+          gap: 1.5rem;
           animation: scrollLeft 30s linear infinite;
 
           li {
-            display: inline-flex;
+            display: flex;
+            gap: 5px;
             svg {
               margin-top: 0.2rem;
             }

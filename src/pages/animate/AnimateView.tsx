@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import type { ReactNode } from "react";
 
 const variants: Variants = {
-  hidden: { opacity: 0.8, y: 100 },
+  hidden: { opacity: 0.2, y: 100 },
   visible: {
     opacity: 1,
     y: 0,
@@ -19,7 +19,7 @@ type AnimatedSectionProps = {
 
 const AnimateView = ({ children, className }: AnimatedSectionProps) => {
   const controls = useAnimation();
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
+  const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true });
 
   useEffect(() => {
     if (inView) controls.start("visible");
