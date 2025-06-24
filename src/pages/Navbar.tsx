@@ -32,7 +32,7 @@ const Navbar = () => {
       isProgrammaticScroll.current = true;
 
       element.scrollIntoView({ behavior: "smooth" });
-      const newPath = targetId === "home" ? "/" : `/${targetId}`;
+      const newPath = targetId === "home" ? "/home" : `/${targetId}`;
       navigate(newPath, { replace: true });
       setIsSidebarOpen(false);
       setActiveSection(targetId);
@@ -66,7 +66,7 @@ const Navbar = () => {
           scrollTimeout.current = null;
         }, 100);
       }
-    } else if (location.pathname === "/" || location.pathname === "") {
+    } else if (location.pathname === "/home" || location.pathname === "") {
       setActiveSection("home");
       activeSectionRef.current = "home";
     }
@@ -109,7 +109,8 @@ const Navbar = () => {
         setActiveSection(currentSection);
         activeSectionRef.current = currentSection;
 
-        const newPath = currentSection === "home" ? "/" : `/${currentSection}`;
+        const newPath =
+          currentSection === "home" ? "/home" : `/${currentSection}`;
         if (location.pathname !== newPath) {
           navigate(newPath);
         }
