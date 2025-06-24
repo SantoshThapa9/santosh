@@ -1,6 +1,6 @@
-const { SitemapStream, streamToPromise } = require("sitemap");
-const { createWriteStream } = require("fs");
-const { join } = require("path");
+import { SitemapStream, streamToPromise } from "sitemap";
+import { createWriteStream } from "fs";
+import { join } from "path";
 
 const links = [
   { url: "/", changefreq: "weekly", priority: 1.0 },
@@ -10,17 +10,26 @@ const links = [
   { url: "/contact" },
 ];
 
-const hostname = "https://sitemap-generator.santosh-gamma.vercel.app";
+const hostname = "https://www.santoshthapa.xyz";
 const stream = new SitemapStream({ hostname });
 
 (async () => {
-  const outputPath = join(process.cwd(), "dist", "sitemap.xml");
-  const writeStream = createWriteStream(outputPath);
+  try {
+    const outputPath = join(process.cwd(), "dist", "sitemap.xml");
+    const writeStream = createWriteStream(outputPath);
 
-  stream.pipe(writeStream);
+    stream.pipe(writeStream);
 
-  links.forEach((link) => stream.write(link));
-  stream.end();
+    links.forEach((link) => stream.write(link));
+    stream.end();
 
-  await streamToPromise(stream);
+    await streamToPromise(stream);
+
+    await new Promise((resolve, reject) => {
+      writeStream.on("finish", resolve);
+      writeStream.on("error", reject);
+    });
+  } catch {
+    process.exit(1);
+  }
 })();
