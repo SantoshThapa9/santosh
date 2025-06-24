@@ -9,6 +9,7 @@ import jobringer from "/projects/JobRinger.webp";
 import { easeOut, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FiExternalLink } from "react-icons/fi";
+import Marquee from "react-fast-marquee";
 
 interface Project {
   id: number;
@@ -224,14 +225,14 @@ const ProjectPage: React.FC = () => {
                   <p className={styles.projectDescription}>{project.about}</p>
 
                   <div className={styles.skillsMarquee}>
-                    <div className={styles.skillsStrip}>
+                    <Marquee speed={30}>
                       {[
                         ...(project.skillsUsed ?? []),
                         ...(project.skillsUsed ?? []),
                       ].map((skill, i) => (
                         <span key={i}>{skill}</span>
                       ))}
-                    </div>
+                    </Marquee>
                   </div>
                 </div>
                 <div className={styles.projectFooter}>

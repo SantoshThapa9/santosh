@@ -113,15 +113,14 @@
           }
 
           .glassyBox {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
             background: rgba(240, 249, 255, 0.493);
             box-shadow: 0 5px 10px rgba(129, 129, 129, 0.1);
             padding: clamp(0.5rem, 3vw, 1rem);
             border-radius: 20px;
-            overflow-wrap: break-word;
-            word-break: normal;
-            margin: 0 auto;
+
+            max-width: 900px;
             border: 1px solid rgba(46, 74, 97, 0.096);
             transition: 0.3s ease;
             &:hover {
@@ -133,28 +132,16 @@
             margin-bottom: 1rem;
           }
           .skillsMarquee {
-            position: relative;
-            height: 1.3rem;
+            width: 100%;
             overflow: hidden;
-            z-index: 9;
-            .skillsStrip {
-              display: flex;
-              position: absolute;
-              list-style: none;
+            max-width: 80dvw;
+            transform: translateZ(0);
+            will-change: transform;
+
+            span {
+              margin-right: 1rem;
               white-space: nowrap;
-              gap: 1.5rem;
               font-size: 0.9rem;
-
-              animation: scrollLeft 30s linear infinite;
-
-              @keyframes scrollLeft {
-                0% {
-                  transform: translateX(0);
-                }
-                100% {
-                  transform: translateX(-50%);
-                }
-              }
             }
           }
 
