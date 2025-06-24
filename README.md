@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# 🧑‍💻 Santosh Thapa | Software Engineer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the private repository for **Santosh Thapa's personal portfolio**, built to showcase technical expertise, modern UI/UX practices, and a strong foundation in full-stack web development. This project highlights a collection of real-world, production-ready web apps built using cutting-edge technologies.
 
-Currently, two official plugins are available:
+## 🚀 About Me
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I’m **Santosh Thapa**, a passionate Software Engineer focused on delivering high-performance, scalable, and user-friendly web applications.
 
-## Expanding the ESLint configuration
+**Core Skills:**
+- 🔁 MERN Stack (MongoDB, Express.js, React.js, Node.js)
+- ⚛️ Frontend Engineering (React.js, Next.js, TypeScript)
+- 💅 Styling with Tailwind CSS, SASS/SCSS
+- 🎨 UI/UX Design & Web Performance Optimization
+- 📱 Responsive, Mobile-First Development
+- 🔍 SEO-Friendly Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+📧 Email: [st8493510@gmail.com](mailto:st8493510@gmail.com)  
+🌐 Portfolio: [santosh-gamma.vercel.app](https://santosh-gamma.vercel.app)  
+🐱 GitHub: [@SantoshThapa9](https://github.com/SantoshThapa9)  
+💼 LinkedIn: [@santosh986](https://www.linkedin.com/in/santosh986/)  
+🐦 Twitter: [@SantoshThapa689](https://x.com/SantoshThapa689)
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🛠️ Tech Stack
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- **Frontend**: React.js, Next.js, TypeScript, Tailwind CSS, SCSS
+- **Backend**: Node.js, Express.js, Firebase
+- **Tools**: GitHub, Vercel, Framer Motion
+- **Best Practices**: Clean Code, Accessibility, SEO, Responsive Design
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+---
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## ⚠️ Repository Notice
+
+This is a **private** repository and **not open for public use, cloning, or contribution**. The code and content are proprietary and intended solely for showcasing professional work and skills.
+
+---
+
+**Designed & Developed by [Santosh Thapa](https://santosh-gamma.vercel.app/)**  

@@ -1,43 +1,81 @@
 import { lazy, Suspense } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./pages/Navbar";
-import styles from "./App.module.scss";
 const About = lazy(() => import("./pages/About"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
 const Footer = lazy(() => import("./pages/Footer"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 
+import SharedStyles from "./shared-style/Shared.module.scss";
+
 const App = () => {
   return (
     <Suspense
       fallback={
-        <div className={styles.loaderCtn}>
-          <div className={styles.loader} />
+        <div className={SharedStyles.loaderCtn}>
+          <div className={SharedStyles.droplet} />
         </div>
       }
     >
       <Navbar />
-      <header className={styles.seo}>
-        <h1>Hi, I'm Santosh Thapa - Software Engineer & Frontend Developer</h1>
-        <h2>
-          As a creative and detail-oriented software engineer, I specialize in
-          React.js, Next.js, JavaScript, TypeScript, HTML5, CSS3, and other
-          modern web technologies, building intuitive and high-performance
-          applications.
-        </h2>
+      <header className={SharedStyles.srOnly}>
+        <h1>Hi, I'm Santosh Thapa - Software Engineer</h1>
+        <h2>I love bringing ideas to life through code and design.</h2>
         <h3>
-          Welcome to my professional portfolio! Here, you'll find my latest
-          projects, learn more about my expertise, and connect with me for
-          collaborations or inquiries. Let's build something amazing together.
+          Explore my portfolio showcasing carefully crafted solo projects,
+          including a pixel-perfect ChatGPT clone and more. Discover my
+          expertise and feel free to connect for collaborations or inquiries.
         </h3>
       </header>
-      <main>
-        <Home />
-        <About />
-        <ProjectPage />
-        <ContactPage />
-      </main>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <main>
+              <Home />
+              <About />
+              <ProjectPage />
+              <ContactPage />
+            </main>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <main>
+              <Home />
+              <About />
+              <ProjectPage />
+              <ContactPage />
+            </main>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <main>
+              <Home />
+              <About />
+              <ProjectPage />
+              <ContactPage />
+            </main>
+          }
+        />
 
+        <Route
+          path="/contact"
+          element={
+            <main>
+              <Home />
+              <About />
+              <ProjectPage />
+              <ContactPage />
+            </main>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
       <Footer />
     </Suspense>
   );

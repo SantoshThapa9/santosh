@@ -2,32 +2,52 @@
   "name": "santosh-thapa",
   "version": "0.1.13",
   "type": "module",
+  "description": "Creative Software Engineer specializing in high-performance web apps. Creator of Kura AI (ChatGPT clone) and other innovative projects.",
+  "author": {
+    "name": "Santosh Thapa",
+    "email": "st8493510@gmail.com",
+    "url": "https://santoshthapa.xyz/",
+    "linkedin": "https://www.linkedin.com/in/santosh986/",
+    "github": "https://github.com/SantoshThapa9/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SantoshThapa9/santosh"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "start": "vite",
+    "build": "tsc -b && vite build && node generate-sitemap.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.9.4",
+    "framer-motion": "^12.19.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-fast-marquee": "^1.6.5",
     "react-icons": "^5.3.0",
-    "react-intersection-observer": "^9.16.0",
+    "react-router-dom": "^7.6.2",
     "react-simple-typewriter": "^5.0.1"
   },
   "devDependencies": {
-    "@types/react": "^19.1.5",
-    "@types/react-dom": "^19.1.5",
-    "@vitejs/plugin-react-swc": "^3.9.0",
-    "eslint": "^9.26.0",
+    "@eslint/js": "^9.29.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
+    "@vitejs/plugin-react-swc": "^3.10.2",
+    "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "sass": "^1.87.0",
+    "globals": "^16.2.0",
+    "sass": "^1.89.2",
+    "sitemap": "^8.0.0",
     "typescript": "^5.8.3",
-    "vite": "^6.3.4"
+    "vite": "^7.0.0"
   }
 }

@@ -1,72 +1,63 @@
 import styles from "./ProjectPage.module.scss";
-import taskify from "/taskify.png";
-import pfc from "/pfc.png";
-import ttt from "/ttt.png";
-import kura from "/kura.png";
-import focusflow from "/focusflow.ico";
-import softsell from "/softsell.ico";
-import p1 from "/p1.jpg";
-import p2 from "/p2.jpg";
-import p3 from "/p3.png";
-
-import AnimateView from "./animate/AnimateView";
+import taskify from "/projects/taskify.webp";
+import pfc from "/projects/pfc.webp";
+import ttt from "/projects/ttt.webp";
+import kura from "/projects/kura.webp";
+import focusflow from "/projects/FocusFlow.webp";
+import softsell from "/projects/SoftSell.webp";
+import jobringer from "/projects/JobRinger.webp";
+import { easeOut, motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { FiExternalLink } from "react-icons/fi";
 
 interface Project {
   id: number;
   title: string;
   logo: string;
-  thumbnail?: string;
+  images: string[];
   link: string;
   about: string;
-
-  skillsUsed: string[];
+  skillsUsed?: string[];
+  detailed?: string;
 }
+
 const projects: Project[] = [
   {
     id: 1,
-    title: "Kura AI",
+    title: "ChatGPT Clone - Kura AI",
     logo: kura,
-    thumbnail: p1,
+    images: [
+      "/projects/thumbnail/kura1.webp",
+      "/projects/thumbnail/kura2.webp",
+      "/projects/thumbnail/kura3.webp",
+    ],
+
     link: "https://kura-iota.vercel.app/",
     about:
-      "KURA AI is a ChatGPT clone with real-time voice chat, AI image generation, neat code/text formatting, and seamless light & dark responsive layouts.",
-
+      "Built a 1:1 ChatGPT clone with image generation and real-time voice chat using Azure, Gemini API, and Web APIs.",
     skillsUsed: [
       "SASS",
       "React.js",
       "Next.js",
       "Web APIs",
-      "Context API",
-      "Gemini API",
-    ],
-  },
-  {
-    id: 2,
-    title: "SoftSell",
-    logo: softsell,
-    thumbnail: p2,
-    link: "https://soft-sell-two-lime.vercel.app/",
-    about:
-      "SoftSell is a landing page for reselling software licenses, with an AI assistant for guidance, smooth animations for engagement, and a clean, responsive design.",
-
-    skillsUsed: [
-      "React.js",
-      "Next.js",
-      "Framer Motion",
+      "Redux",
       "Gemini API",
       "Git",
       "Vercel",
     ],
   },
   {
-    id: 3,
-    title: "Taskify",
+    id: 2,
+    title: "Taskify - Firebase Task Management app",
     logo: taskify,
-    thumbnail: p3,
+    images: [
+      "/projects/thumbnail/taskify1.webp",
+      "/projects/thumbnail/taskify2.webp",
+      "/projects/thumbnail/taskify3.webp",
+    ],
     link: "https://taskifyapp-smoky.vercel.app/",
     about:
-      "Taskify is a task management app with real-time syncing, customizable views, inline editing, bulk actions, and theme switching in a fast, clear, responsive design.",
-
+      "Advanced task manager with real-time sync, inline editing, themes, and bulk operations using Firebase and Context API.",
     skillsUsed: [
       "Next.js",
       "Firebase",
@@ -78,101 +69,221 @@ const projects: Project[] = [
     ],
   },
   {
+    id: 3,
+    title: "Geer - E-commerce site",
+    logo: jobringer,
+    images: [
+      "/projects/thumbnail/geer1.webp",
+      "/projects/thumbnail/geer2.webp",
+      "/projects/thumbnail/geer3.webp",
+    ],
+    link: "https://geer.vercel.app/",
+    about:
+      "Modern e-commerce site featuring fast performance, responsive UI, CRUD operations, and a clean layout inspired by Geer.",
+    skillsUsed: [
+      "React.js",
+      "SASS",
+      "Next.js",
+      "Vercel",
+      "NextAuth",
+      "App Router",
+    ],
+  },
+  {
     id: 4,
-    title: "Pokemon Finding Calculator",
-    logo: pfc,
-    link: "https://pfc-app-mauve.vercel.app/",
-    about: "Fun number-to-Pokémon converter using public PokeAPI data.",
-    skillsUsed: ["React", "PokeAPI", "SASS", "Git"],
+    title: "SoftSell - AI-powered landing page",
+    logo: softsell,
+    images: [
+      "/projects/thumbnail/softsell1.webp",
+      "/projects/thumbnail/softsell2.webp",
+      "/projects/thumbnail/softsell3.webp",
+    ],
+    link: "https://soft-sell-two-lime.vercel.app/",
+    about:
+      "Modern landing page for software reselling featuring smooth animations, clean design, responsive layout, and AI assistant integration.",
+    skillsUsed: [
+      "React.js",
+      "Next.js",
+      "Framer Motion",
+      "Gemini API",
+      "Git",
+      "Vercel",
+    ],
   },
   {
     id: 5,
-    title: "Tic Tac Toe",
-    logo: ttt,
-    link: "https://santoshthapa9.github.io/tictactoer/",
-    about: "Classic XO game with AI, sound effects, and dark/light themes.",
-    skillsUsed: ["HTML", "CSS", "React", "Git"],
+    title: "Jobringer",
+    logo: jobringer,
+    images: [ttt, ttt, ttt],
+    link: "https://jobringer-fawn.vercel.app/",
+    about:
+      "Redesigned a professional job portal with clean UI, modern layout, and improved user experience across devices using TypeScript and Tailwind.",
   },
   {
     id: 6,
     title: "Focus Flow",
     logo: focusflow,
+    images: [ttt, ttt, ttt],
     link: "https://focus-flow-productivity-timer.vercel.app/",
-    about: "Minimalist Pomodoro app for focused work and regular breaks.",
-    skillsUsed: ["TypeScript", "Tailwind", "Next.js", "Vercel"],
+    about:
+      "Minimal Pomodoro timer to boost productivity with focus sessions and breaks, built with TypeScript and Tailwind for a clean, responsive UI.",
+  },
+  {
+    id: 7,
+    title: "Pokemon Finding Calculator",
+    logo: pfc,
+    images: [ttt, ttt, ttt],
+    link: "https://pfc-app-mauve.vercel.app/",
+    about:
+      "Fun number-to-Pokémon converter using React and PokeAPI with interactive logic and a clean, styled layout.",
+  },
+  {
+    id: 8,
+    title: "Tic Tac Toe",
+    logo: ttt,
+    images: [ttt, ttt, ttt],
+    link: "https://tic-tac-toe-ruddy-ten-15.vercel.app/",
+    about:
+      "Classic XO game featuring a basic AI opponent, light/dark themes, and sound effects, built with React.",
   },
 ];
 
 const ProjectPage: React.FC = () => {
+  const [currentImageIndices, setCurrentImageIndices] = useState<{
+    [key: number]: number;
+  }>({});
+
+  useEffect(() => {
+    const initialIndices = projects.reduce(
+      (acc, p) => ({ ...acc, [p.id]: 0 }),
+      {}
+    );
+    setCurrentImageIndices(initialIndices);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndices((prev) =>
+        projects.reduce((acc, p) => {
+          acc[p.id] = (prev[p.id] + 1) % p.images.length;
+          return acc;
+        }, {} as { [key: number]: number })
+      );
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div id="projects" className={styles.projectPage}>
-      <hr />
-      <AnimateView>
-        <h4 className={styles.heading}>PROJECTS</h4>
-      </AnimateView>
+      <motion.div
+        initial={{ scale: 0.8 }}
+        whileInView={{ scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className={styles.header}
+      >
+        <h5 className={styles.heading}>Featured Projects</h5>
+        <p className={styles.subheading}>
+          A collection of my recent work and personal projects
+        </p>
+      </motion.div>
 
-      <div className={styles.mainProjects}>
-        {projects.slice(0, 3).map((p) => (
-          <AnimateView key={p.id}>
-            <div className={styles.card}>
-              {p.thumbnail && (
+      <div className={styles.projectsCtn}>
+        {projects.slice(0, 4).map((project) => (
+          <motion.div
+            key={project.id}
+            className={styles.projectCard}
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.5, ease: easeOut }}
+          >
+            <div className={styles.projectImage}>
+              {project.images.map((img, i) => (
                 <img
-                  src={p.thumbnail}
-                  alt={`${p.title} Thumbnail`}
-                  className={styles.thumbnail}
+                  key={i}
+                  src={img}
+                  alt={`${project.title} - ${i}`}
+                  className={`${
+                    i === currentImageIndices[project.id] ? styles.active : ""
+                  }`}
                   loading="lazy"
                 />
-              )}
-              <div className={styles.box1}>
-                <div className={styles.logoCtn}>
+              ))}
+            </div>
+            <div className={styles.projectContentWrapper}>
+              <div className={styles.projectContent}>
+                <div className={styles.projectHeader}>
                   <img
-                    src={p.logo}
-                    alt={p.title}
-                    className={styles.image}
+                    src={project.logo}
+                    alt={project.title}
+                    className={styles.projectLogo}
                     loading="lazy"
                   />
-                  <h2 className={styles.title}>{p.title}</h2>
+                  <h5 className={styles.projectTitle}>{project.title}</h5>
                 </div>
-                <p className={styles.about}>{p.about}</p>
+                <div className={styles.glassyBox}>
+                  <p className={styles.projectDescription}>{project.about}</p>
 
-                <div className={styles.skillsMarquee}>
-                  <ul className={styles.skillsStrip}>
-                    {p.skillsUsed.concat(p.skillsUsed).map((s, i) => (
-                      <li key={i}>{s}</li>
-                    ))}
-                  </ul>
+                  <div className={styles.skillsMarquee}>
+                    <div className={styles.skillsStrip}>
+                      {[
+                        ...(project.skillsUsed ?? []),
+                        ...(project.skillsUsed ?? []),
+                      ].map((skill, i) => (
+                        <span key={i}>{skill}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-
-                <a
-                  href={p.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  try now
-                </a>
+                <div className={styles.projectFooter}>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.liveLink}
+                  >
+                    Live Demo <FiExternalLink />
+                  </a>
+                </div>
               </div>
             </div>
-          </AnimateView>
+          </motion.div>
         ))}
       </div>
-      <div className={styles.bottomGrid}>
-        {projects.slice(3).map((p) => (
-          <AnimateView key={p.id}>
-            <div className={styles.gridCard}>
-              <img src={p.logo} alt={p.title} className={styles.gridLogo} />
-              <h3 className={styles.gridTitle}>{p.title}</h3>
-              <p className={styles.gridAbout}>{p.about}</p>
-              <ul className={styles.gridSkills}>
-                {p.skillsUsed.map((skill, i) => (
-                  <li key={i}>{skill}</li>
-                ))}
-              </ul>
-              <a href={p.link} target="_blank" className={styles.gridLink}>
-                try now
+      <motion.div
+        initial={{ scale: 0.8 }}
+        whileInView={{ scale: 1 }}
+        transition={{ duration: 0.5, ease: easeOut }}
+        className={styles.moreProjectsHeading}
+      >
+        <h5>More Projects</h5>
+        <p>Other cool stuff I have built—check them out!</p>
+      </motion.div>
+
+      <div className={styles.moreProjects}>
+        {projects.slice(-4).map((project, i) => (
+          <motion.div
+            key={i}
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.5, ease: easeOut }}
+            className={styles.projectCard}
+          >
+            <div>
+              <img src={project.logo} loading="lazy" alt={project.title} />
+              <h5>{project.title}</h5>
+            </div>
+            <p>{project.about}</p>
+            <div className={styles.projectFooter}>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.liveLink}
+              >
+                Live Demo <FiExternalLink />
               </a>
             </div>
-          </AnimateView>
+          </motion.div>
         ))}
       </div>
     </div>

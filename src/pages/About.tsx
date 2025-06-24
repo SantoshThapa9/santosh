@@ -1,305 +1,280 @@
 import styles from "./about.module.scss";
-import { FaReact, FaJs, FaNodeJs, FaGithub } from "react-icons/fa";
+import { FaReact, FaJs, FaNodeJs, FaGithub, FaAward } from "react-icons/fa";
 import {
-  SiNextdotjs,
-  SiTypescript,
+  SiFigma,
   SiHtml5,
   SiCss3,
+  SiTailwindcss,
+  SiFramer,
+  SiNextdotjs,
+  SiTypescript,
   SiFirebase,
+  SiExpress,
+  SiMongodb,
   SiGit,
   SiVercel,
-  SiFigma,
-  SiTailwindcss,
-  SiBootstrap,
-  SiSass,
+  SiAmazon,
   SiWebpack,
-  SiGoogle,
 } from "react-icons/si";
-import AnimateView from "./animate/AnimateView";
+import {
+  FaCode,
+  FaCloud,
+  FaShieldAlt,
+  FaTachometerAlt,
+  FaRocket,
+} from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
+import { easeOut, motion } from "framer-motion";
 import clsx from "clsx";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-
 const About = () => {
   const skillCategories = [
     {
-      title: "UI/UX & Visual Design",
+      title: "UI/UX & Design",
       description:
-        "Crafting responsive, accessible, and visually engaging user experiences with modern design principles.",
+        "Crafting clean, accessible, responsive UIs with Figma and modern CSS frameworks.",
       skills: [
         {
           name: "Figma",
           url: "https://www.figma.com/",
-          icon: (
-            <SiFigma style={{ color: "#F24E1E" }} aria-label="Figma Icon" />
-          ),
+          icon: <SiFigma style={{ color: "#F24E1E" }} />,
         },
         {
           name: "HTML5",
           url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-          icon: (
-            <SiHtml5 style={{ color: "#E34F26" }} aria-label="HTML5 Icon" />
-          ),
+          icon: <SiHtml5 style={{ color: "#E34F26" }} />,
         },
         {
           name: "CSS3",
           url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-          icon: <SiCss3 style={{ color: "#1572B6" }} aria-label="CSS3 Icon" />,
+          icon: <SiCss3 style={{ color: "#1572B6" }} />,
         },
         {
           name: "Tailwind CSS",
           url: "https://tailwindcss.com/",
-          icon: (
-            <SiTailwindcss
-              style={{ color: "#06B6D4" }}
-              aria-label="Tailwind CSS Icon"
-            />
-          ),
+          icon: <SiTailwindcss style={{ color: "#06B6D4" }} />,
         },
+
         {
-          name: "Bootstrap",
-          url: "https://getbootstrap.com/",
-          icon: (
-            <SiBootstrap
-              style={{ color: "#563D7C" }}
-              aria-label="Bootstrap Icon"
-            />
-          ),
-        },
-        {
-          name: "Sass",
-          url: "https://sass-lang.com/",
-          icon: <SiSass style={{ color: "#CC6699" }} aria-label="Sass Icon" />,
+          name: "Framer Motion",
+          url: "https://www.framer.com/motion/",
+          icon: <SiFramer style={{ color: "#0055FF" }} />,
         },
       ],
     },
     {
-      title: "Frontend Development",
+      title: "Full-Stack Development",
       description:
-        "Developing performant, scalable, and maintainable web applications using modern frameworks.",
+        "Building fast, scalable apps with React, TypeScript, and modern backend tools.",
       skills: [
         {
           name: "React",
           url: "https://reactjs.org/",
-          icon: (
-            <FaReact style={{ color: "#61DBFB" }} aria-label="React Icon" />
-          ),
+          icon: <FaReact style={{ color: "#61DBFB" }} />,
         },
         {
           name: "Next.js",
           url: "https://nextjs.org/",
-          icon: (
-            <SiNextdotjs style={{ color: "grey" }} aria-label="Next.js Icon" />
-          ),
+          icon: <SiNextdotjs style={{ color: "#000000" }} />,
         },
         {
           name: "JavaScript",
           url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
-          icon: (
-            <FaJs style={{ color: "#f0db4f" }} aria-label="JavaScript Icon" />
-          ),
+          icon: <FaJs style={{ color: "#f0db4f" }} />,
         },
         {
           name: "TypeScript",
           url: "https://www.typescriptlang.org/",
-          icon: (
-            <SiTypescript
-              style={{ color: "#007acc" }}
-              aria-label="TypeScript Icon"
-            />
-          ),
+          icon: <SiTypescript style={{ color: "#007acc" }} />,
         },
         {
           name: "Node.js",
           url: "https://nodejs.org/",
-          icon: (
-            <FaNodeJs style={{ color: "#68A063" }} aria-label="Node.js Icon" />
-          ),
+          icon: <FaNodeJs style={{ color: "#68A063" }} />,
         },
-
+        {
+          name: "Express.js",
+          url: "https://expressjs.com/",
+          icon: <SiExpress style={{ color: "#000000" }} />,
+        },
+        {
+          name: "MongoDB",
+          url: "https://www.mongodb.com/",
+          icon: <SiMongodb style={{ color: "#47A248" }} />,
+        },
         {
           name: "Firebase",
           url: "https://firebase.google.com/",
-          icon: (
-            <SiFirebase
-              style={{ color: "#FFCA28" }}
-              aria-label="Firebase Icon"
-            />
-          ),
+          icon: <SiFirebase style={{ color: "#FFCA28" }} />,
         },
       ],
     },
     {
-      title: "Deployment & Version Control",
-      description:
-        "Efficiently managing code versioning, CI/CD, and seamless cloud deployments.",
+      title: "Deployment & DevOps",
+      description: "CI/CD, custom domains, and app hosting on Vercel and AWS.",
       skills: [
         {
           name: "GitHub",
           url: "https://github.com/",
-          icon: (
-            <FaGithub style={{ color: "black" }} aria-label="GitHub Icon" />
-          ),
+          icon: <FaGithub style={{ color: "#24292e" }} />,
         },
         {
           name: "Git",
           url: "https://git-scm.com/",
-          icon: <SiGit style={{ color: "orange" }} aria-label="Git Icon" />,
+          icon: <SiGit style={{ color: "#F05032" }} />,
         },
         {
           name: "Vercel",
           url: "https://vercel.com/",
-          icon: <SiVercel style={{ color: "grey" }} aria-label="Vercel Icon" />,
+          icon: <SiVercel style={{ color: "#000000" }} />,
         },
         {
-          name: "GitHub",
-          url: "https://github.com/",
-          icon: (
-            <FaGithub style={{ color: "black" }} aria-label="GitHub Icon" />
-          ),
-        },
-        {
-          name: "Git",
-          url: "https://git-scm.com/",
-          icon: <SiGit style={{ color: "orange" }} aria-label="Git Icon" />,
-        },
-        {
-          name: "Vercel",
-          url: "https://vercel.com/",
-          icon: <SiVercel style={{ color: "grey" }} aria-label="Vercel Icon" />,
-        },
-      ],
-    },
-    {
-      title: "Performance & SEO Optimization",
-      description:
-        "Enhancing site speed, search engine rankings, and accessibility for an optimized user experience.",
-      skills: [
-        {
-          name: "PageSpeed Insights",
-          url: "https://developers.google.com/speed/pagespeed/insights",
-          icon: (
-            <SiGoogle
-              style={{ color: "blueviolet" }}
-              aria-label="PageSpeed Insights Icon"
-            />
-          ),
+          name: "AWS",
+          url: "https://aws.amazon.com/",
+          icon: <SiAmazon style={{ color: "#FF9900" }} />,
         },
         {
           name: "Webpack",
           url: "https://webpack.js.org/",
-          icon: (
-            <SiWebpack style={{ color: "#2b3a42" }} aria-label="Webpack Icon" />
-          ),
-        },
-        {
-          name: "Search Console",
-          url: "https://search.google.com/search-console",
-          icon: (
-            <SiGoogle
-              style={{ color: "green" }}
-              aria-label="Search Console Icon"
-            />
-          ),
-        },
-        {
-          name: "PageSpeed Insights",
-          url: "https://developers.google.com/speed/pagespeed/insights",
-          icon: (
-            <SiGoogle
-              style={{ color: "blueviolet" }}
-              aria-label="PageSpeed Insights Icon"
-            />
-          ),
-        },
-        {
-          name: "Webpack",
-          url: "https://webpack.js.org/",
-          icon: (
-            <SiWebpack style={{ color: "#2b3a42" }} aria-label="Webpack Icon" />
-          ),
-        },
-        {
-          name: "Search Console",
-          url: "https://search.google.com/search-console",
-          icon: (
-            <SiGoogle
-              style={{ color: "green" }}
-              aria-label="Search Console Icon"
-            />
-          ),
+          icon: <SiWebpack style={{ color: "#8DD6F9" }} />,
         },
       ],
     },
   ];
 
-  const secRef = useRef(null);
-
-  const { scrollYProgress } = useScroll({
-    target: secRef,
-    offset: ["center 100%", "end 40%"],
-  });
-
-  const left = useTransform(scrollYProgress, [0, 0.7, 1], [0, 0, -100]);
-  const right = useTransform(scrollYProgress, [0, 0.7, 1], [0, 0, 100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0]);
+  const achievements = [
+    {
+      title: "Pixel-Perfect Clone",
+      description:
+        "Developed ChatGPT Clone with Next.js, GenAI, image generation, and Azure voice chat.",
+      icon: <FaRocket />,
+    },
+    {
+      title: "End-to-End Full-Stack Apps",
+      description:
+        "Built full-stack applications with REST APIs, AI integrations, and real-time updates.",
+      icon: <FaCode />,
+    },
+    {
+      title: "High Performance",
+      description:
+        "Achieved 95+ Lighthouse scores across all projects for optimal load and runtime.",
+      icon: <FaTachometerAlt />,
+    },
+    {
+      title: "SEO Excellence",
+      description:
+        "Optimized portfolio and Kura AI to rank top on Google search results.",
+      icon: <FaAward />,
+    },
+    {
+      title: "Cloud-Native Deployments",
+      description:
+        "Deployed scalable apps on Vercel, AWS, and Firebase with custom domains.",
+      icon: <FaCloud />,
+    },
+    {
+      title: "Security & Authentication",
+      description:
+        "Implemented robust authentication, authorization, and secure coding practices throughout.",
+      icon: <FaShieldAlt />,
+    },
+  ];
 
   return (
     <div id="about" className={clsx(styles.aboutSection)}>
-      <div className={styles.divider} />
-      <div className={styles.headingContainer}>
-        <AnimateView>
-          <h4>About Me</h4>
-        </AnimateView>
-
-        <AnimateView>
-          <img loading="lazy" src="santosh.png" alt="profile photo" />
-        </AnimateView>
-      </div>
-      <AnimateView>
-        <h5 className={styles.h5}>
-          A CREATIVE FRONTEND <span>DEVELOPER</span>
-        </h5>
-      </AnimateView>
-      <div className={styles.desc}>
-        <AnimateView>
-          Specializing in modern, responsive, and user-focused web applications.
-        </AnimateView>
-        <div ref={secRef} className={styles.skillSec}>
-          {skillCategories.map((set, idx) => {
-            const x = idx % 2 === 0 ? left : right;
-            return (
-              <motion.div
-                className={styles.card}
-                key={set.title}
-                style={{ opacity, x }}
-              >
-                <AnimateView>
-                  <p className={styles.title}>{set.title}</p>
-                  <p className={styles.description}>{set.description}</p>
-                  <div className={styles.skillsMarquee}>
-                    <ul className={styles.skillsStrip}>
-                      {[...set.skills, ...set.skills].map((skill, idx) => (
-                        <li key={idx}>
-                          <a
-                            href={skill.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {skill.icon}
-                          </a>
-                          <p>{skill.name}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </AnimateView>
-              </motion.div>
-            );
-          })}
+      <div className={styles.introSection}>
+        <motion.div
+          initial={{ scale: 0.8 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 0.5, ease: easeOut }}
+          className={styles.header}
+        >
+          <h5>About Me</h5>
+          <img
+            loading="lazy"
+            src="/logo180.png"
+            alt="Profile Picture"
+            width={100}
+            height={100}
+          />
+          <p>
+            Full Stack Developer creating fast, secure AI-powered apps with
+            pixel-perfect UI and cloud deployment.
+          </p>
+        </motion.div>
+        <div className={styles.achievements}>
+          {achievements.map((achievement, index) => (
+            <motion.div
+              initial={{ scale: 0.8 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5, ease: easeOut }}
+              key={index}
+              className={styles.achievementItem}
+            >
+              <div className={styles.achievementIcon}>
+                <span>{achievement.icon}</span>
+                <span>{achievement.title}</span>
+              </div>
+              <span className={styles.desc}>{achievement.description}</span>
+            </motion.div>
+          ))}
         </div>
 
-        <br />
+        <a href="#contact" className={styles.ctaButton}>
+          Let's Work Together
+          <FiExternalLink />
+        </a>
+      </div>
+
+      <div className={styles.workSection}>
+        <motion.h5
+          className={styles.sectionTitle}
+          initial={{ opacity: 0, x: -200 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Technical Expertise
+        </motion.h5>
+        <motion.p
+          className={styles.sectionSubtitle}
+          initial={{ opacity: 0, x: 200 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: easeOut }}
+        >
+          Technologies I work with to deliver exceptional results
+        </motion.p>
+
+        <div className={styles.skillGrid}>
+          {skillCategories.map((category, idx) => (
+            <motion.div
+              key={category.title}
+              className={`${styles.skillCard} ${
+                idx % 2 === 0 ? styles.leftCard : styles.rightCard
+              }`}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -300 : 300 }}
+              whileInView={{ opacity: 1, x: 0 }}
+            >
+              <div className={styles.cardHeader}>
+                <h5>{category.title}</h5>
+                <p>{category.description}</p>
+              </div>
+              <div className={styles.skillIcons}>
+                {category.skills.map((skill, skillIdx) => (
+                  <a
+                    key={skillIdx}
+                    href={skill.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.skillIcon}
+                  >
+                    <div className={styles.iconWrapper}>{skill.icon}</div>
+                    <span>{skill.name}</span>
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

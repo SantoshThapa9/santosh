@@ -1,13 +1,13 @@
 :root {
-  --color: #333;
-  --bg: whitesmoke;
-  --accent-color: #226ec5;
-  --accent-bg: #052e5c;
-  --font2: "Orbitron", sans-serif;
+  --color: #3a3a3a;
+  --color2: #222222;
+  --bg: rgb(233, 241, 241);
+  --accent-color: #007db8;
+  --accent-color2: #006cb4;
+  --text-shadow: 0 0 20px white;
+  --font3: "Lilita One", sans-serif;
+  --font2: "Bebas Neue", sans-serif;
   --font1: "Roboto", sans-serif;
-}
-.grecaptcha-badge {
-  visibility: hidden !important;
 }
 
 * {
@@ -17,11 +17,12 @@
 }
 html,
 body {
-  color: var(--color);
-  background-color: var(--bg);
+  color: var(--color2);
+  background: #fcfeff;
   scroll-behavior: smooth;
   font-family: var(--font1);
   position: relative;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
