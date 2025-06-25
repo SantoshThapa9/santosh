@@ -6,6 +6,7 @@ import kura from "/projects/kura.webp";
 import focusflow from "/projects/FocusFlow.webp";
 import softsell from "/projects/SoftSell.webp";
 import jobringer from "/projects/JobRinger.webp";
+import geer from "/projects/Geer.webp";
 import { easeOut, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { FiExternalLink } from "react-icons/fi";
@@ -72,7 +73,7 @@ const projects: Project[] = [
   {
     id: 3,
     title: "Geer - E-commerce site",
-    logo: jobringer,
+    logo: geer,
     images: [
       "/projects/thumbnail/geer1.webp",
       "/projects/thumbnail/geer2.webp",

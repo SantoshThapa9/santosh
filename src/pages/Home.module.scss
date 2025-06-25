@@ -31,9 +31,10 @@
       font-size: clamp(1.3rem, 3vw, 2rem);
       font-family: var(--font2);
       letter-spacing: 1px;
-      text-shadow: var(--text-shadow);
+      text-shadow: 0 0 10px white;
       margin: 0.5rem 0;
       color: var(--accent-color);
+      color: goldenrod;
       text-decoration: underline;
       text-underline-offset: 7px;
       display: flex;

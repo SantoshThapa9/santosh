@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-evenly;
     font-size: clamp(3rem, 6vw, 5rem);
-    color: whitesmoke;
+    color: rgb(255, 255, 255);
     font-family: var(--font2);
     -webkit-text-stroke: 2px var(--accent-color);
     position: relative;
@@ -26,6 +26,7 @@
       transform: translateY(20px);
       animation: fadeSlideUp 2s ease forwards;
       transition: 1s ease !important;
+      text-shadow: -2px 2px var(--accent-color);
     }
   }
 
