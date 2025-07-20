@@ -6,21 +6,24 @@ import kura from "/projects/kura.webp";
 import focusflow from "/projects/FocusFlow.webp";
 import softsell from "/projects/SoftSell.webp";
 import jobringer from "/projects/JobRinger.webp";
-import geer from "/projects/Geer.webp";
+import geer from "/projects/Geer.ico";
 import { easeOut, motion } from "framer-motion";
+import { TbListDetails } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import { FiExternalLink } from "react-icons/fi";
 import Marquee from "react-fast-marquee";
+import Popup from "./PopUp";
 
 interface Project {
   id: number;
   title: string;
   logo: string;
-  images: string[];
   link: string;
   about: string;
+  images?: string[];
   skillsUsed?: string[];
   detailed?: string;
+  highlights?: string[];
 }
 
 const projects: Project[] = [
@@ -36,42 +39,36 @@ const projects: Project[] = [
 
     link: "https://kura-iota.vercel.app/",
     about:
-      "Built a 1:1 ChatGPT clone with image generation and real-time voice chat using Azure, Gemini API, and Web APIs.",
+      "Built a ChatGPT clone from scratch using Next.js and Sass modules, integrated Generative AI and DeepSeek APIs for text and image generation, and used Azure Cognitive Speech, AWS Polly, and Web Speech APIs for seamless real-time voice chat.",
+    highlights: [
+      "Smart replies with text & images using Gemini and DeepSeek",
+      "Real-time voice chat with Azure Speech",
+      "Natural voice replies via AWS Polly",
+      "Web Speech API fallback for voice",
+      "Change its mood — happy, angry, calm, etc.",
+      "Smooth theme switching with Redux and Sass",
+      "Supports voice input",
+      "Remembers chat and streams replies live",
+    ],
+
     skillsUsed: [
-      "SASS",
+      "SASS modules",
       "React.js",
       "Next.js",
+      "JavaScript",
       "Web APIs",
       "Redux",
-      "Gemini API",
+      "Deepseek api",
+      "AWS",
+      "Generative AI",
       "Git",
+      "Azure",
       "Vercel",
     ],
   },
+
   {
     id: 2,
-    title: "Taskify - Firebase Task Management app",
-    logo: taskify,
-    images: [
-      "/projects/thumbnail/taskify1.webp",
-      "/projects/thumbnail/taskify2.webp",
-      "/projects/thumbnail/taskify3.webp",
-    ],
-    link: "https://taskifyapp-smoky.vercel.app/",
-    about:
-      "Advanced task manager with real-time sync, inline editing, themes, and bulk operations using Firebase and Context API.",
-    skillsUsed: [
-      "Next.js",
-      "Firebase",
-      "Vercel",
-      "REST API",
-      "Git",
-      "JavaScript",
-      "Context API",
-    ],
-  },
-  {
-    id: 3,
     title: "Geer - E-commerce site",
     logo: geer,
     images: [
@@ -81,72 +78,80 @@ const projects: Project[] = [
     ],
     link: "https://geer.vercel.app/",
     about:
-      "Modern e-commerce site featuring fast performance, responsive UI, CRUD operations, and a clean layout inspired by Geer.",
+      "Built a full e-commerce site with Next.js and MongoDB, inspired by geer.in. Handled both frontend and backend, including admin features for managing products.",
+    highlights: [
+      "Multiple pages: Home, Products, Cart, Admin",
+      "Product CRUD using Next.js API routes and MongoDB",
+      "Secure admin login to add/delete products",
+      "Search and filter products by price, category, etc.",
+      "Responsive design with Framer Motion for smooth animations",
+      "Data backup with JSON files and quick reset option",
+    ],
+
     skillsUsed: [
       "React.js",
-      "SASS",
+      "SASS modules",
       "Next.js",
+      "Generative AI",
+      "Redux",
       "Vercel",
+      "Framer motion",
+      "Git",
+      "MUI",
+      "Javascript",
+      "MongoDB",
       "NextAuth",
       "App Router",
     ],
   },
   {
+    id: 3,
+    title: "Taskify",
+    logo: taskify,
+    link: "https://taskifyapp-smoky.vercel.app/",
+    about:
+      "A Firebase task manager with real-time sync, inline editing, themes, built using Next.js.",
+  },
+  {
     id: 4,
-    title: "SoftSell - AI-powered landing page",
+    title: "SoftSell",
     logo: softsell,
-    images: [
-      "/projects/thumbnail/softsell1.webp",
-      "/projects/thumbnail/softsell2.webp",
-      "/projects/thumbnail/softsell3.webp",
-    ],
     link: "https://soft-sell-two-lime.vercel.app/",
     about:
-      "Modern landing page for software reselling featuring smooth animations, clean design, responsive layout, and AI assistant integration.",
-    skillsUsed: [
-      "React.js",
-      "Next.js",
-      "Framer Motion",
-      "Gemini API",
-      "Git",
-      "Vercel",
-    ],
+      "Modern landing page for software reselling, featuring smooth animations and AI assistant integration.",
   },
   {
     id: 5,
-    title: "Jobringer",
-    logo: jobringer,
-    images: [ttt, ttt, ttt],
-    link: "https://jobringer-fawn.vercel.app/",
+    title: "Tic Tac Toe",
+    logo: ttt,
+    link: "https://tic-tac-toe-ruddy-ten-15.vercel.app/",
     about:
-      "Redesigned a professional job portal with clean UI, modern layout, and improved user experience across devices using TypeScript and Tailwind.",
+      "Modern app design for XO game featuring PvP, Player vs AI, themes, and sound effects, built with React.",
   },
   {
     id: 6,
-    title: "Focus Flow",
-    logo: focusflow,
-    images: [ttt, ttt, ttt],
-    link: "https://focus-flow-productivity-timer.vercel.app/",
-    about:
-      "Minimal Pomodoro timer to boost productivity with focus sessions and breaks, built with TypeScript and Tailwind for a clean, responsive UI.",
-  },
-  {
-    id: 7,
-    title: "Pokemon Finding Calculator",
+    title: "Pokemon Calculator",
     logo: pfc,
-    images: [ttt, ttt, ttt],
     link: "https://pfc-app-mauve.vercel.app/",
     about:
-      "Fun number-to-Pokémon converter using React and PokeAPI with interactive logic and a clean, styled layout.",
+      "Fun Pokémon calculator that fetches Pokémon based on the calculated answer using PokeAPI.",
+  },
+
+  {
+    id: 7,
+    title: "Jobringer",
+    logo: jobringer,
+    link: "https://jobringer-fawn.vercel.app/",
+    about:
+      "Redesigned a professional job portal frontend with a modern layout, TypeScript, and Tailwind.",
   },
   {
     id: 8,
-    title: "Tic Tac Toe",
-    logo: ttt,
-    images: [ttt, ttt, ttt],
-    link: "https://tic-tac-toe-ruddy-ten-15.vercel.app/",
+    title: "Focus Flow",
+    logo: focusflow,
+    link: "https://focus-flow-productivity-timer.vercel.app/",
     about:
-      "Classic XO game featuring a basic AI opponent, light/dark themes, and sound effects, built with React.",
+      "Minimal Pomodoro timer with focus sessions and breaks, built with TypeScript and Tailwind.",
   },
 ];
 
@@ -154,6 +159,7 @@ const ProjectPage: React.FC = () => {
   const [currentImageIndices, setCurrentImageIndices] = useState<{
     [key: number]: number;
   }>({});
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   useEffect(() => {
     const initialIndices = projects.reduce(
@@ -167,13 +173,16 @@ const ProjectPage: React.FC = () => {
     const interval = setInterval(() => {
       setCurrentImageIndices((prev) =>
         projects.reduce((acc, p) => {
-          acc[p.id] = (prev[p.id] + 1) % p.images.length;
+          if (p.images && p.images.length > 0) {
+            acc[p.id] = ((prev[p.id] || 0) + 1) % p.images.length;
+          }
           return acc;
         }, {} as { [key: number]: number })
       );
     }, 5000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [projects]);
 
   return (
     <div id="projects" className={styles.projectPage}>
@@ -183,14 +192,15 @@ const ProjectPage: React.FC = () => {
         transition={{ duration: 0.5 }}
         className={styles.header}
       >
-        <h5 className={styles.heading}>Featured Projects</h5>
+        <h5 className={styles.heading}>Things I've Built</h5>
         <p className={styles.subheading}>
-          A collection of my recent work and personal projects
+          From concept to deployment - Showcasing my creative coding journey and
+          projects.
         </p>
       </motion.div>
 
       <div className={styles.projectsCtn}>
-        {projects.slice(0, 4).map((project) => (
+        {projects.slice(0, 2).map((project) => (
           <motion.div
             key={project.id}
             className={styles.projectCard}
@@ -198,8 +208,11 @@ const ProjectPage: React.FC = () => {
             whileInView={{ scale: 1 }}
             transition={{ duration: 0.5, ease: easeOut }}
           >
-            <div className={styles.projectImage}>
-              {project.images.map((img, i) => (
+            <div
+              onClick={() => setSelectedProject(project)}
+              className={styles.projectImage}
+            >
+              {project.images?.map((img, i) => (
                 <img
                   key={i}
                   src={img}
@@ -222,9 +235,25 @@ const ProjectPage: React.FC = () => {
                   />
                   <h5 className={styles.projectTitle}>{project.title}</h5>
                 </div>
-                <div className={styles.glassyBox}>
+                <div
+                  className={styles.glassyBox}
+                  onClick={() => setSelectedProject(project)}
+                >
                   <p className={styles.projectDescription}>{project.about}</p>
-
+                  <div className={styles.projectFooter}>
+                    <div className={styles.btn}>
+                      Details
+                      <TbListDetails />
+                    </div>
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.btn}
+                    >
+                      Live Demo <FiExternalLink />
+                    </a>
+                  </div>
                   <div className={styles.skillsMarquee}>
                     <Marquee speed={30}>
                       {[
@@ -235,16 +264,6 @@ const ProjectPage: React.FC = () => {
                       ))}
                     </Marquee>
                   </div>
-                </div>
-                <div className={styles.projectFooter}>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.liveLink}
-                  >
-                    Live Demo <FiExternalLink />
-                  </a>
                 </div>
               </div>
             </div>
@@ -257,37 +276,58 @@ const ProjectPage: React.FC = () => {
         transition={{ duration: 0.5, ease: easeOut }}
         className={styles.moreProjectsHeading}
       >
-        <h5>More Projects</h5>
-        <p>Other cool stuff I have built—check them out!</p>
+        <h5>Creative Experiments</h5>
+        <p>
+          Exploring unique ideas through small, impactful builds — where
+          creativity meets code.
+        </p>
       </motion.div>
 
-      <div className={styles.moreProjects}>
-        {projects.slice(-4).map((project, i) => (
-          <motion.div
-            key={i}
-            initial={{ scale: 0.8 }}
-            whileInView={{ scale: 1 }}
-            transition={{ duration: 0.5, ease: easeOut }}
-            className={styles.projectCard}
-          >
-            <div>
-              <img src={project.logo} loading="lazy" alt={project.title} />
-              <h5>{project.title}</h5>
-            </div>
-            <p>{project.about}</p>
-            <div className={styles.projectFooter}>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.liveLink}
-              >
-                Live Demo <FiExternalLink />
-              </a>
-            </div>
-          </motion.div>
-        ))}
+      <div className={styles.horizontalScrollContainer}>
+        <div className={styles.projectsRow}>
+          {projects.slice(-6).map((project, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+              className={styles.projectCard}
+              onClick={() => setSelectedProject(project)}
+            >
+              <div className={styles.cardHeader}>
+                {project.logo && (
+                  <img
+                    src={project.logo}
+                    alt={project.title}
+                    className={styles.projectIcon}
+                    loading="lazy"
+                  />
+                )}
+                <h4 className={styles.projectName}>{project.title}</h4>
+              </div>
+              <p className={styles.projectSummary}>{project.about}</p>
+              <div className={styles.cardFooter}>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.demoLink}
+                >
+                  <span>View</span>
+                  <FiExternalLink size={14} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
+      {selectedProject && (
+        <Popup
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </div>
   );
 };

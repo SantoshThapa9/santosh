@@ -49,7 +49,7 @@ const Footer = () => {
       <div className={styles.divider}></div>
 
       <div className={styles.copyRight}>
-        &copy; {new Date().getFullYear()} Designed & built by Santosh
+        &copy; {new Date().getFullYear()} All rights reserved.
       </div>
     </footer>
   );

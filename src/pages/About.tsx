@@ -15,7 +15,11 @@ import {
   SiVercel,
   SiAmazon,
   SiWebpack,
+  SiBootstrap,
+  SiMui,
+  SiSass,
 } from "react-icons/si";
+import { VscAzure } from "react-icons/vsc";
 import {
   FaCode,
   FaCloud,
@@ -26,12 +30,13 @@ import {
 import { FiExternalLink } from "react-icons/fi";
 import { easeOut, motion } from "framer-motion";
 import clsx from "clsx";
+import Shared from "../shared-style/Shared.module.scss";
+
 const About = () => {
   const skillCategories = [
     {
-      title: "UI/UX & Design",
-      description:
-        "Crafting clean, accessible, responsive UIs with Figma and modern CSS frameworks.",
+      title: "UI/UX & Frontend Crafting",
+      description: "Modern, responsive, and accessible by default.",
       skills: [
         {
           name: "Figma",
@@ -59,18 +64,33 @@ const About = () => {
           url: "https://www.framer.com/motion/",
           icon: <SiFramer style={{ color: "#0055FF" }} />,
         },
-      ],
-    },
-    {
-      title: "Full-Stack Development",
-      description:
-        "Building fast, scalable apps with React, TypeScript, and modern backend tools.",
-      skills: [
+        {
+          name: "Bootstrap",
+          url: "https://getbootstrap.com/",
+          icon: <SiBootstrap style={{ color: "#7952B3" }} />,
+        },
+        {
+          name: "Material UI",
+          url: "https://mui.com/",
+          icon: <SiMui style={{ color: "#007FFF" }} />,
+        },
+        {
+          name: "Sass",
+          url: "https://sass-lang.com/",
+          icon: <SiSass style={{ color: "#cd6799" }} />,
+        },
         {
           name: "React",
           url: "https://reactjs.org/",
           icon: <FaReact style={{ color: "#61DBFB" }} />,
         },
+      ],
+    },
+    {
+      title: "Full-Stack Development",
+      description:
+        "Streamlined full-stack development—efficient logic meets seamless scalability.",
+      skills: [
         {
           name: "Next.js",
           url: "https://nextjs.org/",
@@ -110,7 +130,8 @@ const About = () => {
     },
     {
       title: "Deployment & DevOps",
-      description: "CI/CD, custom domains, and app hosting on Vercel and AWS.",
+      description:
+        "Effortless delivery through streamlined workflows and smart automation.",
       skills: [
         {
           name: "GitHub",
@@ -133,6 +154,11 @@ const About = () => {
           icon: <SiAmazon style={{ color: "#FF9900" }} />,
         },
         {
+          name: "Azure",
+          url: "https://azure.microsoft.com/",
+          icon: <VscAzure style={{ color: "#0078D4" }} />,
+        },
+        {
           name: "Webpack",
           url: "https://webpack.js.org/",
           icon: <SiWebpack style={{ color: "#8DD6F9" }} />,
@@ -143,88 +169,77 @@ const About = () => {
 
   const achievements = [
     {
-      title: "Pixel-Perfect Clone",
+      title: "Full-Stack Development & Deployment",
       description:
-        "Developed ChatGPT Clone with Next.js, GenAI, image generation, and Azure voice chat.",
-      icon: <FaRocket />,
-    },
-    {
-      title: "End-to-End Full-Stack Apps",
-      description:
-        "Built full-stack applications with REST APIs, AI integrations, and real-time updates.",
+        "Developed complete apps with REST APIs, AI features, and real-time updates, fully deployed to cloud.",
       icon: <FaCode />,
     },
+
     {
-      title: "High Performance",
+      title: "High Performance Optimization",
       description:
-        "Achieved 95+ Lighthouse scores across all projects for optimal load and runtime.",
+        "Consistently scored 98+ on Lighthouse for speed, accessibility, and best practices.",
       icon: <FaTachometerAlt />,
+    },
+    {
+      title: "Pixel-Perfect Clone",
+      description:
+        "Built a pixel-perfect ChatGPT clone. Confident in converting Figma designs to clean, responsive UI code.",
+      icon: <FaRocket />,
     },
     {
       title: "SEO Excellence",
       description:
-        "Optimized portfolio and Kura AI to rank top on Google search results.",
+        "Successfully optimized multiple applications to achieve top rankings on Google search results.",
       icon: <FaAward />,
     },
     {
       title: "Cloud-Native Deployments",
       description:
-        "Deployed scalable apps on Vercel, AWS, and Firebase with custom domains.",
+        "Deployed scalable apps on GitHub, Vercel and AWS with custom domains.",
       icon: <FaCloud />,
     },
     {
       title: "Security & Authentication",
       description:
-        "Implemented robust authentication, authorization, and secure coding practices throughout.",
+        "Implemented security measures like rate limiting, reCAPTCHA, and leveraged Next.js features to safeguard applications.",
       icon: <FaShieldAlt />,
     },
   ];
 
   return (
     <div id="about" className={clsx(styles.aboutSection)}>
-      <div className={styles.introSection}>
-        <motion.div
-          initial={{ scale: 0.8 }}
-          whileInView={{ scale: 1 }}
-          transition={{ duration: 0.5, ease: easeOut }}
-          className={styles.header}
-        >
+      <motion.div
+        initial={{ scale: 0.8 }}
+        whileInView={{ scale: 1 }}
+        transition={{ duration: 0.9, ease: easeOut }}
+        className={styles.introSection}
+      >
+        <div className={styles.header}>
           <h5>About Me</h5>
-          <img
-            loading="lazy"
-            src="/logo180.png"
-            alt="Profile Picture"
-            width={100}
-            height={100}
-          />
+          <img loading="lazy" src="/logo180.png" alt="Profile Picture" />
           <p>
-            Full Stack Developer creating fast, secure AI-powered apps with
-            pixel-perfect UI and cloud deployment.
+            Building Performant, Secure, AI-Powered Apps with Flawless UI,and
+            cloud deployement
           </p>
-        </motion.div>
+        </div>
         <div className={styles.achievements}>
           {achievements.map((achievement, index) => (
-            <motion.div
-              initial={{ scale: 0.8 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.5, ease: easeOut }}
-              key={index}
-              className={styles.achievementItem}
-            >
+            <div key={index} className={styles.achievementItem}>
               <div className={styles.achievementIcon}>
                 <span>{achievement.icon}</span>
                 <span>{achievement.title}</span>
               </div>
               <span className={styles.desc}>{achievement.description}</span>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <a href="#contact" className={styles.ctaButton}>
+        <a href="#contact" style={{ fontSize: "small" }} className={Shared.btn}>
           Let's Work Together
           <FiExternalLink />
         </a>
-      </div>
+      </motion.div>
 
       <div className={styles.workSection}>
         <motion.h5
@@ -251,7 +266,7 @@ const About = () => {
               className={`${styles.skillCard} ${
                 idx % 2 === 0 ? styles.leftCard : styles.rightCard
               }`}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -300 : 300 }}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -200 : 200 }}
               whileInView={{ opacity: 1, x: 0 }}
             >
               <div className={styles.cardHeader}>

@@ -2,12 +2,14 @@
   padding: 20px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   .contactSection {
     text-align: center;
     padding: 4rem 1rem;
     .contactTitle {
-      font-size: clamp(2rem, 3vw, 3rem);
+      font-size: clamp(1.5rem, 3vw, 3rem);
       color: var(--accent-color);
       font-family: var(--font2);
       text-align: center;
@@ -15,7 +17,7 @@
     }
 
     .contactSubtitle {
-      font-size: 1rem;
+      font-size: clamp(0.85rem, 2vw, 1rem);
       color: var(--color);
       line-height: 1.7;
     }
@@ -29,7 +31,6 @@
       border-radius: 30px;
       &:hover {
         color: #002774;
-        text-decoration: underline;
       }
     }
 

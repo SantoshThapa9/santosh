@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import Navbar from "./pages/Navbar";
 const About = lazy(() => import("./pages/About"));
 const ProjectPage = lazy(() => import("./pages/ProjectPage"));
-const Footer = lazy(() => import("./pages/Footer"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 import SharedStyles from "./shared-style/Shared.module.scss";
@@ -21,13 +20,14 @@ const App = () => {
       <Navbar />
       <header className={SharedStyles.srOnly}>
         <h1>Hi, I'm Santosh Thapa - Software Engineer</h1>
-        <h2>I love bringing ideas to life through code and design.</h2>
+        <h2>I bring ideas to life through code and design.</h2>
         <h3>
-          Explore my portfolio showcasing carefully crafted solo projects,
-          including a pixel-perfect ChatGPT clone and more. Discover my
-          expertise and feel free to connect for collaborations or inquiries.
+          Explore my portfolio of solo projects, including pixel-perfect ChatGPT
+          clone, e-commerce sites, and more. Discover my expertise and feel free
+          to connect for collaborations or inquiries.
         </h3>
       </header>
+
       <Routes>
         <Route
           path="/home"
@@ -76,7 +76,6 @@ const App = () => {
         />
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
-      <Footer />
     </Suspense>
   );
 };

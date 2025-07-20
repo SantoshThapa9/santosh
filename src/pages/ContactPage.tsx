@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.scss";
 import SharedStyles from "../shared-style/Shared.module.scss";
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
+import Footer from "./Footer";
 
 const ContactPage: React.FC = () => {
   const [status, setStatus] = useState("");
@@ -50,7 +51,7 @@ const ContactPage: React.FC = () => {
             Open to collaborations and inquiries! <br />
             <a
               href="mailto:st8493510@gmail.com"
-              className={`${SharedStyles.btn1} ${styles.email}`}
+              className={`${SharedStyles.btn} ${styles.email}`}
             >
               st8493510@gmail.com
             </a>
@@ -161,6 +162,7 @@ const ContactPage: React.FC = () => {
           </p>
         )}
       </div>
+      <Footer />
     </div>
   );
 };
