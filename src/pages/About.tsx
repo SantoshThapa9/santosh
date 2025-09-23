@@ -1,5 +1,6 @@
 import styles from "./about.module.scss";
 import { FaReact, FaJs, FaNodeJs, FaGithub, FaAward } from "react-icons/fa";
+import Marquee from "react-fast-marquee";
 import {
   SiFigma,
   SiHtml5,
@@ -18,6 +19,7 @@ import {
   SiBootstrap,
   SiMui,
   SiSass,
+  SiPython,
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import {
@@ -35,8 +37,8 @@ import Shared from "../shared-style/Shared.module.scss";
 const About = () => {
   const skillCategories = [
     {
-      title: "UI/UX & Frontend Crafting",
-      description: "Modern, responsive, and accessible by default.",
+      title: "UI/UX & Frontend",
+      description: "Clean, responsive, and accessible interfaces.",
       skills: [
         {
           name: "Figma",
@@ -58,7 +60,6 @@ const About = () => {
           url: "https://tailwindcss.com/",
           icon: <SiTailwindcss style={{ color: "#06B6D4" }} />,
         },
-
         {
           name: "Framer Motion",
           url: "https://www.framer.com/motion/",
@@ -88,8 +89,7 @@ const About = () => {
     },
     {
       title: "Full-Stack Development",
-      description:
-        "Streamlined full-stack development—efficient logic meets seamless scalability.",
+      description: "Build scalable, maintainable applications.",
       skills: [
         {
           name: "Next.js",
@@ -105,6 +105,11 @@ const About = () => {
           name: "TypeScript",
           url: "https://www.typescriptlang.org/",
           icon: <SiTypescript style={{ color: "#007acc" }} />,
+        },
+        {
+          name: "Python",
+          url: "https://www.python.org/",
+          icon: <SiPython style={{ color: "#3776AB" }} />,
         },
         {
           name: "Node.js",
@@ -130,8 +135,7 @@ const About = () => {
     },
     {
       title: "Deployment & DevOps",
-      description:
-        "Effortless delivery through streamlined workflows and smart automation.",
+      description: "Deploy fast, manage efficiently.",
       skills: [
         {
           name: "GitHub",
@@ -169,46 +173,92 @@ const About = () => {
 
   const achievements = [
     {
-      title: "Full-Stack Development & Deployment",
+      title: "Full-Stack Dev",
       description:
-        "Developed complete apps with REST APIs, AI features, and real-time updates, fully deployed to cloud.",
+        "Built full-stack apps with Next.js and Python, powering projects like Kura AI and Geer.",
       icon: <FaCode />,
     },
-
     {
-      title: "High Performance Optimization",
+      title: "Fast & Efficient",
       description:
-        "Consistently scored 98+ on Lighthouse for speed, accessibility, and best practices.",
+        "Optimized sites for blazing speed, accessibility, and buttery-smooth interactions, ensuring performance even in complex apps like Geer’s e-commerce platform.",
       icon: <FaTachometerAlt />,
     },
     {
-      title: "Pixel-Perfect Clone",
+      title: "UI/UX Precision",
       description:
-        "Built a pixel-perfect ChatGPT clone. Confident in converting Figma designs to clean, responsive UI code.",
+        "Turned Figma designs into pixel-perfect, responsive interfaces.",
       icon: <FaRocket />,
     },
     {
-      title: "SEO Excellence",
+      title: "SEO Ready",
       description:
-        "Successfully optimized multiple applications to achieve top rankings on Google search results.",
+        "Implemented SEO best practices so apps like Kura AI and Portfolio are easily discoverable, rank higher, and load quickly for visitors across devices.",
       icon: <FaAward />,
     },
     {
-      title: "Cloud-Native Deployments",
+      title: "Cloud Deployments",
       description:
-        "Deployed scalable apps on GitHub, Vercel and AWS with custom domains.",
+        "Deployed and managed apps on Vercel and other cloud platforms, connected custom domains, and ensured production readiness.",
       icon: <FaCloud />,
     },
     {
-      title: "Security & Authentication",
+      title: "Secure Apps",
       description:
-        "Implemented security measures like rate limiting, reCAPTCHA, and leveraged Next.js features to safeguard applications.",
+        "Implemented authentication (NextAuth, JWTs) and security measures to protect user data and admin dashboards, critical for platforms like Geer.",
       icon: <FaShieldAlt />,
     },
   ];
+  const projects = [
+    {
+      src: "https://kura-iota.vercel.app/kura.png",
+      name: "KURA AI - ChatGPT Clone",
+    },
+    {
+      src: "https://taskifyapp-smoky.vercel.app/taskify.png",
+      name: "Taskify - Task Management App",
+    },
+    {
+      src: "https://tic-tac-toe-ruddy-ten-15.vercel.app/favicon.ico",
+      name: "Tic Tac Toe",
+    },
+    {
+      src: "https://geer.vercel.app/logo.png",
+      name: "Geer - E-commerce",
+    },
+    {
+      src: "https://soft-sell-two-lime.vercel.app/favicon.ico",
+      name: "SoftSell - Landing Page",
+    },
+    {
+      src: "https://pfc-app-mauve.vercel.app/icon.png",
+      name: "Pokemon Finding Calculator",
+    },
 
+    {
+      src: "https://focus-flow-productivity-timer.vercel.app/favicon.ico",
+      name: "FocusFlow - Pomodoro Timer",
+    },
+    {
+      src: "https://gupta-investment-zone.vercel.app/logo.png",
+      name: "Gupta Investment Zone",
+    },
+  ];
   return (
     <div id="about" className={clsx(styles.aboutSection)}>
+      <Marquee speed={20} className={styles.marqueeContainer}>
+        {projects.map((icon, index) => (
+          <div key={index} className={styles.marqueeItem}>
+            <img
+              loading="lazy"
+              className={styles.icon}
+              src={icon.src}
+              alt={icon.name}
+            />
+            <span>{icon.name}</span>
+          </div>
+        ))}
+      </Marquee>
       <motion.div
         initial={{ scale: 0.8 }}
         whileInView={{ scale: 1 }}
@@ -217,11 +267,7 @@ const About = () => {
       >
         <div className={styles.header}>
           <h5>About Me</h5>
-          <img loading="lazy" src="/logo180.png" alt="Profile Picture" />
-          <p>
-            Building Performant, Secure, AI-Powered Apps with Flawless UI,and
-            cloud deployement
-          </p>
+          <p>Always learning, always making, always evolving.</p>
         </div>
         <div className={styles.achievements}>
           {achievements.map((achievement, index) => (
@@ -234,13 +280,11 @@ const About = () => {
             </div>
           ))}
         </div>
-
         <a href="#contact" style={{ fontSize: "small" }} className={Shared.btn}>
           Let's Work Together
           <FiExternalLink />
         </a>
       </motion.div>
-
       <div className={styles.workSection}>
         <motion.h5
           className={styles.sectionTitle}
@@ -248,16 +292,8 @@ const About = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Technical Expertise
+          What I'm Working With
         </motion.h5>
-        <motion.p
-          className={styles.sectionSubtitle}
-          initial={{ opacity: 0, x: 200 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: easeOut }}
-        >
-          Technologies I work with to deliver exceptional results
-        </motion.p>
 
         <div className={styles.skillGrid}>
           {skillCategories.map((category, idx) => (

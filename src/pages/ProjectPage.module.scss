@@ -25,13 +25,21 @@
   .projectsCtn {
     display: flex;
     flex-direction: column;
-    gap: 6rem;
+    gap: clamp(1rem, 6vw, 6rem);
+
     @media (min-width: 768px) {
       margin-top: 3rem;
     }
     .projectCard {
       position: relative;
       min-height: clamp(250px, 20vw, 350px);
+
+      @media (max-width: 768px) {
+        position: static;
+        min-height: auto;
+        margin-bottom: 2rem;
+      }
+
       &:nth-child(odd) {
         .projectImage {
           left: 0;
@@ -75,20 +83,25 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-          opacity: 0;
+          display: none;
           border-radius: 1rem;
           transition: opacity 1s ease;
           border: 1px solid rgba(143, 143, 143, 0.527);
         }
 
         .active {
-          opacity: 1;
-          z-index: 1;
+          display: block;
         }
       }
       .projectContentWrapper {
         position: absolute;
         z-index: 2;
+
+        @media (max-width: 768px) {
+          position: static;
+          width: 100%;
+        }
+
         .projectContent {
           position: relative;
           display: flex;
@@ -99,7 +112,6 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: clamp(0.3rem, 2vw, 0.8rem);
             color: rgba(44, 44, 44, 0.966);
             font-family: var(--font2);
             letter-spacing: 1px;
@@ -115,6 +127,7 @@
 
             .projectTitle {
               font-size: clamp(1.1rem, 2vw, 1.5rem);
+              font-weight: lighter;
             }
           }
 
@@ -123,7 +136,7 @@
             -webkit-backdrop-filter: blur(7px);
             background: rgba(240, 249, 255, 0.493);
             box-shadow: 0 5px 10px rgba(129, 129, 129, 0.1);
-            padding: clamp(0.5rem, 3vw, 1rem);
+            padding: clamp(0.3rem, 3vw, 1rem);
             border-radius: 20px;
 
             max-width: 900px;
@@ -131,6 +144,23 @@
             transition: 0.3s ease;
             &:hover {
               transform: translateY(-3px) !important;
+            }
+          }
+          .smallImage {
+            position: relative;
+            margin-bottom: 2rem;
+            @media (min-width: 768px) {
+              display: none;
+            }
+            img {
+              width: 100%;
+              height: 100%;
+              display: none;
+              border-radius: 1rem;
+            }
+
+            .active {
+              display: block;
             }
           }
           .projectDescription {
@@ -197,21 +227,24 @@
     -webkit-overflow-scrolling: touch;
 
     &::-webkit-scrollbar {
-      height: 4px;
+      height: 6px;
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
 
     &::-webkit-scrollbar-track {
-      background: #f1f1f1;
+      background: #f1f1f1a9;
       border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #ccc;
+      background: #cccccc5d;
       border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background: #aaa;
+      background: #aaaaaab0;
     }
 
     .projectsRow {
@@ -222,8 +255,7 @@
     }
 
     .projectCard {
-      width: 260px;
-      min-width: 260px;
+      max-width: 500px;
       padding: 1.5rem;
       background: white;
       border-radius: 12px;
@@ -269,6 +301,7 @@
         flex-grow: 1;
         display: -webkit-box;
         -webkit-line-clamp: 3;
+        line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
       }

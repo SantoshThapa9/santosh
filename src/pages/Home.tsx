@@ -10,7 +10,6 @@ import {
   MotionValue,
   easeOut,
 } from "framer-motion";
-import Marquee from "react-fast-marquee";
 import { FaInstagram, FaLinkedin, FaGithub, FaXTwitter } from "react-icons/fa6";
 
 const Home = () => {
@@ -24,17 +23,17 @@ const Home = () => {
   const left: MotionValue<number> = useTransform(
     scrollYProgress,
     [0, 0.7, 1],
-    [0, 0, 100]
+    [0, 0, 50] // Reduced movement for better performance
   );
   const bottom: MotionValue<number> = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0, 0, 20]
+    [0, 0, 10] // Reduced movement for better performance
   );
 
   const opacity: MotionValue<number> = useTransform(
     scrollYProgress,
-    [0, 0.7, 1],
+    [0, 0.8, 1], // Delayed fade for better performance
     [1, 1, 0]
   );
 
@@ -64,19 +63,6 @@ const Home = () => {
     };
   }, [showTalkOptions]);
 
-  const projects = [
-    {
-      src: "/projects/kura.webp",
-      name: "KURA AI - ChatGPT Clone",
-    },
-    { src: "/projects/taskify.webp", name: "Taskify - Task Management App" },
-    { src: "/projects/ttt.webp", name: "Tic Tac Toe" },
-    { src: "/projects/Geer.webp", name: "Geer - E-commerce" },
-    { src: "/projects/SoftSell.webp", name: "SoftSell - Landing Page" },
-    { src: "/projects/pfc.webp", name: "Pokemon Finding Calculator" },
-    { src: "/projects/JobRinger.webp", name: "JobRinger - Job Portal" },
-    { src: "/projects/FocusFlow.webp", name: "FocusFlow - Pomodoro Timer" },
-  ];
   const socialLinks = [
     {
       href: "https://instagram.com/santoshh689",
@@ -114,9 +100,10 @@ const Home = () => {
           <span aria-live="polite" aria-atomic="true">
             <Typewriter
               words={[
+                "Full-Stack Developer </>",
                 "Software Engineer </>",
+                "MERN Stack Developer </>",
                 "Web Developer </>",
-                "UI/UX Engineer </>",
               ]}
               loop={0}
               cursor
@@ -129,8 +116,9 @@ const Home = () => {
           <span className={SharedStyles.srOnly}>Software Engineer</span>
         </h5>
         <p className={styles.heroDescription}>
-          who loves bringing <span>ideas</span> to life through code and design.
+          From <span>imagination</span> to interface — I bring ideas to life.
         </p>
+
         {!showTalkOptions ? (
           <div className={styles.buttonGroup}>
             <a className={SharedStyles.btn} href="#projects">
@@ -243,20 +231,6 @@ const Home = () => {
           <path d="M0,150 C240,160 480,200 720,150 C960,100 1200,180 1440,160 L1440,320 L0,320 Z" />
         </svg>
       </div>
-
-      <Marquee speed={30} className={styles.marqueeContainer}>
-        {projects.map((icon, index) => (
-          <div key={index} className={styles.marqueeItem}>
-            <img
-              loading="lazy"
-              className={styles.icon}
-              src={icon.src}
-              alt={icon.name}
-            />
-            <span>{icon.name}</span>
-          </div>
-        ))}
-      </Marquee>
     </div>
   );
 };

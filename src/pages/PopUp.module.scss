@@ -12,12 +12,16 @@
   padding: 1rem;
   box-sizing: border-box;
   align-items: center;
+  direction: rtl;
 
   @media (max-width: 768px) {
     height: 110svh;
   }
   .popupContent {
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     border-radius: 16px;
     padding: 2.5rem;
     max-width: 800px;
@@ -25,8 +29,9 @@
     max-height: 90%;
     position: relative;
     overflow-y: auto;
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+    text-align: left;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -64,12 +69,25 @@
     }
   }
 
+  .projectImage {
+    img {
+      width: 100%;
+      height: 100%;
+      display: none;
+      border-radius: 1rem;
+    }
+    .active {
+      display: block;
+    }
+  }
   .logo {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 1rem;
     margin-bottom: 1.5rem;
     max-width: 85%;
+
     .popupLogo {
       width: 3rem;
       height: 3rem;

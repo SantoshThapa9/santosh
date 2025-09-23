@@ -5,10 +5,15 @@ import Shared from "../shared-style/Shared.module.scss";
 
 interface PopupProps {
   project: any;
+  currentImageIndices: { [key: number]: number };
   onClose: () => void;
 }
 
-const Popup: React.FC<PopupProps> = ({ project, onClose }) => {
+const Popup: React.FC<PopupProps> = ({
+  project,
+  onClose,
+  currentImageIndices,
+}) => {
   if (!project) return null;
 
   return (
@@ -57,7 +62,19 @@ const Popup: React.FC<PopupProps> = ({ project, onClose }) => {
               )}
             </div>
           </motion.div>
-
+          <div className={styles.projectImage}>
+            {project.images?.map((img: string, i: number) => (
+              <img
+                key={i}
+                src={img}
+                alt={`${project.title} - ${i}`}
+                className={`${
+                  i === currentImageIndices[project.id] ? styles.active : ""
+                }`}
+                loading="lazy"
+              />
+            ))}
+          </div>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
