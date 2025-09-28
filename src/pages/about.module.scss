@@ -1,16 +1,16 @@
 .aboutSection {
   padding: 4rem 1rem;
   margin: 0 auto;
-  max-width: 1400px;
   position: relative;
   .marqueeContainer {
     background-color: rgba(153, 168, 182, 0.397);
     color: black;
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     opacity: 0.6;
     border-top: 1px solid silver;
+    width: 100lvw;
     .marqueeItem {
       margin: 0 1rem;
       display: flex;
@@ -46,7 +46,8 @@
   }
 
   .introSection {
-    margin-top: clamp(2rem, 5vw, 4rem);
+    max-width: 1400px;
+    margin: clamp(2rem, 5vw, 4rem) auto 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -142,6 +143,8 @@
 
   .workSection {
     padding: 3rem 0;
+    max-width: 1400px;
+    margin: clamp(2rem, 5vw, 4rem) auto 0 auto;
     .sectionTitle {
       font-size: clamp(1.5rem, 3vw, 3rem);
       color: var(--accent-color);
