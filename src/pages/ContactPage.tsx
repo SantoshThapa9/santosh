@@ -24,7 +24,7 @@ const ContactPage: React.FC = () => {
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         form.current!,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
       );
 
       setStatus("Message sent!");
@@ -51,7 +51,7 @@ const ContactPage: React.FC = () => {
             Open to collaborations and inquiries! <br />
             <a
               href="mailto:st8493510@gmail.com"
-              className={`${SharedStyles.btn} ${styles.email}`}
+              className={`${SharedStyles.btn2} ${styles.email}`}
             >
               st8493510@gmail.com
             </a>
@@ -59,7 +59,7 @@ const ContactPage: React.FC = () => {
           <div className={styles.socialLinks}>
             <a
               href="https://x.com/SantoshThapa689"
-              className={SharedStyles.btn}
+              className={SharedStyles.btn2}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Santosh Thapa on X"
@@ -68,7 +68,7 @@ const ContactPage: React.FC = () => {
             </a>
             <a
               href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
-              className={SharedStyles.btn}
+              className={SharedStyles.btn2}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Santosh Thapa on Linkedin"
@@ -77,7 +77,7 @@ const ContactPage: React.FC = () => {
             </a>
             <a
               href="https://instagram.com/santoshh689"
-              className={SharedStyles.btn}
+              className={SharedStyles.btn2}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Santosh Thapa on Instagram"
@@ -86,7 +86,7 @@ const ContactPage: React.FC = () => {
             </a>
             <a
               href="https://github.com/SantoshThapa9"
-              className={SharedStyles.btn}
+              className={SharedStyles.btn2}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Santosh Thapa on Github"

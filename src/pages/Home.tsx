@@ -23,18 +23,18 @@ const Home = () => {
   const left: MotionValue<number> = useTransform(
     scrollYProgress,
     [0, 0.7, 1],
-    [0, 0, 50] // Reduced movement for better performance
+    [0, 0, 50], // Reduced movement for better performance
   );
   const bottom: MotionValue<number> = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    [0, 0, 10] // Reduced movement for better performance
+    [0, 0, 10], // Reduced movement for better performance
   );
 
   const opacity: MotionValue<number> = useTransform(
     scrollYProgress,
     [0, 0.8, 1], // Delayed fade for better performance
-    [1, 1, 0]
+    [1, 1, 0],
   );
 
   const techIcons = [
@@ -121,11 +121,8 @@ const Home = () => {
 
         {!showTalkOptions ? (
           <div className={styles.buttonGroup}>
-            <a className={SharedStyles.btn} href="#projects">
-              Projects
-            </a>
+            <a href="#projects">Projects</a>
             <button
-              className={SharedStyles.btn}
               onClick={() => {
                 setShowTalkOptions(true);
               }}
@@ -135,20 +132,19 @@ const Home = () => {
           </div>
         ) : (
           <motion.div className={styles.talkOptions} ref={buttonGroupRef}>
-            {["Message Me", "Talk to Kura AI"].map((label, i) => (
+            {["Send Message", "Chat Now"].map((label, i) => (
               <motion.a
                 key={label}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.3, ease: easeOut }}
                 custom={i}
-                className={SharedStyles.btn}
                 href={
-                  label === "Message Me"
+                  label === "Send Message"
                     ? "#contact"
                     : "https://kura-iota.vercel.app/"
                 }
-                target={label === "Message Me" ? "_self" : "_blank"}
+                target={label === "Send Message" ? "_self" : "_blank"}
                 rel="noopener noreferrer"
               >
                 {label}
@@ -172,7 +168,7 @@ const Home = () => {
         </div>
       </div>
       <motion.div
-        className={styles.floatingContent}
+        className={styles.bottomContent}
         initial={{ x: -100 }}
         animate={{ x: 0 }}
         transition={{ duration: 3, ease: easeOut }}
@@ -192,7 +188,6 @@ const Home = () => {
             />
           </div>
         ))}
-
         <div className={styles.shipContainer}>
           <div className={`${styles.cloud} ${styles.cloud1}`} />
           <div className={`${styles.cloud} ${styles.cloud2}`}></div>
@@ -203,9 +198,8 @@ const Home = () => {
             src="/hero/ship.webp"
             alt="Ship floating in sea"
           />
-        </div>
+        </div>{" "}
       </motion.div>
-
       <div className={styles.waveCtn}>
         <svg
           fill="rgba(21, 146, 204, 0.75)"

@@ -5,128 +5,80 @@ import { easeInOut, motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import clsx from "clsx";
-import SharedStyles from "../shared-style/Shared.module.scss";
-
-function debounce(func: (...args: any[]) => void, wait: number) {
-  let timeout: NodeJS.Timeout | null = null;
-  return (...args: any[]) => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      func(...args);
-    }, wait);
-  };
-}
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
   const isProgrammaticScroll = useRef(false);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
-  const activeSectionRef = useRef("home");
-  const [scrolled, setScrolled] = useState(false);
-  const scrollTo = (targetId: string) => {
-    const element = document.getElementById(targetId);
-    if (element) {
-      isProgrammaticScroll.current = true;
 
-      element.scrollIntoView({ behavior: "smooth" });
-      const newPath = targetId === "home" ? "/home" : `/${targetId}`;
-      navigate(newPath, { replace: true });
-      setIsSidebarOpen(false);
-      setActiveSection(targetId);
-      activeSectionRef.current = targetId;
+  const sections = ["home", "about", "projects", "contact"];
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    isProgrammaticScroll.current = true;
+
+    el.scrollIntoView({ behavior: "smooth" });
+    setActiveSection(id);
+    navigate(id === "home" ? "/home" : `/${id}`, { replace: true });
+    setIsSidebarOpen(false);
+
+    setTimeout(() => {
+      isProgrammaticScroll.current = false;
+    }, 500);
+  };
+
+  // sync route → scroll
+  useEffect(() => {
+    const path = location.pathname.replace("/", "") || "home";
+    const el = document.getElementById(path);
+
+    if (el) {
+      isProgrammaticScroll.current = true;
+      el.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(path);
 
       setTimeout(() => {
         isProgrammaticScroll.current = false;
-      }, 600);
-    }
-  };
-
-  useEffect(() => {
-    const path = location.pathname.slice(1);
-    const validSections = ["home", "about", "projects", "contact"];
-
-    if (path && validSections.includes(path)) {
-      isProgrammaticScroll.current = true;
-      const element = document.getElementById(path);
-
-      if (element) {
-        if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-
-        scrollTimeout.current = setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
-          setActiveSection(path);
-          activeSectionRef.current = path;
-          setTimeout(() => {
-            isProgrammaticScroll.current = false;
-          }, 600);
-
-          scrollTimeout.current = null;
-        }, 100);
-      }
-    } else if (location.pathname === "/home" || location.pathname === "") {
-      setActiveSection("home");
-      activeSectionRef.current = "home";
+      }, 500);
     }
   }, [location.pathname]);
 
+  // scroll effects
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY >= 100);
-    };
+    const onScroll = () => {
+      setScrolled(window.scrollY > 100);
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
       if (isProgrammaticScroll.current) return;
 
-      const sectionIds = ["home", "about", "projects", "contact"];
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      let currentSection = activeSectionRef.current;
+      const scrollPos = window.scrollY + window.innerHeight / 3;
 
-      for (const id of sectionIds) {
+      for (const id of sections) {
         const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          const top = rect.top + window.scrollY;
-          const bottom = rect.bottom + window.scrollY;
+        if (!el) continue;
 
-          if (scrollPosition >= top && scrollPosition <= bottom) {
-            currentSection = id;
-            break;
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+
+        if (scrollPos >= top && scrollPos <= bottom) {
+          if (activeSection !== id) {
+            setActiveSection(id);
+            navigate(id === "home" ? "/home" : `/${id}`, { replace: true });
           }
-        }
-      }
-
-      if (currentSection !== activeSectionRef.current) {
-        setActiveSection(currentSection);
-        activeSectionRef.current = currentSection;
-
-        const newPath =
-          currentSection === "home" ? "/home" : `/${currentSection}`;
-        if (location.pathname !== newPath) {
-          navigate(newPath);
+          break;
         }
       }
     };
 
-    const debouncedHandleScroll = debounce(handleScroll, 100);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [activeSection, navigate]);
 
-    window.addEventListener("scroll", debouncedHandleScroll);
-    return () => {
-      window.removeEventListener("scroll", debouncedHandleScroll);
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-    };
-  }, [navigate, location.pathname]);
-
-  const Links = ["home", "about", "projects", "contact"];
   return (
     <nav className={clsx(styles.navbar, scrolled && styles.navbarVB)}>
       <div className={styles.logo}>
@@ -134,35 +86,36 @@ const Navbar = () => {
         <span>.</span>
       </div>
 
-      <div className={clsx(styles.NavBar)}>
+      <div className={styles.NavBar}>
         <ul>
-          {Links.map((section) => (
+          {sections.map((s) => (
             <li
-              key={section}
-              className={clsx(SharedStyles.btn2, {
-                [styles.activeLink]: activeSection === section,
+              key={s}
+              className={clsx({
+                [styles.activeLink]: activeSection === s,
               })}
-              onClick={() => scrollTo(section)}
+              onClick={() => scrollTo(s)}
             >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
+              {s.charAt(0).toUpperCase() + s.slice(1)}
             </li>
           ))}
         </ul>
       </div>
+
       <div
         onClick={() => setIsSidebarOpen(false)}
         className={clsx(styles.sidebar, isSidebarOpen && styles.open)}
       >
         <ul>
-          {Links.map((section) => (
+          {sections.map((s) => (
             <li
-              key={section}
-              className={clsx(SharedStyles.btn2, {
-                [styles.activeLink]: activeSection === section,
+              key={s}
+              className={clsx({
+                [styles.activeLink]: activeSection === s,
               })}
-              onClick={() => scrollTo(section)}
+              onClick={() => scrollTo(s)}
             >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
+              {s.charAt(0).toUpperCase() + s.slice(1)}
             </li>
           ))}
         </ul>
@@ -173,11 +126,11 @@ const Navbar = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: easeInOut }}
         className={styles.menuBtn}
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        aria-label="menu button"
+        onClick={() => setIsSidebarOpen((p) => !p)}
       >
         {isSidebarOpen ? <RxCross2 /> : <MdOutlineMenu />}
       </motion.button>
+
       <div className={clsx(isSidebarOpen && styles.overlay)} />
     </nav>
   );

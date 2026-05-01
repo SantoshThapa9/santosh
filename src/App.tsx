@@ -9,6 +9,15 @@ const ContactPage = lazy(() => import("./pages/ContactPage"));
 import SharedStyles from "./shared-style/Shared.module.scss";
 
 const App = () => {
+  const Layout = () => (
+    <main>
+      <Home />
+      <About />
+      <ProjectPage />
+      <ContactPage />
+    </main>
+  );
+
   return (
     <Suspense
       fallback={
@@ -29,51 +38,10 @@ const App = () => {
       </header>
 
       <Routes>
-        <Route
-          path="/home"
-          element={
-            <main>
-              <Home />
-              <About />
-              <ProjectPage />
-              <ContactPage />
-            </main>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <main>
-              <Home />
-              <About />
-              <ProjectPage />
-              <ContactPage />
-            </main>
-          }
-        />
-        <Route
-          path="/projects"
-          element={
-            <main>
-              <Home />
-              <About />
-              <ProjectPage />
-              <ContactPage />
-            </main>
-          }
-        />
-
-        <Route
-          path="/contact"
-          element={
-            <main>
-              <Home />
-              <About />
-              <ProjectPage />
-              <ContactPage />
-            </main>
-          }
-        />
+        <Route path="/home" element={<Layout />} />
+        <Route path="/about" element={<Layout />} />
+        <Route path="/projects" element={<Layout />} />
+        <Route path="/contact" element={<Layout />} />
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </Suspense>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "./AppFooter.module.scss";
+import styles from "./Footer.module.scss";
 
 const Footer = () => {
   const footerRef = useRef(null);

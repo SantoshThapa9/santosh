@@ -21,47 +21,41 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "ChatGPT Clone - Kura AI",
+    title: "Kura AI",
     logo: "https://kura-iota.vercel.app/kura.png",
     images: [
       "/projects/thumbnail/kura1.webp",
       "/projects/thumbnail/kura2.webp",
       "/projects/thumbnail/kura3.webp",
     ],
-
     link: "https://kura-iota.vercel.app/",
     about:
-      "Built a ChatGPT clone from scratch using Next.js and Sass modules, integrated Generative AI and DeepSeek APIs for text and image generation, and used Azure Cognitive Speech, AWS Polly, and Web Speech APIs for seamless real-time voice chat.",
+      "AI chat application with text, image, and voice interaction. Built with a focus on real-time responses and multi-modal input.",
     highlights: [
-      "Smart replies with text & images using Gemini and DeepSeek",
-      "Real-time voice chat with Azure Speech",
-      "Natural voice replies via AWS Polly",
-      "Web Speech API fallback for voice",
-      "Change its mood — happy, angry, calm, etc.",
-      "Smooth theme switching with Redux and Sass",
-      "Supports voice input",
-      "Remembers chat and streams replies live",
+      "Text generation with formatted output (markdown, code blocks)",
+      "Real-time voice chat with Web Speech API fallback",
+      "Streaming responses for live chat experience",
+      "Image analysis, editing, and generation support",
+      "Persistent conversation history",
+      "Chat-driven actions (theme change, reminders, todo creation)",
     ],
-
     skillsUsed: [
-      "SASS modules",
-      "React.js",
       "Next.js",
+      "React",
       "JavaScript",
-      "Web APIs",
+      "Sass",
       "Redux",
-      "Deepseek api",
-      "AWS",
-      "Generative AI",
-      "Git",
-      "Azure",
+      "Web Speech API",
+      "DeepSeek API",
+      "Gemini API",
       "Vercel",
+      "Git",
     ],
   },
 
   {
     id: 2,
-    title: "Geer - E-commerce site",
+    title: "Geer - E-commerce",
     logo: "https://geer.vercel.app/logo.png",
     images: [
       "/projects/thumbnail/geer1.webp",
@@ -70,124 +64,26 @@ const projects: Project[] = [
     ],
     link: "https://geer.vercel.app/",
     about:
-      "Built a full e-commerce site with Next.js and MongoDB, inspired by geer.in. Handled both frontend and backend, including admin features for managing products.",
+      "Full-stack e-commerce application with product management and basic admin controls.",
     highlights: [
-      "Multiple pages: Home, Products, Cart, Admin",
-      "Product CRUD using Next.js API routes and MongoDB",
-      "Secure admin login to add/delete products",
-      "Search and filter products by price, category, etc.",
-      "Responsive design with Framer Motion for smooth animations",
-      "Data backup with JSON files and quick reset option",
+      "Product listing, cart, and checkout flow",
+      "Admin panel for product CRUD operations",
+      "Authentication for admin access",
+      "Search and filtering by category and price",
+      "Responsive UI with basic animations",
     ],
-
     skillsUsed: [
-      "React.js",
-      "SASS modules",
       "Next.js",
-      "Generative AI",
-      "Redux",
-      "Vercel",
-      "Framer motion",
-      "Git",
-      "MUI",
-      "Javascript",
+      "React",
+      "JavaScript",
       "MongoDB",
       "NextAuth",
-      "App Router",
-    ],
-  },
-  {
-    id: 3,
-    title: "Gupta Investment Zone",
-    logo: "https://gupta-investment-zone.vercel.app/logo.png",
-    images: [
-      "/projects/thumbnail/gupta1.webp",
-      "/projects/thumbnail/gupta2.webp",
-      "/projects/thumbnail/gupta3.webp",
-    ],
-    link: "https://gupta-investment-zone.vercel.app/",
-    about:
-      "Developed the official website for Gupta Investment Zone, serving as a central hub connecting social media, Telegram updates, offline classes, and office information. Designed the platform to provide seamless access to daily market insights and community resources.",
-    highlights: [
-      "Landing page as a central hub for all platforms",
-      "Integrated links to Telegram, social media, and daily updates",
-      "Dedicated sections for offline classes and office location",
-      "Responsive design for smooth browsing across devices",
-      "User-friendly navigation for quick access to resources",
-    ],
-    skillsUsed: [
-      "React.js",
-      "Next.js",
-      "Tailwind CSS",
-      "TypeScript",
-      "Vercel",
-      "Git",
-      "Javascript",
-    ],
-  },
-
-  {
-    id: 4,
-    title: "SoftSell",
-    logo: "https://soft-sell-two-lime.vercel.app/favicon.ico",
-    images: [
-      "/projects/thumbnail/softsell1.webp",
-      "/projects/thumbnail/softsell2.webp",
-      "/projects/thumbnail/softsell3.webp",
-    ],
-    link: "https://soft-sell-two-lime.vercel.app/",
-    about:
-      "Modern landing page for software reselling, featuring smooth animations and AI assistant integration. Designed to showcase products and services in a sleek, professional layout with a focus on conversions.",
-    highlights: [
-      "Engaging landing page with clear call-to-actions",
-      "Integrated AI assistant for customer interaction",
-      "Smooth animations and transitions for better UX",
-      "Responsive design across desktop, tablet, and mobile",
-      "Optimized for fast loading and SEO-friendly structure",
-    ],
-    skillsUsed: [
-      "React.js",
-      "Next.js",
-      "Tailwind CSS",
+      "Redux",
       "Framer Motion",
+      "MUI",
       "Vercel",
       "Git",
-      "Javascript",
     ],
-  },
-
-  {
-    id: 5,
-    title: "Tic Tac Toe",
-    logo: "https://tic-tac-toe-ruddy-ten-15.vercel.app/favicon.ico",
-    link: "https://tic-tac-toe-ruddy-ten-15.vercel.app/",
-    about:
-      "Modern app design for XO game featuring PvP, Player vs AI, themes, and sound effects, built with React.",
-  },
-  {
-    id: 6,
-    title: "Pokemon Calculator",
-    logo: "https://pfc-app-mauve.vercel.app/icon.png",
-    link: "https://pfc-app-mauve.vercel.app/",
-    about:
-      "Fun Pokémon calculator that fetches Pokémon based on the calculated answer using PokeAPI.",
-  },
-
-  {
-    id: 7,
-    title: "Taskify",
-    logo: "https://taskifyapp-smoky.vercel.app/taskify.png",
-    link: "https://taskifyapp-smoky.vercel.app/",
-    about:
-      "A Firebase task manager with real-time sync, inline editing, themes, built using Next.js.",
-  },
-  {
-    id: 8,
-    title: "Focus Flow",
-    logo: "https://focus-flow-productivity-timer.vercel.app/favicon.ico",
-    link: "https://focus-flow-productivity-timer.vercel.app/",
-    about:
-      "Minimal Pomodoro timer with focus sessions and breaks, built with TypeScript and Tailwind.",
   },
 ];
 
@@ -200,7 +96,7 @@ const ProjectPage: React.FC = () => {
   useEffect(() => {
     const initialIndices = projects.reduce(
       (acc, p) => ({ ...acc, [p.id]: 0 }),
-      {}
+      {},
     );
     setCurrentImageIndices(initialIndices);
   }, []);
@@ -208,14 +104,17 @@ const ProjectPage: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndices((prev) =>
-        projects.reduce((acc, p) => {
-          if (p.images && p.images.length > 0) {
-            acc[p.id] = ((prev[p.id] || 0) + 1) % p.images.length;
-          }
-          return acc;
-        }, {} as { [key: number]: number })
+        projects.reduce(
+          (acc, p) => {
+            if (p.images && p.images.length > 0) {
+              acc[p.id] = ((prev[p.id] || 0) + 1) % p.images.length;
+            }
+            return acc;
+          },
+          {} as { [key: number]: number },
+        ),
       );
-    }, 8000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -230,8 +129,8 @@ const ProjectPage: React.FC = () => {
       >
         <h5 className={styles.heading}>Things I've Built</h5>
         <p className={styles.subheading}>
-          From concept to deployment - Showcasing my creative coding journey and
-          projects.
+          End-to-end projects focused on performance, usability, and clean
+          architecture.
         </p>
       </motion.div>
 
@@ -324,7 +223,7 @@ const ProjectPage: React.FC = () => {
           </motion.div>
         ))}
       </div>
-      <motion.div
+      {/* <motion.div
         initial={{ scale: 0.8 }}
         whileInView={{ scale: 1 }}
         transition={{ duration: 0.5, ease: easeOut }}
@@ -335,7 +234,7 @@ const ProjectPage: React.FC = () => {
 
       <div className={styles.horizontalScrollContainer}>
         <div className={styles.projectsRow}>
-          {projects.slice(-4).map((project, i) => (
+          {projects.slice(-2).map((project, i) => (
             <div
               key={i}
               className={styles.projectCard}
@@ -366,7 +265,7 @@ const ProjectPage: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
       {selectedProject && (
         <Popup
           project={selectedProject}

@@ -56,22 +56,50 @@
 
     .header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-evenly;
+      flex-direction: column;
+      width: 100%;
 
-      h5 {
-        font-size: clamp(1.5rem, 3vw, 3rem);
-        color: var(--accent-color);
-        font-family: var(--font2);
-        letter-spacing: 1px;
-        z-index: 3;
+      @media (min-width: 640px) {
+        flex-direction: row;
       }
 
-      p {
-        font-size: clamp(0.8rem, 1.6vw, 1.1rem);
-        text-align: center;
-        line-height: 1.7;
+      .pfpCtn {
+        position: relative;
+        .triangle {
+          border-left: clamp(100px, 30dvw, 200px) solid transparent;
+          border-right: clamp(100px, 30dvw, 200px) solid transparent;
+          border-bottom: clamp(150px, 40dvw, 300px) solid var(--accent-color);
+        }
+        img {
+          height: clamp(170px, 30dvw + 10svh, 350px);
+
+          aspect-ratio: 1;
+          object-fit: cover;
+          position: absolute;
+          bottom: 0;
+          left: calc(2dvw + 1svh);
+        }
+      }
+      .aboutCtn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h5 {
+          font-size: clamp(1.5rem, 3vw, 3rem);
+          color: var(--accent-color);
+          font-family: var(--font2);
+          letter-spacing: 1px;
+          z-index: 3;
+        }
+
+        p {
+          font-size: clamp(0.8rem, 1.6vw, 1.1rem);
+          text-align: center;
+          line-height: 1.7;
+        }
       }
     }
 
@@ -93,9 +121,11 @@
         flex-direction: column;
         margin: clamp(0.5rem, 1.5vw, 1rem);
         border-radius: 20px;
-        background-color: white;
-        box-shadow: inset 0 4px 10px rgba(182, 205, 224, 0.267),
-          0 2px 7px rgba(95, 95, 95, 0.205);
+        background: #fcfeff;
+
+        box-shadow:
+          1px 2px 8px rgba(163, 177, 198, 0.5),
+          inset -1px -1px 0 rgba(0, 0, 0, 0.05);
 
         .achievementIcon {
           display: flex;
@@ -168,7 +198,8 @@
       margin: 0 auto;
       transition: transform 0.3s ease;
       background-color: white;
-      box-shadow: inset 0 4px 10px rgba(182, 205, 224, 0.267),
+      box-shadow:
+        inset 0 4px 10px rgba(182, 205, 224, 0.267),
         0 2px 7px rgba(95, 95, 95, 0.205);
       border-radius: 20px;
       &:hover {

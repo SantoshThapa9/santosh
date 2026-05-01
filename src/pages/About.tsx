@@ -2,26 +2,18 @@ import styles from "./about.module.scss";
 import { FaReact, FaJs, FaNodeJs, FaGithub, FaAward } from "react-icons/fa";
 import Marquee from "react-fast-marquee";
 import {
-  SiFigma,
-  SiHtml5,
-  SiCss3,
   SiTailwindcss,
   SiFramer,
   SiNextdotjs,
   SiTypescript,
-  SiFirebase,
   SiExpress,
   SiMongodb,
   SiGit,
   SiVercel,
-  SiAmazon,
   SiWebpack,
-  SiBootstrap,
-  SiMui,
-  SiSass,
+  SiSupabase,
   SiPython,
 } from "react-icons/si";
-import { VscAzure } from "react-icons/vsc";
 import {
   FaCode,
   FaCloud,
@@ -37,60 +29,14 @@ import Shared from "../shared-style/Shared.module.scss";
 const About = () => {
   const skillCategories = [
     {
-      title: "UI/UX & Frontend",
-      description: "Clean, responsive, and accessible interfaces.",
+      title: "Frontend",
+      description: "Responsive, accessible interfaces with modern React.",
       skills: [
-        {
-          name: "Figma",
-          url: "https://www.figma.com/",
-          icon: <SiFigma style={{ color: "#F24E1E" }} />,
-        },
-        {
-          name: "HTML5",
-          url: "https://developer.mozilla.org/en-US/docs/Web/HTML",
-          icon: <SiHtml5 style={{ color: "#E34F26" }} />,
-        },
-        {
-          name: "CSS3",
-          url: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-          icon: <SiCss3 style={{ color: "#1572B6" }} />,
-        },
-        {
-          name: "Tailwind CSS",
-          url: "https://tailwindcss.com/",
-          icon: <SiTailwindcss style={{ color: "#06B6D4" }} />,
-        },
-        {
-          name: "Framer Motion",
-          url: "https://www.framer.com/motion/",
-          icon: <SiFramer style={{ color: "#0055FF" }} />,
-        },
-        {
-          name: "Bootstrap",
-          url: "https://getbootstrap.com/",
-          icon: <SiBootstrap style={{ color: "#7952B3" }} />,
-        },
-        {
-          name: "Material UI",
-          url: "https://mui.com/",
-          icon: <SiMui style={{ color: "#007FFF" }} />,
-        },
-        {
-          name: "Sass",
-          url: "https://sass-lang.com/",
-          icon: <SiSass style={{ color: "#cd6799" }} />,
-        },
         {
           name: "React",
-          url: "https://reactjs.org/",
+          url: "https://react.dev/",
           icon: <FaReact style={{ color: "#61DBFB" }} />,
         },
-      ],
-    },
-    {
-      title: "Full-Stack Development",
-      description: "Build scalable, maintainable applications.",
-      skills: [
         {
           name: "Next.js",
           url: "https://nextjs.org/",
@@ -107,10 +53,21 @@ const About = () => {
           icon: <SiTypescript style={{ color: "#007acc" }} />,
         },
         {
-          name: "Python",
-          url: "https://www.python.org/",
-          icon: <SiPython style={{ color: "#3776AB" }} />,
+          name: "Tailwind CSS",
+          url: "https://tailwindcss.com/",
+          icon: <SiTailwindcss style={{ color: "#06B6D4" }} />,
         },
+        {
+          name: "Framer Motion",
+          url: "https://www.framer.com/motion/",
+          icon: <SiFramer style={{ color: "#0055FF" }} />,
+        },
+      ],
+    },
+    {
+      title: "Backend",
+      description: "APIs and server-side logic for real applications.",
+      skills: [
         {
           name: "Node.js",
           url: "https://nodejs.org/",
@@ -127,85 +84,79 @@ const About = () => {
           icon: <SiMongodb style={{ color: "#47A248" }} />,
         },
         {
-          name: "Firebase",
-          url: "https://firebase.google.com/",
-          icon: <SiFirebase style={{ color: "#FFCA28" }} />,
+          name: "Supabase",
+          url: "https://supabase.com/",
+          icon: <SiSupabase style={{ color: "#3ECF8E" }} />,
+        },
+        {
+          name: "Python",
+          url: "https://www.python.org/",
+          icon: <SiPython style={{ color: "#3776AB" }} />,
         },
       ],
     },
     {
-      title: "Deployment & DevOps",
-      description: "Deploy fast, manage efficiently.",
+      title: "Tools & Deployment",
+      description: "Version control and production deployment.",
       skills: [
-        {
-          name: "GitHub",
-          url: "https://github.com/",
-          icon: <FaGithub style={{ color: "#24292e" }} />,
-        },
         {
           name: "Git",
           url: "https://git-scm.com/",
           icon: <SiGit style={{ color: "#F05032" }} />,
         },
         {
-          name: "Vercel",
-          url: "https://vercel.com/",
-          icon: <SiVercel style={{ color: "#000000" }} />,
-        },
-        {
-          name: "AWS",
-          url: "https://aws.amazon.com/",
-          icon: <SiAmazon style={{ color: "#FF9900" }} />,
-        },
-        {
-          name: "Azure",
-          url: "https://azure.microsoft.com/",
-          icon: <VscAzure style={{ color: "#0078D4" }} />,
+          name: "GitHub",
+          url: "https://github.com/",
+          icon: <FaGithub style={{ color: "#24292e" }} />,
         },
         {
           name: "Webpack",
           url: "https://webpack.js.org/",
           icon: <SiWebpack style={{ color: "#8DD6F9" }} />,
         },
+        {
+          name: "Vercel",
+          url: "https://vercel.com/",
+          icon: <SiVercel style={{ color: "#000000" }} />,
+        },
       ],
     },
   ];
-
   const achievements = [
     {
-      title: "Full-Stack Dev",
+      title: "Full-Stack Development",
       description:
-        "Built full-stack apps with Next.js and Python, powering projects like Kura AI and Geer.",
+        "Built production apps using Next.js and Python, including Kura AI and Geer.",
       icon: <FaCode />,
     },
     {
-      title: "Fast & Efficient",
+      title: "Performance Focus",
       description:
-        "Optimized sites for blazing speed, accessibility, and buttery-smooth interactions, ensuring performance even in complex apps like Geer’s e-commerce platform.",
+        "Reduced load times and improved responsiveness across complex flows, including e-commerce.",
       icon: <FaTachometerAlt />,
     },
     {
-      title: "UI/UX Precision",
+      title: "UI Implementation",
       description:
-        "Turned Figma designs into pixel-perfect, responsive interfaces.",
+        "Converted Figma designs into responsive, accessible interfaces with consistent design systems.",
       icon: <FaRocket />,
     },
     {
-      title: "SEO Ready",
+      title: "SEO Optimization",
       description:
-        "Implemented SEO best practices so apps like Kura AI and Portfolio are easily discoverable, rank higher, and load quickly for visitors across devices.",
+        "Applied SSR, metadata, and structured content to improve visibility and indexing.",
       icon: <FaAward />,
     },
     {
-      title: "Cloud Deployments",
+      title: "Deployment & Infra",
       description:
-        "Deployed and managed apps on Vercel and other cloud platforms, connected custom domains, and ensured production readiness.",
+        "Deployed and maintained apps on Vercel with custom domains and CI-ready setups.",
       icon: <FaCloud />,
     },
     {
-      title: "Secure Apps",
+      title: "Authentication & Security",
       description:
-        "Implemented authentication (NextAuth, JWTs) and security measures to protect user data and admin dashboards, critical for platforms like Geer.",
+        "Implemented secure auth flows using NextAuth and JWT with role-based access control.",
       icon: <FaShieldAlt />,
     },
   ];
@@ -246,7 +197,7 @@ const About = () => {
   ];
   return (
     <div id="about" className={clsx(styles.aboutSection)}>
-      <Marquee speed={20} className={styles.marqueeContainer}>
+      <Marquee speed={30} className={styles.marqueeContainer}>
         {projects.map((icon, index) => (
           <div key={index} className={styles.marqueeItem}>
             <img
@@ -266,8 +217,17 @@ const About = () => {
         className={styles.introSection}
       >
         <div className={styles.header}>
-          <h5>About Me</h5>
-          <p>Always learning, always making, always evolving.</p>
+          <div className={styles.pfpCtn}>
+            <div className={styles.triangle} />
+            <img src="/about/pfp.png" alt="Profile Picture" />
+          </div>
+          <div className={styles.aboutCtn}>
+            <h5>About Me</h5>
+            <p>
+              I build full-stack web apps using Next.js, Node.js, and modern
+              tooling
+            </p>
+          </div>
         </div>
         <div className={styles.achievements}>
           {achievements.map((achievement, index) => (
@@ -280,7 +240,11 @@ const About = () => {
             </div>
           ))}
         </div>
-        <a href="#contact" style={{ fontSize: "small" }} className={Shared.btn}>
+        <a
+          href="#contact"
+          style={{ fontSize: "small" }}
+          className={Shared.btn2}
+        >
           Let's Work Together
           <FiExternalLink />
         </a>

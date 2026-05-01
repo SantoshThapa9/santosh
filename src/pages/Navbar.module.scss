@@ -9,7 +9,7 @@
   align-items: center;
   background: none;
   box-shadow: none;
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     padding: 1rem;
   }
 
@@ -38,7 +38,7 @@
     z-index: 9999;
     position: absolute;
     right: 10px;
-    @media (min-width: 768px) {
+    @media (min-width: 640px) {
       display: none;
     }
   }
@@ -55,7 +55,7 @@
     z-index: 9999;
     display: flex;
     justify-content: center;
-    @media (min-width: 768px) {
+    @media (min-width: 640px) {
       display: none;
     }
     &.open {
@@ -109,7 +109,7 @@
     z-index: 9998;
     opacity: 1;
 
-    @media (min-width: 768px) {
+    @media (min-width: 640px) {
       display: none;
     }
   }
@@ -132,16 +132,15 @@
   position: absolute;
   right: 10px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     display: none;
   }
   ul {
     display: flex;
-    gap: 4rem;
+    gap: clamp(1rem, 2vw, 2.5rem);
     list-style: none;
     padding: 0;
     margin: 0;
-    padding-right: 2rem;
     li {
       cursor: pointer;
       opacity: 0;

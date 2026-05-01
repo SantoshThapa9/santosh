@@ -14,7 +14,11 @@
     position: relative;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 1s ease, transform 1s ease;
+    transition:
+      opacity 1s ease,
+      transform 1s ease;
+
+    user-select: none;
 
     &.animate {
       opacity: 1;
@@ -22,10 +26,8 @@
     }
 
     .letter {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideUp 2s ease forwards;
-      transition: 1s ease !important;
+      letter-spacing: 5vw;
+      animation: bounce 9s linear infinite;
       text-shadow: -2px 2px var(--accent-color);
     }
   }
@@ -48,9 +50,17 @@
     user-select: none;
   }
 
-  @keyframes fadeSlideUp {
-    to {
-      opacity: 1;
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(6px);
+    }
+    100% {
       transform: translateY(0);
     }
   }
