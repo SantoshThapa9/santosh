@@ -29,30 +29,40 @@ const projects: Project[] = [
       "/projects/thumbnail/kura3.webp",
     ],
     link: "https://kura-iota.vercel.app/",
+
     about:
-      "AI chat application with text, image, and voice interaction. Built with a focus on real-time responses and multi-modal input.",
+      "A full-stack AI assistant inspired by ChatGPT, featuring multimodal conversations, voice interaction, image generation, coding assistance, and premium AI capabilities. Built with a production-ready architecture including authentication, payments, personalization, and persistent chat history.",
+
     highlights: [
-      "Text generation with formatted output (markdown, code blocks)",
-      "Real-time voice chat with Web Speech API fallback",
-      "Streaming responses for live chat experience",
-      "Image analysis, editing, and generation support",
-      "Persistent conversation history",
-      "Chat-driven actions (theme change, reminders, todo creation)",
+      "ChatGPT-inspired UI with responsive, production-quality user experience",
+      "Secure authentication using NextAuth with MongoDB-backed user accounts",
+      "Persistent chat history, conversation management, and personalized user settings",
+      "AI-powered text generation with markdown, syntax highlighting, and streaming responses",
+      "Voice conversations using Web Speech API with real-time speech recognition",
+
+      "Built-in AI actions allowing users to change themes, manage personalization, create reminders, todos, and control app features directly through chat",
+      "Dedicated Pro Coding Assistant optimized for programming, debugging, and code explanations",
+      "Premium subscription system using Razorpay with ₹1 / 7-day trial",
+      "Premium-only features including advanced image generation, Pro Chat Mode, and higher AI usage limits",
     ],
+
     skillsUsed: [
       "Next.js",
       "React",
       "JavaScript",
-      "Sass",
+      "TypeScript",
+      "MongoDB",
+      "NextAuth.js",
       "Redux",
-      "Web Speech API",
-      "DeepSeek API",
+      "Sass",
       "Gemini API",
+      "OpenAI API",
+      "Web Speech API",
+      "Razorpay",
       "Vercel",
       "Git",
     ],
   },
-
   {
     id: 2,
     title: "Geer - E-commerce",
@@ -63,27 +73,95 @@ const projects: Project[] = [
       "/projects/thumbnail/geer3.webp",
     ],
     link: "https://geer.vercel.app/",
+
     about:
-      "Full-stack e-commerce application with product management and basic admin controls.",
+      "A full-stack e-commerce platform built with Next.js, featuring secure authentication, product management, online payments, order processing, and a modern shopping experience enhanced with an AI shopping assistant.",
+
     highlights: [
-      "Product listing, cart, and checkout flow",
-      "Admin panel for product CRUD operations",
-      "Authentication for admin access",
-      "Search and filtering by category and price",
-      "Responsive UI with basic animations",
+      "Complete shopping experience with product browsing, cart, checkout, and order management",
+      "Secure authentication with NextAuth.js and MongoDB",
+      "AI shopping assistant to help users discover products and answer shopping-related queries",
+      "Integrated Razorpay payment gateway for secure online payments",
+      "Persistent shopping cart powered by Redux for seamless state management",
+      "Product search, category filtering, sorting, and responsive browsing experience",
+      "Order placement with purchase history for authenticated users",
+      "Smooth page transitions and interactive UI using Framer Motion",
+      "Responsive design optimized for desktop, tablet, and mobile devices",
+      "Production-ready deployment on Vercel with a scalable Next.js architecture",
     ],
+
     skillsUsed: [
       "Next.js",
       "React",
       "JavaScript",
       "MongoDB",
-      "NextAuth",
-      "Redux",
-      "Framer Motion",
+      "NextAuth.js",
+      "Redux Toolkit",
+      "Razorpay",
       "MUI",
+      "Framer Motion",
+      "REST API",
       "Vercel",
       "Git",
     ],
+  },
+];
+const otherProjects = [
+  {
+    id: 3,
+    title: "Gupta Investment Zone",
+    logo: "https://gupta-investment-zone.vercel.app/logo.png",
+    link: "https://gupta-investment-zone.vercel.app/",
+    about:
+      "A professional investment and financial services website with a modern, responsive design and clean user experience.",
+  },
+  {
+    id: 4,
+    title: "Skill Blade",
+    logo: "https://skill-blade-psi.vercel.app/skill-blade.png",
+    link: "https://skill-blade-psi.vercel.app/",
+    about:
+      "A modern platform for discovering and improving developer skills through an intuitive and responsive interface.",
+  },
+  {
+    id: 5,
+    title: "SoftSell",
+    logo: "https://soft-sell-two-lime.vercel.app/favicon.ico",
+    link: "https://soft-sell-two-lime.vercel.app/",
+    about:
+      "A modern SaaS landing page built with a strong focus on conversions, responsive layouts, and smooth animations.",
+  },
+  {
+    id: 6,
+    title: "Taskify",
+    logo: "https://taskifyapp-smoky.vercel.app/taskify.png",
+    link: "https://taskifyapp-smoky.vercel.app/",
+    about:
+      "A task management application for organizing projects, tracking progress, and improving productivity.",
+  },
+  {
+    id: 7,
+    title: "FocusFlow",
+    logo: "https://focus-flow-productivity-timer.vercel.app/favicon.ico",
+    link: "https://focus-flow-productivity-timer.vercel.app/",
+    about:
+      "A Pomodoro productivity timer with focus sessions, break reminders, and a distraction-free interface.",
+  },
+  {
+    id: 8,
+    title: "Pokémon Finding Calculator",
+    logo: "https://pfc-app-mauve.vercel.app/icon.png",
+    link: "https://pfc-app-mauve.vercel.app/",
+    about:
+      "A utility app that simplifies Pokémon finding calculations with a clean and responsive interface.",
+  },
+  {
+    id: 9,
+    title: "Tic Tac Toe",
+    logo: "https://tic-tac-toe-ruddy-ten-15.vercel.app/favicon.ico",
+    link: "https://tic-tac-toe-ruddy-ten-15.vercel.app/",
+    about:
+      "A responsive Tic Tac Toe game featuring smooth gameplay, clean UI, and React-based architecture.",
   },
 ];
 
@@ -223,7 +301,7 @@ const ProjectPage: React.FC = () => {
           </motion.div>
         ))}
       </div>
-      {/* <motion.div
+      <motion.div
         initial={{ scale: 0.8 }}
         whileInView={{ scale: 1 }}
         transition={{ duration: 0.5, ease: easeOut }}
@@ -234,7 +312,7 @@ const ProjectPage: React.FC = () => {
 
       <div className={styles.horizontalScrollContainer}>
         <div className={styles.projectsRow}>
-          {projects.slice(-2).map((project, i) => (
+          {otherProjects.map((project, i) => (
             <div
               key={i}
               className={styles.projectCard}
@@ -265,7 +343,7 @@ const ProjectPage: React.FC = () => {
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
       {selectedProject && (
         <Popup
           project={selectedProject}

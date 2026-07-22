@@ -38,10 +38,11 @@ const Home = () => {
   );
 
   const techIcons = [
-    { src: "/hero/tailwind.webp", alt: "tailwind icon" },
-    { src: "/hero/typescript.webp", alt: "typescript icon" },
     { src: "/hero/nextjs.webp", alt: "next.js icon" },
+    { src: "/hero/mongo-db.webp", alt: "mongodb icon" },
+    { src: "/hero/ai.webp", alt: "ai icon" },
   ];
+
   const [showTalkOptions, setShowTalkOptions] = useState(false);
 
   const buttonGroupRef = useRef<HTMLDivElement | null>(null);
@@ -100,7 +101,7 @@ const Home = () => {
           <span aria-live="polite" aria-atomic="true">
             <Typewriter
               words={[
-                "Full-Stack Developer </>",
+                "AI Full-Stack Engineer </>",
                 "Software Engineer </>",
                 "MERN Stack Developer </>",
                 "Web Developer </>",
@@ -116,7 +117,7 @@ const Home = () => {
           <span className={SharedStyles.srOnly}>Software Engineer</span>
         </h5>
         <p className={styles.heroDescription}>
-          From <span>imagination</span> to interface — I bring ideas to life.
+          I Build <span>AI-Powered</span> Web Experiences
         </p>
 
         {!showTalkOptions ? (

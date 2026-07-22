@@ -80,31 +80,25 @@
     .talkOptions {
       display: flex;
       gap: 1rem;
-      margin-top: clamp(1.5rem, 2svh, 2.5rem);
+      margin-top: 2rem;
+
       a,
       button {
         color: var(--color);
-        font-size: 0.8rem;
         font-weight: bold;
         text-decoration: none;
-        background: orange;
-        color: rgb(255, 255, 255);
-        padding: 1rem 0.5rem;
-        border-radius: 20px / 20px;
-        border: none;
+        background: transparent;
+        color: rgb(255, 166, 0);
+        padding: clamp(0.8rem, 1dvw + 1dvh, 0.9rem);
+        font-size: clamp(0.8rem, 1dvw + 1dvh, 0.9rem);
+        border-radius: 15px;
+        border: 1px solid rgb(255, 208, 0);
+
         outline: none;
         position: relative;
         transition: scale 0.3s ease;
         overflow: hidden;
-        &::before {
-          content: "";
-          position: absolute;
-          inset: 0px;
-          border: 2px solid white;
-          border-radius: inherit;
-          pointer-events: none;
-          animation: floatBorder 5s infinite linear alternate;
-        }
+
         &::after {
           content: "";
           position: absolute;
@@ -139,41 +133,14 @@
           scale: 1.05;
         }
       }
-
-      @keyframes floatBorder {
-        0% {
-          transform: translate(0px, 0px);
-        }
-        20% {
-          transform: translate(1px, -1px);
-        }
-        40% {
-          transform: translate(-3px, 1px);
-        }
-
-        60% {
-          transform: translate(2px, 1px);
-        }
-        80% {
-          transform: translate(-3px, -1px);
-        }
-        100% {
-          transform: translate(1px, 1px);
-        }
-      }
-      a {
-        animation: fly1 5s ease-in infinite;
-      }
-      button {
-        animation: fly2 5s ease-in infinite;
-      }
     }
 
     .socialIcons {
-      margin-top: 1.5rem;
+      margin-top: 2rem;
       display: flex;
-      gap: clamp(10px, 3vw, 30px);
+      gap: clamp(13px, 1.5dvw + 1.5dvh, 25px);
       opacity: 0.8;
+
       a {
         transition: 0.3s ease;
         margin-right: 0.5rem;
@@ -181,34 +148,39 @@
         &:nth-child(1) {
           animation-delay: 0s;
           animation: fly1 7s ease-in infinite;
+          margin-top: -1px;
         }
         &:nth-child(2) {
           animation-delay: 0.2s;
           animation: fly2 7s ease-in infinite;
+          margin-top: -4px;
         }
         &:nth-child(3) {
           animation-delay: 0.4s;
           animation: fly3 7s ease-in infinite;
+          margin-top: -2px;
         }
         &:nth-child(4) {
           animation-delay: 0.6s;
           animation: fly4 7s ease-in infinite;
+          margin-top: -4px;
         }
-
+        @keyframes smoke {
+          0% {
+            opacity: 0;
+            transform: translate(-50%, 10px) scale(0.7);
+          }
+          30% {
+            opacity: 0.5;
+          }
+          100% {
+            opacity: 0;
+            transform: translate(-50%, -30px) scale(1.6);
+          }
+        }
         &:hover {
           transform: translateY(-3px);
           filter: brightness(1.2) saturate(0.8);
-        }
-
-        &::after {
-          content: "";
-          position: absolute;
-          bottom: -4px;
-          left: 0;
-          height: 2px;
-          width: 0;
-          background-color: currentColor;
-          transition: width 0.3s ease;
         }
 
         &:hover::after {
@@ -224,15 +196,11 @@
       0% {
         transform: translate(0px, 0px) rotate(0deg);
       }
-      25% {
-        transform: translate(1px, -2px) rotate(0.3deg);
-      }
+
       50% {
-        transform: translate(-1px, -3px) rotate(-0.3deg);
+        transform: translate(-1px, -3px) rotate(-6deg);
       }
-      75% {
-        transform: translate(0.5px, -1.5px) rotate(0.2deg);
-      }
+
       100% {
         transform: translate(0px, 0px) rotate(0deg);
       }
@@ -242,15 +210,11 @@
       0% {
         transform: translate(0px, 0px) rotate(0deg);
       }
-      25% {
-        transform: translate(-1.5px, 1px) rotate(-0.4deg);
-      }
+
       50% {
-        transform: translate(1px, 2px) rotate(0.4deg);
+        transform: translate(1px, 2px) rotate(5deg);
       }
-      75% {
-        transform: translate(-0.5px, 1px) rotate(-0.2deg);
-      }
+
       100% {
         transform: translate(0px, 0px) rotate(0deg);
       }
@@ -260,11 +224,9 @@
       0% {
         transform: translate(0px, 0px) rotate(0deg);
       }
-      30% {
-        transform: translate(1px, -1px) rotate(0.2deg);
-      }
-      60% {
-        transform: translate(-1px, 1px) rotate(-0.2deg);
+
+      50% {
+        transform: translate(-1px, 1px) rotate(-7deg);
       }
       100% {
         transform: translate(0px, 0px) rotate(0deg);
@@ -275,15 +237,11 @@
       0% {
         transform: translate(0px, 0px) rotate(0deg);
       }
-      20% {
-        transform: translate(-1px, -1px) rotate(-0.2deg);
-      }
+
       50% {
-        transform: translate(1px, -2px) rotate(0.3deg);
+        transform: translate(1px, -2px) rotate(3deg);
       }
-      80% {
-        transform: translate(-0.5px, -1px) rotate(-0.1deg);
-      }
+
       100% {
         transform: translate(0px, 0px) rotate(0deg);
       }
@@ -297,7 +255,7 @@
     justify-content: space-evenly;
     width: 100%;
     bottom: 0;
-    margin-bottom: clamp(4.5rem, 6dvh + 6dvw, 6.5rem);
+    margin-bottom: clamp(4.5rem, 5dvh + 5dvw, 6.5rem);
 
     .icons {
       display: flex;
@@ -415,7 +373,7 @@
       }
 
       .ship {
-        width: clamp(150px, 25vw, 400px);
+        width: clamp(150px, 25vw, 300px);
         height: auto;
         transition: 0.6s ease;
         border-bottom-left-radius: clamp(35px, 6vw, 95px);

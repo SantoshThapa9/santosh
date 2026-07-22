@@ -12,23 +12,17 @@
     font-family: var(--font2);
     -webkit-text-stroke: 2px var(--accent-color);
     position: relative;
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 1s ease,
-      transform 1s ease;
-
-    user-select: none;
-
-    &.animate {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    opacity: 1;
 
     .letter {
       letter-spacing: 5vw;
       animation: bounce 9s linear infinite;
       text-shadow: -2px 2px var(--accent-color);
+      transition: zoom 0.3s ease;
+      &:hover {
+        zoom: 1.3;
+        text-shadow: -2px 2px blue;
+      }
     }
   }
 
