@@ -14,7 +14,7 @@ const port = Number(process.env.PORT || 4000);
 
 const allowedOrigins = (
   process.env.FRONTEND_ORIGIN ||
-  "http://localhost:3000,http://127.0.0.1:3000"
+  "https://santosh-gamma.vercel.app,http://localhost:3000,http://127.0.0.1:3000"
 )
   .split(",")
   .map((origin) => origin.trim())

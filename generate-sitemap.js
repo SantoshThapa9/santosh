@@ -10,7 +10,7 @@ const links = [
   { url: "/contact" },
 ];
 
-const hostname = "https://www.santoshthapa.xyz";
+const hostname = "https://santosh-gamma.vercel.app";
 const stream = new SitemapStream({ hostname });
 
 (async () => {

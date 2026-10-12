@@ -44,10 +44,11 @@ its dependencies with `npm --prefix server install`, copy
 `server/.env.example` to `server/.env`, fill in the server-only values, and
 start it with `npm run dev:server`. The server also reads an existing project
 root `.env` file as a fallback. Start the frontend separately with `npm run
-dev`; Vite proxies `/api` requests to the local Express server.
+dev`; Vite proxies `/api` and `/health` requests to the local Express server.
 
-Deploy the Express app as a Node.js service and set the following environment
-variables in that service's environment (never in frontend `VITE_` variables):
+Deploy the Express app as a Node.js web service and set the following
+environment variables in that service's environment (never in frontend
+`VITE_` variables):
 
 | Variable | Purpose |
 | --- | --- |
@@ -58,20 +59,34 @@ variables in that service's environment (never in frontend `VITE_` variables):
 | `EMAILJS_TEMPLATE_ID` | EmailJS template ID |
 | `EMAILJS_PUBLIC_KEY` | EmailJS public key |
 | `EMAILJS_PRIVATE_KEY` | Optional EmailJS private key; set only if private-key authorization is enabled for the account |
-| `FRONTEND_ORIGIN` | Exact allowed frontend origin, such as `https://your-site.example` |
+| `FRONTEND_ORIGIN` | Comma-separated exact allowed frontend origins; for this site use `https://santosh-gamma.vercel.app` |
 | `PORT` | Optional server port (defaults to `4000`) |
 | `TRUST_PROXY` | Set to `1` only when the service is behind exactly one trusted reverse proxy |
 
 For a separately deployed frontend, set the public build-time variable
 `VITE_API_URL` to the Express service origin (for example,
-`https://api.your-site.example`). The API allows at most two contact attempts
-per client IP per UTC calendar day. It trusts forwarded client IP headers only
-when `TRUST_PROXY=1`, and stores only HMAC digests in Redis. Redis errors fail
+`https://santosh-portfolio-9dky.onrender.com`). The frontend defaults to this
+Render origin in production if `VITE_API_URL` is unset; configure the variable
+on the frontend host when using a different API origin. If `FRONTEND_ORIGIN`
+is unset, the API allows `https://santosh-gamma.vercel.app` and local Vite
+development origins. The API allows at most two contact attempts per client
+IP per UTC calendar day. It trusts forwarded client IP headers only when
+`TRUST_PROXY=1`, and stores only HMAC digests in Redis. Redis errors fail
 closed. EmailJS requests are paced to at most one per second per server
 process, as required by the EmailJS REST API. Configure `EMAILJS_PRIVATE_KEY`
 only if private-key authorization is enabled in the EmailJS account; keep it
 server-side and never use a `VITE_` prefix. Rotate any EmailJS private keys
 previously configured as `VITE_` variables, since those may already have been
 exposed in a deployed browser bundle.
+
+Configure Render's health check path as `/health`. When the Render service is
+asleep, its free instance can return a temporary loading response while it
+starts. The contact form now checks `/health` and retries only that safe GET
+for up to 90 seconds before submitting the message once. This makes cold
+starts recoverable but cannot eliminate the startup delay; use an always-on
+Render instance to avoid sleeping. Set `FRONTEND_ORIGIN` to the exact
+production origin in Render (not the local example value), and make sure the
+front-end host's build environment points `VITE_API_URL` at the Render
+service if you change the API domain.
 
 **Designed & Developed by [Santosh Thapa](https://santosh-gamma.vercel.app/)**  

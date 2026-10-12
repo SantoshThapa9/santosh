@@ -3,6 +3,58 @@ import styles from "./Contact.module.scss";
 import SharedStyles from "../shared-style/Shared.module.scss";
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
+const productionApiUrl = "https://santosh-portfolio-9dky.onrender.com";
+const apiUrl =
+  import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ||
+  (import.meta.env.PROD ? productionApiUrl : "");
+
+async function waitForContactApi() {
+  const deadline = Date.now() + 90_000;
+  const transientStatuses = new Set([502, 503, 504]);
+
+  while (Date.now() < deadline) {
+    try {
+      const response = await fetch(`${apiUrl}/health`, {
+        headers: { Accept: "application/json" },
+        cache: "no-store",
+        signal: AbortSignal.timeout(10_000),
+      });
+
+      if (response.ok) {
+        const result: unknown = await response.json();
+        if (
+          result &&
+          typeof result === "object" &&
+          "status" in result &&
+          result.status === "ok"
+        ) {
+          return;
+        }
+
+        throw new Error("Contact server returned an invalid health response.");
+      }
+
+      if (!transientStatuses.has(response.status)) {
+        throw new Error(
+          `Contact server health check failed with status ${response.status}.`,
+        );
+      }
+    } catch (error) {
+      if (
+        !(error instanceof TypeError) &&
+        !(error instanceof DOMException) &&
+        !(error instanceof Error && error.name === "TimeoutError")
+      ) {
+        throw error;
+      }
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+
+  throw new Error("Contact server did not become ready within 90 seconds.");
+}
+
 const ContactPage: React.FC = () => {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,9 +69,12 @@ const ContactPage: React.FC = () => {
     }
 
     setLoading(true);
+    setStatus("Connecting to the contact server…");
     try {
+      await waitForContactApi();
+      setStatus("Sending your message…");
+
       const formData = new FormData(currentForm);
-      const apiUrl = import.meta.env.VITE_API_URL?.replace(/\/$/, "") ?? "";
       const response = await fetch(`${apiUrl}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -73,11 +128,11 @@ const ContactPage: React.FC = () => {
     }
   };
   useEffect(() => {
-    if (status) {
+    if (status && !loading) {
       const timeout = setTimeout(() => setStatus(""), 4000);
       return () => clearTimeout(timeout);
     }
-  }, [status]);
+  }, [loading, status]);
 
   return (
     <section
