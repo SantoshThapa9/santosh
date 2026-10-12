@@ -90,6 +90,6 @@ app.use((error, request, response, next) => {
   });
 });
 
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Contact server listening on port ${port}.`);
 });

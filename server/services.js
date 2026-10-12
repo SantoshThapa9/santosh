@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 
 const rateLimitTtlSeconds = 172800;
 const emailjsMinimumIntervalMs = 1000;
-const emailjsTimeoutMs = 20000;
+const emailjsTimeoutMs = 15_000;
 
 let emailjsQueue = Promise.resolve();
 let lastEmailjsRequestAt = 0;
@@ -110,7 +110,7 @@ export async function reserveDailySend(config, ip) {
       visitorKey,
       String(rateLimitTtlSeconds),
     ]),
-    signal: AbortSignal.timeout(5000),
+    signal: AbortSignal.timeout(10_000),
   });
 
   if (!response.ok) {

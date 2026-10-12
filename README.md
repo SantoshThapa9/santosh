@@ -45,10 +45,17 @@ its dependencies with `npm --prefix server install`, copy
 start it with `npm run dev:server`. The server also reads an existing project
 root `.env` file as a fallback. Start the frontend separately with `npm run
 dev`; Vite proxies `/api` and `/health` requests to the local Express server.
+Run the backend's HTTP and contact-flow tests with `npm --prefix server test`.
 
-Deploy the Express app as a Node.js web service and set the following
-environment variables in that service's environment (never in frontend
-`VITE_` variables):
+The repository includes a Render Blueprint in `render.yaml`. Apply it from
+Render to create/update the API service. Its root directory is `server`, its
+build command is `npm ci`, its start command is `npm start`, and its health
+check is `/health`. Keep the build command limited to installation; do not run
+`npm start` or `node index.js` as part of the build command. Render supplies
+`PORT` automatically, and the server binds to `0.0.0.0`.
+
+Set the Blueprint's unsynchronized secret variables in Render (never in
+frontend `VITE_` variables):
 
 | Variable | Purpose |
 | --- | --- |
@@ -60,33 +67,35 @@ environment variables in that service's environment (never in frontend
 | `EMAILJS_PUBLIC_KEY` | EmailJS public key |
 | `EMAILJS_PRIVATE_KEY` | Optional EmailJS private key; set only if private-key authorization is enabled for the account |
 | `FRONTEND_ORIGIN` | Comma-separated exact allowed frontend origins; for this site use `https://santosh-gamma.vercel.app` |
-| `PORT` | Optional server port (defaults to `4000`) |
-| `TRUST_PROXY` | Set to `1` only when the service is behind exactly one trusted reverse proxy |
+| `PORT` | Supplied by Render; local default is `4000` |
+| `TRUST_PROXY` | Blueprint sets `1` for Render's trusted proxy; local default is off |
 
-For a separately deployed frontend, set the public build-time variable
-`VITE_API_URL` to the Express service origin (for example,
-`https://santosh-portfolio-9dky.onrender.com`). The frontend defaults to this
-Render origin in production if `VITE_API_URL` is unset; configure the variable
-on the frontend host when using a different API origin. If `FRONTEND_ORIGIN`
-is unset, the API allows `https://santosh-gamma.vercel.app` and local Vite
-development origins. The API allows at most two contact attempts per client
-IP per UTC calendar day. It trusts forwarded client IP headers only when
-`TRUST_PROXY=1`, and stores only HMAC digests in Redis. Redis errors fail
-closed. EmailJS requests are paced to at most one per second per server
-process, as required by the EmailJS REST API. Configure `EMAILJS_PRIVATE_KEY`
-only if private-key authorization is enabled in the EmailJS account; keep it
-server-side and never use a `VITE_` prefix. Rotate any EmailJS private keys
-previously configured as `VITE_` variables, since those may already have been
-exposed in a deployed browser bundle.
+The checked-in `.env.production` configures the public API URL
+`https://santosh-portfolio-9dky.onrender.com` for Vercel production builds;
+Vite development uses the `/api` and `/health` proxies to
+`http://localhost:4000`, so URLs do not need to be edited when switching
+environments. If the API domain changes, update `VITE_API_URL` in
+`.env.production` and set the same public variable in Vercel. The Vercel
+project should use the repository root, `npm run build` as its build command,
+and `dist` as its output directory.
 
-Configure Render's health check path as `/health`. When the Render service is
-asleep, its free instance can return a temporary loading response while it
-starts. The contact form now checks `/health` and retries only that safe GET
-for up to 90 seconds before submitting the message once. This makes cold
-starts recoverable but cannot eliminate the startup delay; use an always-on
-Render instance to avoid sleeping. Set `FRONTEND_ORIGIN` to the exact
-production origin in Render (not the local example value), and make sure the
-front-end host's build environment points `VITE_API_URL` at the Render
-service if you change the API domain.
+The API allows at most two contact attempts per client IP per UTC calendar
+day. It stores only HMAC digests in Redis. Redis errors fail closed. Redis
+calls time out after 10 seconds and EmailJS calls after 15 seconds, so
+upstream delays are bounded without the previous five-second Redis cutoff.
+EmailJS requests are paced to at most one per second per server process, as
+required by the EmailJS REST API. Configure `EMAILJS_PRIVATE_KEY` only if
+private-key authorization is enabled for the account; keep it server-side and
+never use a `VITE_` prefix. Rotate any EmailJS private keys previously
+configured as `VITE_` variables, since those may already have been exposed in
+a deployed browser bundle.
+
+The contact form checks `/health` and retries only that safe GET for up to 90
+seconds before submitting the message once. This makes cold starts
+recoverable but cannot eliminate the sleep delay on Render's free plan; use an
+always-on instance to avoid sleeping. The Blueprint sets
+`FRONTEND_ORIGIN=https://santosh-gamma.vercel.app` and `TRUST_PROXY=1`. If you
+deploy from the Render dashboard rather than applying the Blueprint, use the
+same values and settings above.
 
 **Designed & Developed by [Santosh Thapa](https://santosh-gamma.vercel.app/)**  

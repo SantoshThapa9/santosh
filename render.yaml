@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: santosh-portfolio
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
+      - key: CONTACT_IP_HASH_SECRET
+        sync: false
+      - key: EMAILJS_SERVICE_ID
+        sync: false
+      - key: EMAILJS_TEMPLATE_ID
+        sync: false
+      - key: EMAILJS_PUBLIC_KEY
+        sync: false
+      - key: FRONTEND_ORIGIN
+        value: https://santosh-gamma.vercel.app
+      - key: TRUST_PROXY
+        value: "1"

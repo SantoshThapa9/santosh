@@ -3,10 +3,16 @@ import styles from "./Contact.module.scss";
 import SharedStyles from "../shared-style/Shared.module.scss";
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
-const productionApiUrl = "https://santosh-portfolio-9dky.onrender.com";
 const apiUrl =
-  import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ||
-  (import.meta.env.PROD ? productionApiUrl : "");
+  import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ?? "";
+
+function contactApiUrl(path: string) {
+  if (import.meta.env.PROD && !apiUrl) {
+    throw new Error("VITE_API_URL is required for production builds.");
+  }
+
+  return `${apiUrl}${path}`;
+}
 
 async function waitForContactApi() {
   const deadline = Date.now() + 90_000;
@@ -14,7 +20,7 @@ async function waitForContactApi() {
 
   while (Date.now() < deadline) {
     try {
-      const response = await fetch(`${apiUrl}/health`, {
+      const response = await fetch(contactApiUrl("/health"), {
         headers: { Accept: "application/json" },
         cache: "no-store",
         signal: AbortSignal.timeout(10_000),
@@ -75,7 +81,7 @@ const ContactPage: React.FC = () => {
       setStatus("Sending your message…");
 
       const formData = new FormData(currentForm);
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      const response = await fetch(contactApiUrl("/api/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
