@@ -72,12 +72,13 @@ frontend `VITE_` variables):
 
 The checked-in `.env.production` configures the public API URL
 `https://santosh-portfolio-9dky.onrender.com` for Vercel production builds;
-Vite development uses the `/api` and `/health` proxies to
-`http://localhost:4000`, so URLs do not need to be edited when switching
-environments. If the API domain changes, update `VITE_API_URL` in
-`.env.production` and set the same public variable in Vercel. The Vercel
-project should use the repository root, `npm run build` as its build command,
-and `dist` as its output directory.
+Vite development always uses the `/api` and `/health` proxies to
+`http://localhost:4000`, even if a local `.env` happens to contain
+`VITE_API_URL`, so URLs do not need to be edited when switching environments.
+If the API domain changes, update `VITE_API_URL` in `.env.production` and set
+the same public variable in Vercel. The Vercel project should use the
+repository root, `npm run build` as its build command, and `dist` as its
+output directory.
 
 The API allows at most two contact attempts per client IP per UTC calendar
 day. It stores only HMAC digests in Redis. Redis errors fail closed. Redis
@@ -91,9 +92,13 @@ configured as `VITE_` variables, since those may already have been exposed in
 a deployed browser bundle.
 
 The contact form checks `/health` and retries only that safe GET for up to 90
-seconds before submitting the message once. This makes cold starts
-recoverable but cannot eliminate the sleep delay on Render's free plan; use an
-always-on instance to avoid sleeping. The Blueprint sets
+seconds before submitting the message once. Health retries use backoff and
+each health request is capped at 85 seconds to give a sleeping Render
+instance time to wake without repeated canceled requests. The contact POST is
+capped at 35 seconds; a POST timeout is reported as ambiguous and is never
+automatically retried, avoiding duplicate messages.
+This makes cold starts recoverable but cannot eliminate the sleep delay on
+Render's free plan; use an always-on instance to avoid sleeping. The Blueprint sets
 `FRONTEND_ORIGIN=https://santosh-gamma.vercel.app` and `TRUST_PROXY=1`. If you
 deploy from the Render dashboard rather than applying the Blueprint, use the
 same values and settings above.

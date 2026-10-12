@@ -97,6 +97,23 @@ test("contact preflight allows the configured local frontend origin", async () =
   );
 });
 
+test("contact preflight allows the production Vercel origin", async () => {
+  const response = await fetch(`${baseUrl}/api/contact`, {
+    method: "OPTIONS",
+    headers: {
+      Origin: "https://santosh-gamma.vercel.app",
+      "Access-Control-Request-Method": "POST",
+      "Access-Control-Request-Headers": "content-type",
+    },
+  });
+
+  assert.equal(response.status, 204);
+  assert.equal(
+    response.headers.get("access-control-allow-origin"),
+    "https://santosh-gamma.vercel.app",
+  );
+});
+
 test("contact endpoint rejects invalid input before contacting providers", async () => {
   const response = await fetch(`${baseUrl}/api/contact`, {
     method: "POST",

@@ -105,3 +105,72 @@ test("valid contact requests pass rate limiting and deliver exactly one email", 
     ["redis.example.test", "api.emailjs.com"],
   );
 });
+
+test("Redis failure returns a service error and does not send email", async () => {
+  const upstreamCalls = [];
+  globalThis.fetch = async (input, init) => {
+    const url = new URL(String(input));
+
+    if (url.hostname === "127.0.0.1") {
+      return originalFetch(input, init);
+    }
+
+    upstreamCalls.push(url.hostname);
+    return new Response("unavailable", { status: 503 });
+  };
+
+  const response = await fetch(`${baseUrl}/api/contact`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: "Example Visitor",
+      email: "visitor@example.com",
+      message: "Please get in touch.",
+    }),
+  });
+
+  assert.equal(response.status, 503);
+  assert.deepEqual(
+    await response.json(),
+    { message: "Contact form is temporarily unavailable." },
+  );
+  assert.deepEqual(upstreamCalls, ["redis.example.test"]);
+});
+
+test("EmailJS failure returns an upstream error after rate limit reservation", async () => {
+  const upstreamCalls = [];
+  globalThis.fetch = async (input, init) => {
+    const url = new URL(String(input));
+
+    if (url.hostname === "127.0.0.1") {
+      return originalFetch(input, init);
+    }
+
+    upstreamCalls.push(url.hostname);
+
+    if (url.hostname === "redis.example.test") {
+      return new Response(JSON.stringify({ result: "reserved" }), {
+        status: 200,
+      });
+    }
+
+    return new Response("provider unavailable", { status: 503 });
+  };
+
+  const response = await fetch(`${baseUrl}/api/contact`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: "Example Visitor",
+      email: "visitor@example.com",
+      message: "Please get in touch.",
+    }),
+  });
+
+  assert.equal(response.status, 502);
+  assert.match((await response.json()).message, /could not be sent/);
+  assert.deepEqual(upstreamCalls, [
+    "redis.example.test",
+    "api.emailjs.com",
+  ]);
+});

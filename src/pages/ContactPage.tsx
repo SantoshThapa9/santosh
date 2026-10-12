@@ -3,8 +3,9 @@ import styles from "./Contact.module.scss";
 import SharedStyles from "../shared-style/Shared.module.scss";
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
-const apiUrl =
-  import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ?? "";
+const apiUrl = import.meta.env.DEV
+  ? ""
+  : (import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ?? "");
 
 function contactApiUrl(path: string) {
   if (import.meta.env.PROD && !apiUrl) {
@@ -17,13 +18,16 @@ function contactApiUrl(path: string) {
 async function waitForContactApi() {
   const deadline = Date.now() + 90_000;
   const transientStatuses = new Set([502, 503, 504]);
+  let retryDelayMs = 2000;
 
   while (Date.now() < deadline) {
+    const remainingMs = deadline - Date.now();
+
     try {
       const response = await fetch(contactApiUrl("/health"), {
         headers: { Accept: "application/json" },
         cache: "no-store",
-        signal: AbortSignal.timeout(10_000),
+        signal: AbortSignal.timeout(Math.min(85_000, remainingMs)),
       });
 
       if (response.ok) {
@@ -46,19 +50,45 @@ async function waitForContactApi() {
         );
       }
     } catch (error) {
-      if (
-        !(error instanceof TypeError) &&
-        !(error instanceof DOMException) &&
-        !(error instanceof Error && error.name === "TimeoutError")
-      ) {
+      if (error instanceof Error && error.name === "TimeoutError") {
+        throw new Error("Contact server health check timed out.");
+      }
+
+      if (!(error instanceof TypeError)) {
         throw error;
       }
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const pauseMs = Math.min(retryDelayMs, deadline - Date.now());
+    if (pauseMs > 0) {
+      await new Promise((resolve) => setTimeout(resolve, pauseMs));
+    }
+    retryDelayMs = Math.min(10_000, retryDelayMs * 2);
   }
 
   throw new Error("Contact server did not become ready within 90 seconds.");
+}
+
+function getContactFailureMessage(error: unknown) {
+  if (
+    error instanceof Error &&
+    error.message === "Contact server did not become ready within 90 seconds."
+  ) {
+    return "The contact server did not become ready. Please try again shortly or email me directly.";
+  }
+
+  if (
+    error instanceof Error &&
+    error.message === "Contact server health check timed out."
+  ) {
+    return "The contact server is taking too long to start. Please try again shortly or email me directly.";
+  }
+
+  if (error instanceof Error && error.name === "TimeoutError") {
+    return "The contact request timed out. It may have been delivered; please check your email before retrying, or email me directly.";
+  }
+
+  return "Your message could not be sent. Please email me directly.";
 }
 
 const ContactPage: React.FC = () => {
@@ -89,6 +119,7 @@ const ContactPage: React.FC = () => {
           email: String(formData.get("user_email") ?? "").trim(),
           message: String(formData.get("message") ?? "").trim(),
         }),
+        signal: AbortSignal.timeout(35_000),
       });
 
       if (!response.ok) {
@@ -128,7 +159,7 @@ const ContactPage: React.FC = () => {
       currentForm.reset();
     } catch (error) {
       console.error("Unable to send contact form message.", error);
-      setStatus("Your message could not be sent. Please email me directly.");
+      setStatus(getContactFailureMessage(error));
     } finally {
       setLoading(false);
     }
