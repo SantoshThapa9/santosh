@@ -1,10 +1,16 @@
 import { MdOutlineMenu } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 import styles from "./Navbar.module.scss";
-import { easeInOut, motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import clsx from "clsx";
+
+const sections = ["home", "about", "projects", "contact"] as const;
+const getScrollBehavior = (): ScrollBehavior =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,58 +20,62 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isProgrammaticScroll = useRef(false);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const sections = ["home", "about", "projects", "contact"];
+  const closeSidebar = useCallback(() => {
+    setIsSidebarOpen(false);
+    menuButtonRef.current?.focus();
+  }, []);
 
   const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
+    const section = document.getElementById(id);
+    if (!section) return;
 
     isProgrammaticScroll.current = true;
 
-    el.scrollIntoView({ behavior: "smooth" });
     setActiveSection(id);
-    navigate(id === "home" ? "/home" : `/${id}`, { replace: true });
-    setIsSidebarOpen(false);
 
-    setTimeout(() => {
-      isProgrammaticScroll.current = false;
-    }, 500);
+    navigate(id === "home" ? "/home" : `/${id}`, {
+      replace: true,
+    });
+
+    section.scrollIntoView({
+      behavior: getScrollBehavior(),
+      block: "start",
+    });
+
+    closeSidebar();
   };
-
-  // sync route → scroll
   useEffect(() => {
     const path = location.pathname.replace("/", "") || "home";
-    const el = document.getElementById(path);
+    const section = document.getElementById(path);
 
-    if (el) {
+    if (section) {
       isProgrammaticScroll.current = true;
-      el.scrollIntoView({ behavior: "smooth" });
+      section.scrollIntoView({ behavior: getScrollBehavior() });
       setActiveSection(path);
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         isProgrammaticScroll.current = false;
-      }, 500);
+      }, 3000);
     }
   }, [location.pathname]);
 
-  // scroll effects
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 100);
-
+      setScrolled(window.scrollY > 24);
       if (isProgrammaticScroll.current) return;
 
       const scrollPos = window.scrollY + window.innerHeight / 3;
-
       for (const id of sections) {
-        const el = document.getElementById(id);
-        if (!el) continue;
+        const section = document.getElementById(id);
+        if (!section) continue;
 
-        const top = el.offsetTop;
-        const bottom = top + el.offsetHeight;
-
-        if (scrollPos >= top && scrollPos <= bottom) {
+        const { top, bottom } = section.getBoundingClientRect();
+        if (
+          scrollPos >= top + window.scrollY &&
+          scrollPos <= bottom + window.scrollY
+        ) {
           if (activeSection !== id) {
             setActiveSection(id);
             navigate(id === "home" ? "/home" : `/${id}`, { replace: true });
@@ -75,63 +85,111 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [activeSection, navigate]);
 
-  return (
-    <nav className={clsx(styles.navbar, scrolled && styles.navbarVB)}>
-      <div className={styles.logo}>
-        <strong>Santosh thapa</strong>
-        <span>.</span>
-      </div>
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isSidebarOpen) closeSidebar();
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [closeSidebar, isSidebarOpen]);
 
-      <div className={styles.NavBar}>
-        <ul>
-          {sections.map((s) => (
-            <li
-              key={s}
-              className={clsx({
-                [styles.activeLink]: activeSection === s,
-              })}
-              onClick={() => scrollTo(s)}
-            >
-              {s.charAt(0).toUpperCase() + s.slice(1)}
-            </li>
-          ))}
-        </ul>
-      </div>
+  useEffect(() => {
+    if (!isSidebarOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const mobileViewport = window.matchMedia("(max-width: 680px)");
+    if (mobileViewport.matches) document.body.style.overflow = "hidden";
+
+    const closeOnDesktop = (event: MediaQueryListEvent) => {
+      if (!event.matches) setIsSidebarOpen(false);
+    };
+    mobileViewport.addEventListener("change", closeOnDesktop);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      mobileViewport.removeEventListener("change", closeOnDesktop);
+    };
+  }, [isSidebarOpen]);
+
+  const renderLinks = () => (
+    <ul>
+      {sections.map((section) => (
+        <li key={section}>
+          <a
+            href={`#${section}`}
+            className={clsx(activeSection === section && styles.activeLink)}
+            aria-current={activeSection === section ? "location" : undefined}
+            onClick={(event) => {
+              event.preventDefault();
+              scrollTo(section);
+            }}
+          >
+            {section.charAt(0).toUpperCase() + section.slice(1)}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+
+  return (
+    <nav
+      className={clsx(styles.navbar, scrolled && styles.navbarVB)}
+      aria-label="Main navigation"
+    >
+      <a
+        className={styles.logo}
+        href="#home"
+        onClick={(event) => {
+          event.preventDefault();
+          scrollTo("home");
+        }}
+        aria-label="Santosh Thapa, home"
+      >
+        <strong>Santosh Thapa</strong>
+        <span>.</span>
+      </a>
+
+      <div className={styles.NavBar}>{renderLinks()}</div>
+
+      <button
+        type="button"
+        ref={menuButtonRef}
+        className={styles.menuBtn}
+        onClick={() => setIsSidebarOpen((open) => !open)}
+        aria-expanded={isSidebarOpen}
+        aria-controls="mobile-navigation"
+        aria-label={
+          isSidebarOpen ? "Close navigation menu" : "Open navigation menu"
+        }
+      >
+        {isSidebarOpen ? (
+          <RxCross2 aria-hidden="true" />
+        ) : (
+          <MdOutlineMenu aria-hidden="true" />
+        )}
+      </button>
 
       <div
-        onClick={() => setIsSidebarOpen(false)}
+        id="mobile-navigation"
         className={clsx(styles.sidebar, isSidebarOpen && styles.open)}
+        aria-hidden={!isSidebarOpen}
+        inert={!isSidebarOpen}
       >
-        <ul>
-          {sections.map((s) => (
-            <li
-              key={s}
-              className={clsx({
-                [styles.activeLink]: activeSection === s,
-              })}
-              onClick={() => scrollTo(s)}
-            >
-              {s.charAt(0).toUpperCase() + s.slice(1)}
-            </li>
-          ))}
-        </ul>
+        <div className={styles.mobileLinks}>{renderLinks()}</div>
       </div>
-
-      <motion.button
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: easeInOut }}
-        className={styles.menuBtn}
-        onClick={() => setIsSidebarOpen((p) => !p)}
-      >
-        {isSidebarOpen ? <RxCross2 /> : <MdOutlineMenu />}
-      </motion.button>
-
-      <div className={clsx(isSidebarOpen && styles.overlay)} />
+      {isSidebarOpen && (
+        <button
+          type="button"
+          className={styles.overlay}
+          onClick={closeSidebar}
+          aria-label="Close navigation menu"
+          tabIndex={-1}
+        />
+      )}
     </nav>
   );
 };

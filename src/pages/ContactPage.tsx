@@ -1,36 +1,73 @@
 import { useState, useRef, useEffect } from "react";
-import emailjs from "@emailjs/browser";
 import styles from "./Contact.module.scss";
 import SharedStyles from "../shared-style/Shared.module.scss";
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
-import Footer from "./Footer";
 
 const ContactPage: React.FC = () => {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const form = useRef<HTMLFormElement | null>(null);
-  const lastSubmitTime = useRef<number | null>(null);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (lastSubmitTime.current && Date.now() - lastSubmitTime.current < 1000) {
-      setStatus("Please wait a second before sending again.");
+    const currentForm = form.current;
+    if (!currentForm) {
+      setStatus("The contact form is unavailable. Please email me directly.");
       return;
     }
-    lastSubmitTime.current = Date.now();
+
     setLoading(true);
     try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        form.current!,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-      );
+      const formData = new FormData(currentForm);
+      const apiUrl = import.meta.env.VITE_API_URL?.replace(/\/$/, "") ?? "";
+      const response = await fetch(`${apiUrl}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: String(formData.get("user_name") ?? "").trim(),
+          email: String(formData.get("user_email") ?? "").trim(),
+          message: String(formData.get("message") ?? "").trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        if (
+          response.headers.get("content-type")?.includes("application/json")
+        ) {
+          const result: unknown = await response.json();
+          if (
+            result &&
+            typeof result === "object" &&
+            "message" in result &&
+            typeof result.message === "string"
+          ) {
+            setStatus(result.message);
+            return;
+          }
+        }
+
+        throw new Error(
+          `Contact request failed with status ${response.status}.`,
+        );
+      }
+      if (!response.headers.get("content-type")?.includes("application/json")) {
+        throw new Error("Contact server returned an unexpected response.");
+      }
+      const result: unknown = await response.json();
+      if (
+        !result ||
+        typeof result !== "object" ||
+        !("message" in result) ||
+        result.message !== "Message sent."
+      ) {
+        throw new Error("Contact server returned an invalid response.");
+      }
 
       setStatus("Message sent!");
-      form.current?.reset();
-    } catch {
-      setStatus("Error sending message.");
+      currentForm.reset();
+    } catch (error) {
+      console.error("Unable to send contact form message.", error);
+      setStatus("Your message could not be sent. Please email me directly.");
     } finally {
       setLoading(false);
     }
@@ -43,12 +80,20 @@ const ContactPage: React.FC = () => {
   }, [status]);
 
   return (
-    <div id="contact" className={styles.ContactPage}>
+    <section
+      id="contact"
+      className={styles.ContactPage}
+      aria-labelledby="contact-title"
+    >
       <div className={styles.contactContainer}>
         <div className={styles.contactSection}>
-          <h5 className={styles.contactTitle}>Get in Touch</h5>
+          <h2 id="contact-title" className={styles.contactTitle}>
+            Let’s Work Together
+          </h2>
           <p className={styles.contactSubtitle}>
-            Open to collaborations and inquiries! <br />
+            Have a project in mind or want to compare notes? I’d be glad to hear
+            from you.
+            <br />
             <a
               href="mailto:st8493510@gmail.com"
               className={`${SharedStyles.btn2} ${styles.email}`}
@@ -56,7 +101,11 @@ const ContactPage: React.FC = () => {
               st8493510@gmail.com
             </a>
           </p>
-          <div className={styles.socialLinks}>
+          <div
+            className={styles.socialLinks}
+            role="group"
+            aria-label="Social profiles"
+          >
             <a
               href="https://x.com/SantoshThapa689"
               className={SharedStyles.btn2}
@@ -67,11 +116,11 @@ const ContactPage: React.FC = () => {
               <FaTwitter className={styles.icon} />
             </a>
             <a
-              href="https://in.linkedin.com/in/santosh986?trk=profile-badge"
+              href="https://www.linkedin.com/in/santosh986/"
               className={SharedStyles.btn2}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Santosh Thapa on Linkedin"
+              aria-label="Santosh Thapa on LinkedIn"
             >
               <FaLinkedin className={styles.icon} />
             </a>
@@ -96,7 +145,12 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
 
-        <form ref={form} className={styles.contactForm} onSubmit={sendEmail}>
+        <form
+          ref={form}
+          className={styles.contactForm}
+          onSubmit={sendEmail}
+          aria-label="Send a message"
+        >
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.formLabel}>
               Name
@@ -106,8 +160,10 @@ const ContactPage: React.FC = () => {
               id="name"
               name="user_name"
               className={styles.formInput}
-              placeholder="Your name"
+              placeholder="How should I address you?"
               required
+              autoComplete="name"
+              maxLength={100}
             />
           </div>
           <div className={styles.formGroup}>
@@ -119,8 +175,10 @@ const ContactPage: React.FC = () => {
               id="email"
               name="user_email"
               className={styles.formInput}
-              placeholder="Your email"
+              placeholder="you@example.com"
               required
+              autoComplete="email"
+              maxLength={254}
             />
           </div>
           <div className={styles.formGroup}>
@@ -131,12 +189,19 @@ const ContactPage: React.FC = () => {
               id="message"
               name="message"
               className={styles.formTextarea}
-              placeholder="Your message"
+              placeholder="A little about what you have in mind..."
               required
+              rows={5}
+              maxLength={5000}
             ></textarea>
           </div>
 
-          <button className={styles.sendButton} disabled={loading}>
+          <button
+            className={styles.sendButton}
+            disabled={loading}
+            type="submit"
+            aria-busy={loading}
+          >
             <div className={styles.svgWrapper1}>
               <div className={styles.svgWrapper}>
                 <svg
@@ -153,17 +218,16 @@ const ContactPage: React.FC = () => {
                 </svg>
               </div>
             </div>
-            <span> {loading ? "Sending..." : "Send"}</span>
+            <span> {loading ? "Sending…" : "Send Message"}</span>
           </button>
         </form>
         {status && (
-          <p className={styles.statusMessage} aria-live="polite">
+          <p className={styles.statusMessage} role="status" aria-live="polite">
             {status}
           </p>
         )}
       </div>
-      <Footer />
-    </div>
+    </section>
   );
 };
 
