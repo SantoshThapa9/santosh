@@ -1,21 +1,21 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./Contact.module.scss";
-import SharedStyles from "../shared-style/Shared.module.scss";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
-const apiUrl = import.meta.env.DEV
-  ? ""
-  : (import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ?? "");
+const apiUrl = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ?? "";
+const healthRequestTimeoutMs = 10_000;
 
 function contactApiUrl(path: string) {
-  if (import.meta.env.PROD && !apiUrl) {
-    throw new Error("VITE_API_URL is required for production builds.");
+  if (!apiUrl) {
+    throw new Error("VITE_API_URL is required to contact the server.");
   }
 
   return `${apiUrl}${path}`;
 }
 
-async function waitForContactApi() {
+async function waitForContactApi(onRetry: () => void) {
   const deadline = Date.now() + 90_000;
   const transientStatuses = new Set([502, 503, 504]);
   let retryDelayMs = 2000;
@@ -27,7 +27,9 @@ async function waitForContactApi() {
       const response = await fetch(contactApiUrl("/health"), {
         headers: { Accept: "application/json" },
         cache: "no-store",
-        signal: AbortSignal.timeout(Math.min(85_000, remainingMs)),
+        signal: AbortSignal.timeout(
+          Math.min(healthRequestTimeoutMs, remainingMs),
+        ),
       });
 
       if (response.ok) {
@@ -49,12 +51,13 @@ async function waitForContactApi() {
           `Contact server health check failed with status ${response.status}.`,
         );
       }
+      onRetry();
     } catch (error) {
       if (error instanceof Error && error.name === "TimeoutError") {
-        throw new Error("Contact server health check timed out.");
-      }
-
-      if (!(error instanceof TypeError)) {
+        onRetry();
+      } else if (error instanceof TypeError) {
+        onRetry();
+      } else {
         throw error;
       }
     }
@@ -77,13 +80,6 @@ function getContactFailureMessage(error: unknown) {
     return "The contact server did not become ready. Please try again shortly or email me directly.";
   }
 
-  if (
-    error instanceof Error &&
-    error.message === "Contact server health check timed out."
-  ) {
-    return "The contact server is taking too long to start. Please try again shortly or email me directly.";
-  }
-
   if (error instanceof Error && error.name === "TimeoutError") {
     return "The contact request timed out. It may have been delivered; please check your email before retrying, or email me directly.";
   }
@@ -95,6 +91,7 @@ const ContactPage: React.FC = () => {
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
   const form = useRef<HTMLFormElement | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,7 +104,9 @@ const ContactPage: React.FC = () => {
     setLoading(true);
     setStatus("Connecting to the contact server…");
     try {
-      await waitForContactApi();
+      await waitForContactApi(() =>
+        setStatus("The contact server is waking up…"),
+      );
       setStatus("Sending your message…");
 
       const formData = new FormData(currentForm);
@@ -178,72 +177,132 @@ const ContactPage: React.FC = () => {
       aria-labelledby="contact-title"
     >
       <div className={styles.contactContainer}>
-        <div className={styles.contactSection}>
-          <h2 id="contact-title" className={styles.contactTitle}>
+        <motion.div
+          className={styles.contactSection}
+          initial={reduceMotion ? false : { opacity: 0, x: -28 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{
+            once: false,
+            amount: 0.2,
+            margin: "0px 0px -16% 0px",
+          }}
+          transition={{ duration: reduceMotion ? 0 : 0.65, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <motion.h2
+            id="contact-title"
+            className={styles.contactTitle}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: reduceMotion ? 0 : 0.45 }}
+          >
             Let’s Work Together
-          </h2>
+          </motion.h2>
+
           <p className={styles.contactSubtitle}>
             Have a project in mind or want to compare notes? I’d be glad to hear
             from you.
-            <br />
-            <a
-              href="mailto:st8493510@gmail.com"
-              className={`${SharedStyles.btn2} ${styles.email}`}
-            >
-              st8493510@gmail.com
-            </a>
           </p>
+
+          <motion.a
+            href="mailto:st8493510@gmail.com"
+            className={styles.email}
+            aria-label="Send an email to Santosh Thapa"
+            whileHover={reduceMotion ? undefined : { x: 4 }}
+          >
+            <span>st8493510@gmail.com</span>
+            <span className={styles.emailArrow} aria-hidden="true">
+              ↗
+            </span>
+          </motion.a>
+
           <div
             className={styles.socialLinks}
             role="group"
             aria-label="Social profiles"
           >
-            <a
+            <motion.a
               href="https://x.com/SantoshThapa689"
-              className={SharedStyles.btn2}
+              className={styles.socialLink}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Santosh Thapa on X"
+              whileHover={reduceMotion ? undefined : { y: -5, rotate: -7 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.94 }}
             >
               <FaTwitter className={styles.icon} />
-            </a>
-            <a
+            </motion.a>
+
+            <motion.a
               href="https://www.linkedin.com/in/santosh986/"
-              className={SharedStyles.btn2}
+              className={styles.socialLink}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Santosh Thapa on LinkedIn"
+              whileHover={reduceMotion ? undefined : { y: -5, rotate: 5 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.94 }}
             >
               <FaLinkedin className={styles.icon} />
-            </a>
-            <a
+            </motion.a>
+
+            <motion.a
               href="https://instagram.com/santoshh689"
-              className={SharedStyles.btn2}
+              className={styles.socialLink}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Santosh Thapa on Instagram"
+              whileHover={reduceMotion ? undefined : { y: -5, rotate: -7 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.94 }}
             >
               <FaInstagram className={styles.icon} />
-            </a>
-            <a
+            </motion.a>
+
+            <motion.a
               href="https://github.com/SantoshThapa9"
-              className={SharedStyles.btn2}
+              className={styles.socialLink}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Santosh Thapa on Github"
+              aria-label="Santosh Thapa on GitHub"
+              whileHover={reduceMotion ? undefined : { y: -5, rotate: 5 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.94 }}
             >
               <FaGithub className={styles.icon} />
-            </a>
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
 
-        <form
+        <motion.form
           ref={form}
           className={styles.contactForm}
           onSubmit={sendEmail}
           aria-label="Send a message"
+          initial={reduceMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={{
+            once: false,
+            amount: 0.16,
+            margin: "0px 0px -14% 0px",
+          }}
+          variants={{
+            hidden: { opacity: 0, y: 24 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: reduceMotion ? 0 : 0.6,
+                delay: reduceMotion ? 0 : 0.08,
+                staggerChildren: reduceMotion ? 0 : 0.08,
+              },
+            },
+          }}
         >
-          <div className={styles.formGroup}>
+          <motion.div
+            className={styles.formGroup}
+            variants={{
+              hidden: { opacity: 0, x: 12 },
+              visible: { opacity: 1, x: 0 },
+            }}
+          >
             <label htmlFor="name" className={styles.formLabel}>
               Name
             </label>
@@ -257,8 +316,14 @@ const ContactPage: React.FC = () => {
               autoComplete="name"
               maxLength={100}
             />
-          </div>
-          <div className={styles.formGroup}>
+          </motion.div>
+          <motion.div
+            className={styles.formGroup}
+            variants={{
+              hidden: { opacity: 0, x: 12 },
+              visible: { opacity: 1, x: 0 },
+            }}
+          >
             <label htmlFor="email" className={styles.formLabel}>
               Email
             </label>
@@ -272,8 +337,14 @@ const ContactPage: React.FC = () => {
               autoComplete="email"
               maxLength={254}
             />
-          </div>
-          <div className={styles.formGroup}>
+          </motion.div>
+          <motion.div
+            className={styles.formGroup}
+            variants={{
+              hidden: { opacity: 0, x: 12 },
+              visible: { opacity: 1, x: 0 },
+            }}
+          >
             <label htmlFor="message" className={styles.formLabel}>
               Message
             </label>
@@ -286,13 +357,15 @@ const ContactPage: React.FC = () => {
               rows={5}
               maxLength={5000}
             ></textarea>
-          </div>
+          </motion.div>
 
-          <button
+          <motion.button
             className={styles.sendButton}
             disabled={loading}
             type="submit"
             aria-busy={loading}
+            whileHover={reduceMotion || loading ? undefined : { y: -2, scale: 1.02 }}
+            whileTap={reduceMotion || loading ? undefined : { scale: 0.98 }}
           >
             <div className={styles.svgWrapper1}>
               <div className={styles.svgWrapper}>
@@ -311,13 +384,23 @@ const ContactPage: React.FC = () => {
               </div>
             </div>
             <span> {loading ? "Sending…" : "Send Message"}</span>
-          </button>
-        </form>
+          </motion.button>
+        </motion.form>
+        <AnimatePresence>
         {status && (
-          <p className={styles.statusMessage} role="status" aria-live="polite">
+          <motion.p
+            className={styles.statusMessage}
+            role="status"
+            aria-live="polite"
+            initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2 }}
+          >
             {status}
-          </p>
+          </motion.p>
         )}
+        </AnimatePresence>
       </div>
     </section>
   );

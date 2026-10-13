@@ -4,22 +4,17 @@ import styles from "./Navbar.module.scss";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import clsx from "clsx";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
-const sections = ["home", "about", "projects", "contact"] as const;
-const getScrollBehavior = (): ScrollBehavior =>
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ? "auto"
-    : "smooth";
+const sections = ["home", "about", "projects", "assistant", "contact"] as const;
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  const [scrolled, setScrolled] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isProgrammaticScroll = useRef(false);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const closeSidebar = useCallback(() => {
@@ -31,8 +26,6 @@ const Navbar = () => {
     const section = document.getElementById(id);
     if (!section) return;
 
-    isProgrammaticScroll.current = true;
-
     setActiveSection(id);
 
     navigate(id === "home" ? "/home" : `/${id}`, {
@@ -40,32 +33,45 @@ const Navbar = () => {
     });
 
     section.scrollIntoView({
-      behavior: getScrollBehavior(),
+      behavior: "auto",
       block: "start",
     });
 
     closeSidebar();
   };
   useEffect(() => {
-    const path = location.pathname.replace("/", "") || "home";
-    const section = document.getElementById(path);
+    const locationState = location.state;
+    if (
+      locationState &&
+      typeof locationState === "object" &&
+      "fromScroll" in locationState &&
+      locationState.fromScroll === true
+    ) {
+      return;
+    }
+
+    const pathSegments = location.pathname.split("/").filter(Boolean);
+    const path = pathSegments[0] || "home";
+    const targetId =
+      path === "projects"
+        ? pathSegments[1] === "others"
+          ? "project-others"
+          : pathSegments[1]
+            ? `project-${pathSegments[1]}`
+            : path
+        : path;
+    const section = document.getElementById(targetId);
 
     if (section) {
-      isProgrammaticScroll.current = true;
-      section.scrollIntoView({ behavior: getScrollBehavior() });
+      section.scrollIntoView({ behavior: "auto", block: "start" });
       setActiveSection(path);
-
-      window.setTimeout(() => {
-        isProgrammaticScroll.current = false;
-      }, 3000);
+    } else if (path === "projects" && pathSegments[1]) {
+      navigate("/projects", { replace: true });
     }
-  }, [location.pathname]);
+  }, [location.pathname, location.state, navigate]);
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 24);
-      if (isProgrammaticScroll.current) return;
-
       const scrollPos = window.scrollY + window.innerHeight / 3;
       for (const id of sections) {
         const section = document.getElementById(id);
@@ -78,7 +84,10 @@ const Navbar = () => {
         ) {
           if (activeSection !== id) {
             setActiveSection(id);
-            navigate(id === "home" ? "/home" : `/${id}`, { replace: true });
+            navigate(id === "home" ? "/home" : `/${id}`, {
+              replace: true,
+              state: { fromScroll: true },
+            });
           }
           break;
         }
@@ -87,7 +96,7 @@ const Navbar = () => {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [activeSection, navigate]);
+  }, [activeSection, location.pathname, navigate]);
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -136,11 +145,17 @@ const Navbar = () => {
   );
 
   return (
-    <nav
-      className={clsx(styles.navbar, scrolled && styles.navbarVB)}
+    <motion.nav
+      className={styles.navbar}
       aria-label="Main navigation"
+      initial={reduceMotion ? false : { y: -18, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: reduceMotion ? 0 : 0.45,
+        ease: [0.22, 1, 0.36, 1],
+      }}
     >
-      <a
+      <motion.a
         className={styles.logo}
         href="#home"
         onClick={(event) => {
@@ -148,14 +163,15 @@ const Navbar = () => {
           scrollTo("home");
         }}
         aria-label="Santosh Thapa, home"
+        whileHover={reduceMotion ? undefined : { y: -1 }}
       >
         <strong>Santosh Thapa</strong>
         <span>.</span>
-      </a>
+      </motion.a>
 
       <div className={styles.NavBar}>{renderLinks()}</div>
 
-      <button
+      <motion.button
         type="button"
         ref={menuButtonRef}
         className={styles.menuBtn}
@@ -165,32 +181,53 @@ const Navbar = () => {
         aria-label={
           isSidebarOpen ? "Close navigation menu" : "Open navigation menu"
         }
+        whileHover={
+          reduceMotion
+            ? undefined
+            : { scale: 1.06, rotate: isSidebarOpen ? 0 : 4 }
+        }
+        whileTap={reduceMotion ? undefined : { scale: 0.94 }}
       >
         {isSidebarOpen ? (
           <RxCross2 aria-hidden="true" />
         ) : (
           <MdOutlineMenu aria-hidden="true" />
         )}
-      </button>
+      </motion.button>
 
-      <div
+      <motion.div
         id="mobile-navigation"
         className={clsx(styles.sidebar, isSidebarOpen && styles.open)}
         aria-hidden={!isSidebarOpen}
         inert={!isSidebarOpen}
+        initial={false}
+        animate={{
+          x: isSidebarOpen ? 0 : "102%",
+          opacity: isSidebarOpen ? 1 : 0,
+        }}
+        transition={{
+          duration: reduceMotion ? 0 : 0.32,
+          ease: [0.22, 1, 0.36, 1],
+        }}
       >
         <div className={styles.mobileLinks}>{renderLinks()}</div>
-      </div>
-      {isSidebarOpen && (
-        <button
-          type="button"
-          className={styles.overlay}
-          onClick={closeSidebar}
-          aria-label="Close navigation menu"
-          tabIndex={-1}
-        />
-      )}
-    </nav>
+      </motion.div>
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.button
+            type="button"
+            className={styles.overlay}
+            onClick={closeSidebar}
+            aria-label="Close navigation menu"
+            tabIndex={-1}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2 }}
+          />
+        )}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 

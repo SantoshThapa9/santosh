@@ -1,0 +1,43 @@
+.launcher {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 90;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: clamp(2.5rem, 4vw, 3rem);
+  height: clamp(2.5rem, 4vw, 3rem);
+
+  color: #17120f;
+  background: linear-gradient(140deg, #ffbd98, #ef8b62);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 50%;
+
+  box-shadow: 0 10px 34px rgb(239 139 98 / 28%);
+  cursor: pointer;
+
+  transition:
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.launcher svg {
+  width: clamp(1.3rem, 2vw, 1.6rem);
+  height: clamp(1.3rem, 2vw, 1.6rem);
+  opacity: 0.8;
+}
+
+.launcher:hover {
+  box-shadow: 0 14px 40px rgb(239 139 98 / 38%);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 420px) {
+  .launcher {
+    right: max(0.9rem, env(safe-area-inset-right));
+    bottom: max(0.9rem, env(safe-area-inset-bottom));
+  }
+}

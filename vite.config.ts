@@ -8,10 +8,6 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     port: 3000,
-    proxy: {
-      "/api": "http://localhost:4000",
-      "/health": "http://localhost:4000",
-    },
   },
 
   build: {
@@ -34,6 +30,8 @@ export default defineConfig({
       "framer-motion",
       "react-icons",
       "react-router-dom",
+      "react-markdown",
+      "remark-gfm",
     ],
   },
 });

@@ -24,7 +24,7 @@
     text-decoration: none;
 
     span {
-      color: var(--accent-color);
+      color: greenyellow;
       font-size: 1.5rem;
       line-height: 0.8;
     }
@@ -54,12 +54,9 @@
     align-items: center;
     justify-content: center;
     background: var(--bg);
-    opacity: 0;
     pointer-events: none;
-    transition: opacity 180ms ease;
 
     &.open {
-      opacity: 1;
       pointer-events: auto;
     }
   }
@@ -98,14 +95,6 @@
       box-shadow: -18px 0 48px rgb(0 0 0 / 38%);
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
-      transform: translateX(102%);
-      transition:
-        opacity 180ms ease,
-        transform 180ms ease;
-
-      &.open {
-        transform: translateX(0);
-      }
     }
 
     .overlay {
@@ -196,11 +185,6 @@
   }
 }
 
-.navbarVB {
-  border-bottom-color: var(--line);
-  background: rgb(11 14 16 / 94%);
-}
-
 @media (max-width: 360px) {
   .navbar {
     padding-right: 0.75rem;
@@ -230,7 +214,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .navbar,
-  .navbar .sidebar,
   .NavBar a {
     transition: none;
   }

@@ -13,6 +13,8 @@ services:
         sync: false
       - key: CONTACT_IP_HASH_SECRET
         sync: false
+      - key: OPENAI_API_KEY
+        sync: false
       - key: EMAILJS_SERVICE_ID
         sync: false
       - key: EMAILJS_TEMPLATE_ID
@@ -21,5 +23,3 @@ services:
         sync: false
       - key: FRONTEND_ORIGIN
         value: https://santosh-gamma.vercel.app
-      - key: TRUST_PROXY
-        value: "1"

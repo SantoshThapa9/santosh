@@ -43,6 +43,57 @@ end
 return "reserved"
 `;
 
+const chatRateLimitScript = `
+local now = redis.call("TIME")
+local nowMillis = (tonumber(now[1]) * 1000) + math.floor(tonumber(now[2]) / 1000)
+
+redis.call("ZREMRANGEBYSCORE", KEYS[1], "-inf", nowMillis - 60000)
+local messageCount = redis.call("ZCARD", KEYS[1])
+
+if messageCount >= tonumber(ARGV[1]) then
+  return "limited"
+end
+
+redis.call("ZADD", KEYS[1], nowMillis, ARGV[2])
+redis.call("EXPIRE", KEYS[1], 60)
+return "reserved"
+`;
+
+function getRedisConfiguration() {
+  const keys = [
+    "UPSTASH_REDIS_REST_URL",
+    "UPSTASH_REDIS_REST_TOKEN",
+    "CONTACT_IP_HASH_SECRET",
+  ];
+  const missing = keys.filter((key) => !process.env[key]);
+
+  if (missing.length) {
+    throw new Error(`Missing environment variables: ${missing.join(", ")}`);
+  }
+
+  const ipHashSecret = process.env.CONTACT_IP_HASH_SECRET;
+  if (ipHashSecret.length < 32) {
+    throw new Error(
+      "CONTACT_IP_HASH_SECRET must contain at least 32 characters.",
+    );
+  }
+
+  const redisUrl = new URL(process.env.UPSTASH_REDIS_REST_URL);
+  if (
+    redisUrl.protocol !== "https:" ||
+    redisUrl.username ||
+    redisUrl.password
+  ) {
+    throw new Error("Invalid Upstash Redis URL.");
+  }
+
+  return {
+    redisUrl: redisUrl.toString(),
+    redisToken: process.env.UPSTASH_REDIS_REST_TOKEN,
+    ipHashSecret,
+  };
+}
+
 export function requiredConfiguration() {
   const keys = [
     "UPSTASH_REDIS_REST_URL",
@@ -59,33 +110,97 @@ export function requiredConfiguration() {
     throw new Error(`Missing environment variables: ${missing.join(", ")}`);
   }
 
-  const ipHashSecret = process.env.CONTACT_IP_HASH_SECRET;
-
-  if (ipHashSecret.length < 32) {
-    throw new Error(
-      "CONTACT_IP_HASH_SECRET must contain at least 32 characters.",
-    );
-  }
-
-  const redisUrl = new URL(process.env.UPSTASH_REDIS_REST_URL);
-
-  if (
-    redisUrl.protocol !== "https:" ||
-    redisUrl.username ||
-    redisUrl.password
-  ) {
-    throw new Error("Invalid Upstash Redis URL.");
-  }
+  const redisConfiguration = getRedisConfiguration();
 
   return {
-    redisUrl: redisUrl.toString(),
-    redisToken: process.env.UPSTASH_REDIS_REST_TOKEN,
-    ipHashSecret,
+    ...redisConfiguration,
     emailServiceId: process.env.EMAILJS_SERVICE_ID,
     emailTemplateId: process.env.EMAILJS_TEMPLATE_ID,
     emailPublicKey: process.env.EMAILJS_PUBLIC_KEY,
     emailPrivateKey: process.env.EMAILJS_PRIVATE_KEY,
   };
+}
+
+export function requiredChatConfiguration() {
+  const redisConfiguration = getRedisConfiguration();
+  const apiKey = process.env.OPENAI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("Missing environment variable: OPENAI_API_KEY");
+  }
+
+  return {
+    ...redisConfiguration,
+    apiKey,
+    model: "gpt-6-luna",
+  };
+}
+
+export async function reserveChatMessage(config, ip) {
+  const ipDigest = crypto
+    .createHmac("sha256", config.ipHashSecret)
+    .update(ip)
+    .digest("hex");
+  const visitorKey = `chat:window:${ipDigest}`;
+  const response = await fetch(config.redisUrl, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${config.redisToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify([
+      "EVAL",
+      chatRateLimitScript,
+      "1",
+      visitorKey,
+      "5",
+      crypto.randomUUID(),
+    ]),
+    signal: AbortSignal.timeout(10_000),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Upstash Redis returned ${response.status}.`);
+  }
+
+  const result = await response.json();
+  if (result.result !== "reserved" && result.result !== "limited") {
+    throw new Error("Invalid Redis chat rate-limit result.");
+  }
+
+  return result.result;
+}
+
+export async function requestChatReply(config, messages) {
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${config.apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: config.model,
+      messages,
+    }),
+    signal: AbortSignal.timeout(20_000),
+  });
+
+  if (!response.ok) {
+    const providerMessage = (await response.text())
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 300);
+    const detail = providerMessage ? `: ${providerMessage}` : "";
+    throw new Error(`OpenAI returned ${response.status}${detail}.`);
+  }
+
+  const result = await response.json();
+  const reply = result.choices?.[0]?.message?.content;
+  if (typeof reply !== "string" || !reply.trim()) {
+    throw new Error("OpenAI returned an invalid chat response.");
+  }
+
+  return reply.trim();
 }
 
 export async function reserveDailySend(config, ip) {

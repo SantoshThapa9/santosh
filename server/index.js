@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import helmet from "helmet";
+import { handleChat } from "./chat.js";
 import { handleContact } from "./contact.js";
 
 dotenv.config({ path: fileURLToPath(new URL(".env", import.meta.url)) });
@@ -24,11 +25,8 @@ if (!Number.isInteger(port) || port < 1 || port > 65535) {
   throw new Error("PORT must be a valid TCP port number.");
 }
 
-if (process.env.TRUST_PROXY === "1") {
-  app.set("trust proxy", 1);
-}
-
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
 app.use(helmet());
 
 app.use(
@@ -58,6 +56,7 @@ app.get("/health", (request, response) => {
 });
 
 app.post("/api/contact", handleContact);
+app.post("/api/chat", handleChat);
 
 app.use((error, request, response, next) => {
   if (response.headersSent) {

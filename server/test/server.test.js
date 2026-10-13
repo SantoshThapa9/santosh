@@ -28,7 +28,6 @@ before(async () => {
       ...process.env,
       PORT: String(port),
       FRONTEND_ORIGIN: `${allowedOrigin},https://santosh-gamma.vercel.app`,
-      TRUST_PROXY: "0",
     },
     stdio: "ignore",
   });
@@ -76,6 +75,19 @@ test("health endpoint returns an uncached JSON readiness response", async () => 
   assert.deepEqual(await response.json(), { status: "ok" });
 });
 
+test("health endpoint allows the configured local frontend origin", async () => {
+  const response = await fetch(`${baseUrl}/health`, {
+    headers: { Origin: allowedOrigin },
+  });
+
+  assert.equal(response.status, 200);
+  assert.equal(
+    response.headers.get("access-control-allow-origin"),
+    allowedOrigin,
+  );
+  assert.deepEqual(await response.json(), { status: "ok" });
+});
+
 test("contact preflight allows the configured local frontend origin", async () => {
   const response = await fetch(`${baseUrl}/api/contact`, {
     method: "OPTIONS",
@@ -114,6 +126,44 @@ test("contact preflight allows the production Vercel origin", async () => {
   );
 });
 
+test("chat preflight allows the configured local frontend origin", async () => {
+  const response = await fetch(`${baseUrl}/api/chat`, {
+    method: "OPTIONS",
+    headers: {
+      Origin: allowedOrigin,
+      "Access-Control-Request-Method": "POST",
+      "Access-Control-Request-Headers": "content-type",
+    },
+  });
+
+  assert.equal(response.status, 204);
+  assert.equal(
+    response.headers.get("access-control-allow-origin"),
+    allowedOrigin,
+  );
+  assert.match(response.headers.get("access-control-allow-methods"), /POST/);
+});
+
+test("chat endpoint rejects invalid input before contacting providers", async () => {
+  const response = await fetch(`${baseUrl}/api/chat`, {
+    method: "POST",
+    headers: {
+      Origin: allowedOrigin,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  });
+
+  assert.equal(response.status, 400);
+  assert.equal(
+    response.headers.get("access-control-allow-origin"),
+    allowedOrigin,
+  );
+  assert.deepEqual(await response.json(), {
+    message: "Please provide a valid message and up to five prior messages.",
+  });
+});
+
 test("contact endpoint rejects invalid input before contacting providers", async () => {
   const response = await fetch(`${baseUrl}/api/contact`, {
     method: "POST",
@@ -125,6 +175,10 @@ test("contact endpoint rejects invalid input before contacting providers", async
   });
 
   assert.equal(response.status, 400);
+  assert.equal(
+    response.headers.get("access-control-allow-origin"),
+    allowedOrigin,
+  );
   assert.deepEqual(await response.json(), {
     message: "Please provide a valid name, email, and message.",
   });

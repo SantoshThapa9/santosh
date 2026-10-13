@@ -39,12 +39,19 @@ This is a **private** repository and **not open for public use, cloning, or cont
 
 ## Contact form backend
 
-The contact form API is a separate Express application in `server/`. Install
-its dependencies with `npm --prefix server install`, copy
-`server/.env.example` to `server/.env`, fill in the server-only values, and
-start it with `npm run dev:server`. The server also reads an existing project
-root `.env` file as a fallback. Start the frontend separately with `npm run
-dev`; Vite proxies `/api` and `/health` requests to the local Express server.
+The contact form and portfolio assistant API are a separate Express application in `server/`. Install
+its dependencies with `npm --prefix server ci`, copy
+`server/.env.example` to `server/.env`, and set the server-only Redis and
+EmailJS values. Start it with `npm run dev:server`. The server listens on
+`http://localhost:4000` by default and allows the local frontend origins on
+port 3000. In a second terminal, copy `.env.example` to the project root as
+`.env` and start the frontend with `npm run dev`; `VITE_API_URL` is already
+set to `http://localhost:4000` in the example. The health endpoint works
+without provider credentials; sending a contact message requires valid Redis
+and EmailJS settings in `server/.env`. Chat also requires `OPENAI_API_KEY` in
+`server/.env`; it defaults to the cost-friendly `gpt-4o-mini` model and can be
+changed with the optional `OPENAI_MODEL` setting. Never expose the OpenAI key
+through a frontend `VITE_` variable.
 Run the backend's HTTP and contact-flow tests with `npm --prefix server test`.
 
 The repository includes a Render Blueprint in `render.yaml`. Apply it from
@@ -62,23 +69,27 @@ frontend `VITE_` variables):
 | `UPSTASH_REDIS_REST_URL` | Upstash Redis REST endpoint URL (`https://...`) |
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash Redis REST token |
 | `CONTACT_IP_HASH_SECRET` | Unique random secret (at least 32 characters) used to HMAC-hash client IPs before storing rate-limit keys |
+| `OPENAI_API_KEY` | Server-only OpenAI API key used by the portfolio assistant |
+| `OPENAI_MODEL` | Optional chat model override (default: `gpt-4o-mini`) |
 | `EMAILJS_SERVICE_ID` | EmailJS service ID |
 | `EMAILJS_TEMPLATE_ID` | EmailJS template ID |
 | `EMAILJS_PUBLIC_KEY` | EmailJS public key |
 | `EMAILJS_PRIVATE_KEY` | Optional EmailJS private key; set only if private-key authorization is enabled for the account |
 | `FRONTEND_ORIGIN` | Comma-separated exact allowed frontend origins; for this site use `https://santosh-gamma.vercel.app` |
 | `PORT` | Supplied by Render; local default is `4000` |
-| `TRUST_PROXY` | Blueprint sets `1` for Render's trusted proxy; local default is off |
 
-The checked-in `.env.production` configures the public API URL
-`https://santosh-portfolio-9dky.onrender.com` for Vercel production builds;
-Vite development always uses the `/api` and `/health` proxies to
-`http://localhost:4000`, even if a local `.env` happens to contain
-`VITE_API_URL`, so URLs do not need to be edited when switching environments.
-If the API domain changes, update `VITE_API_URL` in `.env.production` and set
-the same public variable in Vercel. The Vercel project should use the
-repository root, `npm run build` as its build command, and `dist` as its
-output directory.
+The frontend uses `VITE_API_URL` for API and health requests in both
+development and production. Copy `.env.example` to `.env` for local
+development, and set its value to the API server URL you want to use. To use a
+different URL for production builds, create `.env.production` from
+`.env.production.example` and set the production API URL there; Vite loads the
+mode-specific file for production builds. In Vercel, set `VITE_API_URL`
+separately for Preview and Production if they use different API servers.
+Restart the dev server or rebuild after changing an environment value. These
+URLs are public frontend configuration, not secrets. The API server must allow
+each frontend origin through its `FRONTEND_ORIGIN` setting. The Vercel project
+should use the repository root, `npm run build` as its build command, and
+`dist` as its output directory.
 
 The API allows at most two contact attempts per client IP per UTC calendar
 day. It stores only HMAC digests in Redis. Redis errors fail closed. Redis
@@ -91,16 +102,25 @@ never use a `VITE_` prefix. Rotate any EmailJS private keys previously
 configured as `VITE_` variables, since those may already have been exposed in
 a deployed browser bundle.
 
+The portfolio assistant is available at `/assistant`. Its conversation is kept
+in browser `sessionStorage` and can be reset with **New chat**. The floating
+**Ask me** button only navigates to the assistant. Chat requests use Upstash
+Redis to atomically allow five messages per client IP per minute, store only an
+HMAC digest, and fail closed if Redis is unavailable. Each completion includes
+at most five earlier messages and is capped at 350 generated tokens. The
+assistant is grounded in the portfolio details in `server/chat.js`; verify
+those details there when portfolio content changes.
+
 The contact form checks `/health` and retries only that safe GET for up to 90
-seconds before submitting the message once. Health retries use backoff and
-each health request is capped at 85 seconds to give a sleeping Render
-instance time to wake without repeated canceled requests. The contact POST is
-capped at 35 seconds; a POST timeout is reported as ambiguous and is never
-automatically retried, avoiding duplicate messages.
+seconds before submitting the message once. Health retries use backoff, with
+each request capped at 10 seconds so a sleeping Render instance can be checked
+again as it wakes. The contact POST is capped at 35 seconds; a POST timeout is
+reported as ambiguous and is never automatically retried, avoiding duplicate
+messages.
 This makes cold starts recoverable but cannot eliminate the sleep delay on
-Render's free plan; use an always-on instance to avoid sleeping. The Blueprint sets
-`FRONTEND_ORIGIN=https://santosh-gamma.vercel.app` and `TRUST_PROXY=1`. If you
-deploy from the Render dashboard rather than applying the Blueprint, use the
-same values and settings above.
+Render's free plan; use an always-on instance to avoid sleeping. The Blueprint
+sets `FRONTEND_ORIGIN=https://santosh-gamma.vercel.app`. If you deploy from the
+Render dashboard rather than applying the Blueprint, use the same values and
+settings above.
 
 **Designed & Developed by [Santosh Thapa](https://santosh-gamma.vercel.app/)**  
