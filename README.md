@@ -37,32 +37,16 @@ This is a **private** repository and **not open for public use, cloning, or cont
 
 ---
 
-## Contact form backend
+## Contact form and assistant APIs
 
-The contact form and portfolio assistant API are a separate Express application in `server/`. Install
-its dependencies with `npm --prefix server ci`, copy
-`server/.env.example` to `server/.env`, and set the server-only Redis and
-EmailJS values. Start it with `npm run dev:server`. The server listens on
-`http://localhost:4000` by default and allows the local frontend origins on
-port 3000. In a second terminal, copy `.env.example` to the project root as
-`.env` and start the frontend with `npm run dev`; `VITE_API_URL` is already
-set to `http://localhost:4000` in the example. The health endpoint works
-without provider credentials; sending a contact message requires valid Redis
-and EmailJS settings in `server/.env`. Chat also requires `OPENAI_API_KEY` in
-`server/.env`; it defaults to the cost-friendly `gpt-4o-mini` model and can be
-changed with the optional `OPENAI_MODEL` setting. Never expose the OpenAI key
-through a frontend `VITE_` variable.
-Run the backend's HTTP and contact-flow tests with `npm --prefix server test`.
+The contact form, portfolio assistant, and health check are Vercel Serverless
+Functions in `api/`. The frontend calls `/api/contact`, `/api/chat`, and
+`/api/health` on the same origin, so no public API URL or `VITE_API_URL`
+setting is needed.
 
-The repository includes a Render Blueprint in `render.yaml`. Apply it from
-Render to create/update the API service. Its root directory is `server`, its
-build command is `npm ci`, its start command is `npm start`, and its health
-check is `/health`. Keep the build command limited to installation; do not run
-`npm start` or `node index.js` as part of the build command. Render supplies
-`PORT` automatically, and the server binds to `0.0.0.0`.
-
-Set the Blueprint's unsynchronized secret variables in Render (never in
-frontend `VITE_` variables):
+Set these values in the Vercel project's **Settings → Environment Variables**
+for every environment that should provide the corresponding feature. Keep them
+server-side; never prefix secrets with `VITE_`.
 
 | Variable | Purpose |
 | --- | --- |
@@ -75,27 +59,26 @@ frontend `VITE_` variables):
 | `EMAILJS_TEMPLATE_ID` | EmailJS template ID |
 | `EMAILJS_PUBLIC_KEY` | EmailJS public key |
 | `EMAILJS_PRIVATE_KEY` | Optional EmailJS private key; set only if private-key authorization is enabled for the account |
-| `FRONTEND_ORIGIN` | Comma-separated exact allowed frontend origins; for this site use `https://santosh-gamma.vercel.app` |
-| `PORT` | Supplied by Render; local default is `4000` |
 
-The frontend uses `VITE_API_URL` for API and health requests in both
-development and production. Copy `.env.example` to `.env` for local
-development, and set its value to the API server URL you want to use. To use a
-different URL for production builds, create `.env.production` from
-`.env.production.example` and set the production API URL there; Vite loads the
-mode-specific file for production builds. In Vercel, set `VITE_API_URL`
-separately for Preview and Production if they use different API servers.
-Restart the dev server or rebuild after changing an environment value. These
-URLs are public frontend configuration, not secrets. The API server must allow
-each frontend origin through its `FRONTEND_ORIGIN` setting. The Vercel project
-should use the repository root, `npm run build` as its build command, and
-`dist` as its output directory.
+For local development, copy `.env.example` to `.env.local` and replace the
+placeholders with valid provider credentials. Only Redis and
+`CONTACT_IP_HASH_SECRET` are needed for rate limiting; contact delivery also
+needs the EmailJS values, and chat also needs `OPENAI_API_KEY`.
+`EMAILJS_PRIVATE_KEY` and `OPENAI_MODEL` are optional.
+
+The Vercel config explicitly builds the frontend as static output from `dist`
+and each API handler with the Node.js function runtime. Exact API routes are
+matched before the static filesystem and SPA fallback. Locally, copy
+`.env.example` to `.env.local`, fill in the provider values, and run
+`npm run dev`. Vite then executes the same handlers in `api/` through local
+middleware and loads server-only values from `.env.local`. The frontend uses
+same-origin API paths, so no `VITE_API_URL` is needed.
+Never commit `.env.local` or expose provider keys in browser code.
 
 The API allows at most two contact attempts per client IP per UTC calendar
 day. It stores only HMAC digests in Redis. Redis errors fail closed. Redis
-calls time out after 10 seconds and EmailJS calls after 15 seconds, so
-upstream delays are bounded without the previous five-second Redis cutoff.
-EmailJS requests are paced to at most one per second per server process, as
+calls time out after 10 seconds and EmailJS calls after 15 seconds.
+EmailJS requests are paced to at most one per second per warm function process, as
 required by the EmailJS REST API. Configure `EMAILJS_PRIVATE_KEY` only if
 private-key authorization is enabled for the account; keep it server-side and
 never use a `VITE_` prefix. Rotate any EmailJS private keys previously
@@ -108,19 +91,19 @@ in browser `sessionStorage` and can be reset with **New chat**. The floating
 Redis to atomically allow five messages per client IP per minute, store only an
 HMAC digest, and fail closed if Redis is unavailable. Each completion includes
 at most five earlier messages and is capped at 350 generated tokens. The
-assistant is grounded in the portfolio details in `server/chat.js`; verify
-those details there when portfolio content changes.
+assistant is grounded in the portfolio details in `api/chat.js`; verify those
+details there when portfolio content changes.
 
-The contact form checks `/health` and retries only that safe GET for up to 90
-seconds before submitting the message once. Health retries use backoff, with
-each request capped at 10 seconds so a sleeping Render instance can be checked
-again as it wakes. The contact POST is capped at 35 seconds; a POST timeout is
-reported as ambiguous and is never automatically retried, avoiding duplicate
-messages.
-This makes cold starts recoverable but cannot eliminate the sleep delay on
-Render's free plan; use an always-on instance to avoid sleeping. The Blueprint
-sets `FRONTEND_ORIGIN=https://santosh-gamma.vercel.app`. If you deploy from the
-Render dashboard rather than applying the Blueprint, use the same values and
-settings above.
+The contact form checks `/api/health` before submitting a message once. The
+health check retries transient failures with backoff; the contact POST is
+capped at 35 seconds and is never automatically retried after a timeout,
+avoiding duplicate messages. API requests accept only same-origin browser
+requests. Redis errors fail closed. Redis calls time out after 10 seconds and
+EmailJS calls after 15 seconds. EmailJS requests are paced to at most one per
+second per warm function process. Configure `EMAILJS_PRIVATE_KEY` only if
+private-key authorization is enabled for the account, and rotate any private
+keys previously exposed in frontend `VITE_` variables.
+
+Run the API handler tests with `npm run test:api`.
 
 **Designed & Developed by [Santosh Thapa](https://santosh-gamma.vercel.app/)**  

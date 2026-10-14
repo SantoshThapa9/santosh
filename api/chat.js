@@ -2,7 +2,12 @@ import {
   requestChatReply,
   reserveChatMessage,
   requiredChatConfiguration,
-} from "./services.js";
+} from "../lib/api-services.js";
+import { getClientIp, prepareRequest, sendJson } from "../lib/api-http.js";
+
+export const config = {
+  api: { bodyParser: { sizeLimit: "10kb" } },
+};
 
 const maxMessageLength = 2000;
 const maxHistoryMessageLength = 2000;
@@ -84,11 +89,12 @@ function isChatRequest(body) {
   );
 }
 
-export async function handleChat(request, response) {
-  const { message, previousMessages = [] } = request.body ?? {};
+export default async function handler(request, response) {
+  if (!prepareRequest(request, response, "POST")) return;
 
+  const { message, previousMessages = [] } = request.body ?? {};
   if (!isChatRequest(request.body)) {
-    return response.status(400).json({
+    return sendJson(response, 400, {
       message: "Please provide a valid message and up to five prior messages.",
     });
   }
@@ -98,14 +104,14 @@ export async function handleChat(request, response) {
     config = requiredChatConfiguration();
   } catch (error) {
     console.error("Invalid chat server configuration.", error);
-    return response.status(503).json({
+    return sendJson(response, 503, {
       message: "The assistant is temporarily unavailable.",
     });
   }
 
-  const ip = request.ip;
+  const ip = getClientIp(request);
   if (!ip || ip.length > 64 || !/^[\da-f:.]+$/i.test(ip)) {
-    return response.status(503).json({
+    return sendJson(response, 503, {
       message: "The assistant is temporarily unavailable.",
     });
   }
@@ -115,13 +121,13 @@ export async function handleChat(request, response) {
     rateLimitResult = await reserveChatMessage(config, ip);
   } catch (error) {
     console.error("Redis chat rate-limit failure.", error);
-    return response.status(503).json({
+    return sendJson(response, 503, {
       message: "The assistant is temporarily unavailable.",
     });
   }
 
   if (rateLimitResult === "limited") {
-    return response.status(429).json({
+    return sendJson(response, 429, {
       message:
         "You’ve reached the limit of five messages per minute. Please try again shortly.",
     });
@@ -138,10 +144,10 @@ export async function handleChat(request, response) {
       ...history,
       { role: "user", content: message.trim() },
     ]);
-    return response.status(200).json({ reply });
+    return sendJson(response, 200, { reply });
   } catch (error) {
     console.error("OpenAI chat completion failed.", error);
-    return response.status(502).json({
+    return sendJson(response, 502, {
       message: "The assistant could not reply right now. Please try again.",
     });
   }

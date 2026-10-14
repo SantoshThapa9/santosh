@@ -25,7 +25,6 @@ const quickPrompts = [
   "Tell me about Kura AI",
 ];
 
-const apiUrl = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ?? "";
 const storageKey = "portfolio-assistant-messages";
 
 function readConversation(): ChatMessage[] {
@@ -88,11 +87,6 @@ const AssistantPage = () => {
     const message = draft.trim();
 
     if (!message || isSending) return;
-    if (!apiUrl) {
-      setErrorMessage("The assistant is not connected right now.");
-      return;
-    }
-
     const nextMessages = [
       ...messages,
       { role: "user" as const, content: message },
@@ -103,7 +97,7 @@ const AssistantPage = () => {
     setIsSending(true);
 
     try {
-      const response = await fetch(`${apiUrl}/api/chat`, {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

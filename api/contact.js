@@ -2,7 +2,12 @@ import {
   requiredConfiguration,
   reserveDailySend,
   sendContactEmail,
-} from "./services.js";
+} from "../lib/api-services.js";
+import { getClientIp, prepareRequest, sendJson } from "../lib/api-http.js";
+
+export const config = {
+  api: { bodyParser: { sizeLimit: "10kb" } },
+};
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -23,60 +28,55 @@ function isContactForm(body) {
   );
 }
 
-export async function handleContact(request, response) {
-  const contact = request.body;
+export default async function handler(request, response) {
+  if (!prepareRequest(request, response, "POST")) return;
 
+  const contact = request.body;
   if (!isContactForm(contact)) {
-    return response.status(400).json({
+    return sendJson(response, 400, {
       message: "Please provide a valid name, email, and message.",
     });
   }
 
   let config;
-
   try {
     config = requiredConfiguration();
   } catch (error) {
     console.error("Invalid server configuration.", error);
-    return response.status(503).json({
+    return sendJson(response, 503, {
       message: "Contact form is temporarily unavailable.",
     });
   }
 
-  const ip = request.ip;
-
+  const ip = getClientIp(request);
   if (!ip || ip.length > 64 || !/^[\da-f:.]+$/i.test(ip)) {
-    return response.status(503).json({
+    return sendJson(response, 503, {
       message: "Contact form is temporarily unavailable.",
     });
   }
 
   let rateLimitResult;
-
   try {
     rateLimitResult = await reserveDailySend(config, ip);
   } catch (error) {
     console.error("Redis rate-limit failure.", error);
-    return response.status(503).json({
+    return sendJson(response, 503, {
       message: "Contact form is temporarily unavailable.",
     });
   }
 
   if (rateLimitResult === "visitor_limit") {
-    return response.status(429).json({
+    return sendJson(response, 429, {
       message: "This visitor can send two messages per day.",
     });
   }
 
   try {
     await sendContactEmail(config, contact);
-
-    return response.status(200).json({
-      message: "Message sent.",
-    });
+    return sendJson(response, 200, { message: "Message sent." });
   } catch (error) {
     console.error("Email delivery failed.", error);
-    return response.status(502).json({
+    return sendJson(response, 502, {
       message: "Your message could not be sent.",
     });
   }

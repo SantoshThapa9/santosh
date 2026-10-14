@@ -4,15 +4,10 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { FaTwitter, FaLinkedin, FaInstagram, FaGithub } from "react-icons/fa";
 
-const apiUrl = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, "") ?? "";
 const healthRequestTimeoutMs = 10_000;
 
 function contactApiUrl(path: string) {
-  if (!apiUrl) {
-    throw new Error("VITE_API_URL is required to contact the server.");
-  }
-
-  return `${apiUrl}${path}`;
+  return path;
 }
 
 async function waitForContactApi(onRetry: () => void) {
@@ -24,7 +19,7 @@ async function waitForContactApi(onRetry: () => void) {
     const remainingMs = deadline - Date.now();
 
     try {
-      const response = await fetch(contactApiUrl("/health"), {
+      const response = await fetch(contactApiUrl("/api/health"), {
         headers: { Accept: "application/json" },
         cache: "no-store",
         signal: AbortSignal.timeout(
