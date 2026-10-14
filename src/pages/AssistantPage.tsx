@@ -288,7 +288,7 @@ const AssistantPage = () => {
                 exit={reduceMotion ? undefined : { opacity: 0 }}
               >
                 <span className={styles.messageAvatar} aria-hidden="true">
-                  s.
+                  <TbRobot />
                 </span>
                 <p className={`${styles.messageBubble} ${styles.typing}`}>
                   <i />
