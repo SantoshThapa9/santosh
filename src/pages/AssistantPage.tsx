@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { FiArrowUpRight, FiPlus, FiSend } from "react-icons/fi";
 import styles from "./AssistantPage.module.scss";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
