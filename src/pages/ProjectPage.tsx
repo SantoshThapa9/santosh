@@ -171,6 +171,8 @@ const projects: FeaturedProject[] = [
       "/projects/nv/2.webp",
       "/projects/nv/3.webp",
     ],
+    link: "https://ninzo-versus.vercel.app/",
+
     about:
       "A tournament platform for players to discover competitions and showcase them to a global audience. Ninzo Versus has grown to 50+ active users.",
     highlights: [
